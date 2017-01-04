@@ -13,7 +13,8 @@ import com.board.service.PostService;
 
 @Controller
 public class PostController {
-	//푸쉬테스트
+	//push
+	//push
 	@Autowired
 	private PostService postService;
 	
