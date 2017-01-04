@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+		<WatchedResource>WEB-INF/web.xml</WatchedResource>
+	<Resource 
+		name="jdbc/board"
+		auth="Container"
+        driverClassName="oracle.jdbc.driver.OracleDriver"
+        factory="org.apache.tomcat.dbcp.dbcp.BasicDataSourceFactory"
+        username="board"
+        password="board"
+        type="javax.sql.DataSource"
+        url="jdbc:oracle:thin:@localhost:1521:xe" 
+         maxActive="2" 
+		 minIdle="2"/>
+</Context>
