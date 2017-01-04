@@ -35,6 +35,6 @@ public class PostController {
 	public List<Post> postList(){
 		return postService.postList(0);
 	}
-	
+	//test
 	
 }
