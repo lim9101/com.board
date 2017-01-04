@@ -14,6 +14,7 @@ import com.board.service.PostService;
 public class PostController {
 	//push
 	//push
+	//push
 	@Autowired
 	private PostService postService;
 	
