@@ -1,12 +1,11 @@
 package com.board.controller;
 
-import java.sql.Date;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import antlr.collections.List;
 
 import com.board.DTO.Post;
 import com.board.service.PostService;
