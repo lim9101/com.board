@@ -5,10 +5,9 @@ import java.sql.Date;
 public class Post {
 	private int spNo=0;
 	private int pNo=0;
-	private String userId;
+	private String user_id;
 	private String title;
 	private String content;
-	private String fileName;
 	private Date date_in;
 	private Date date_up;
 	private int count;
@@ -25,12 +24,14 @@ public class Post {
 	public void setpNo(int pNo) {
 		this.pNo = pNo;
 	}
-	public String getUserId() {
-		return userId;
+	
+	public String getUser_id() {
+		return user_id;
 	}
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
 	}
+	
 	public String getTitle() {
 		return title;
 	}
@@ -42,12 +43,6 @@ public class Post {
 	}
 	public void setContent(String content) {
 		this.content = content;
-	}
-	public String getFileName() {
-		return fileName;
-	}
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
 	}
 	public int getCount() {
 		return count;
@@ -69,18 +64,17 @@ public class Post {
 	}
 	@Override
 	public String toString() {
-		return "Post [spNo=" + spNo + ", pNo=" + pNo + ", userId=" + userId
-				+ ", title=" + title + ", content=" + content + ", fileName="
-				+ fileName + ", date_in=" + date_in + ", date_up=" + date_up
+		return "Post [spNo=" + spNo + ", pNo=" + pNo + ", user_id=" + user_id
+				+ ", title=" + title + ", content=" + content
+				+ ", date_in=" + date_in + ", date_up=" + date_up
 				+ ", count=" + count + ", getSpNo()=" + getSpNo()
-				+ ", getpNo()=" + getpNo() + ", getUserId()=" + getUserId()
+				+ ", getpNo()=" + getpNo() + ", getUserId()=" + getUser_id()
 				+ ", getTitle()=" + getTitle() + ", getContent()="
-				+ getContent() + ", getFileName()=" + getFileName()
+				+ getContent() 
 				+ ", getCount()=" + getCount() + ", getDate_in()="
 				+ getDate_in() + ", getDate_up()=" + getDate_up()
 				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
 				+ ", toString()=" + super.toString() + "]";
 	}
-	
 	
 }

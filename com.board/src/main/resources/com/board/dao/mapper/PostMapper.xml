@@ -8,11 +8,13 @@
  		where spno =#{spNo}
  		order by pno DESC
  	</select>
+ 	
+ 	<!-- 공지 글 추가 -->
  	<insert id="addPost" parameterType="post">
- 		insert into posts values(#{spNo},#{pNo},#{userId,jdbcType=VARCHAR},#{title,jdbcType=VARCHAR}
- 		,#{content,jdbcType=VARCHAR},#{date_in,jdbcType=DATE},#{date_up,jdbcType=DATE},#{fileName,jdbcType=VARCHAR}
- 		,#{count})
+ 		insert into posts values(#{spNo},#{pNo},#{user_id,jdbcType=VARCHAR},#{title,jdbcType=VARCHAR}
+ 		,#{content,jdbcType=VARCHAR},#{date_in,jdbcType=DATE},#{date_up,jdbcType=DATE},#{count})
  	</insert>
+ 	
  	<update id="updatePost" parameterType="post">
  	update posts set title=#{title},content={content},date_up=#{date_up}
 	where pno={pNO} and spno=#{spNo}
