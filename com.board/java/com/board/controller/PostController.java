@@ -36,5 +36,5 @@ public class PostController {
 		return postService.postList(0);
 	}
 	//test
-	
+	//커믿 푸쉬
 }
