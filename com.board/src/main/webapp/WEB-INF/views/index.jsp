@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    <!-- test -->
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -44,7 +46,7 @@ $(document).ready(function(){
 <div class="container">
 <h1>Board login</h1>
 	<div>
-		ID:<input type="text" class="id"/>
+		IDD:<input type="text" class="id"/>
 		PW:<input type="password" class="pw"/>
 		   <button type="button" class="btn btn-primary btn-mg login" value="login">login</button>
 		   <button type="button" class="btn btn-primary btn-mg cansel" value="cansel">cansel</button>
