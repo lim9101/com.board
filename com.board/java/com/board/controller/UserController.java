@@ -21,6 +21,7 @@ public class UserController {
 	public boolean signIn(User user,HttpSession session){
 		boolean result=false;
 		System.out.println(user);
+		
 		try{
 			result=userService.signIn(user);
 		}catch(Exception e){

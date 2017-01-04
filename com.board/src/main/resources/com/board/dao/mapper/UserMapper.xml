@@ -19,7 +19,7 @@
 	</select>
 	
 	<insert id="addUser" parameterType="user">
-		insert into users values( #{userId,jdbcType=VARCHAR},#{userPw,jdbcType=VARCHAR},#{userName,jdbcType=VARCHAR},#{email,jdbcType=VARCHAR},
+		insert into users(user_id,user_pw,user_name,email,phone,add_no,add_d,gender) values( #{userId,jdbcType=VARCHAR},#{userPw,jdbcType=VARCHAR},#{userName,jdbcType=VARCHAR},#{email,jdbcType=VARCHAR},
 		 		#{phone,jdbcType=VARCHAR},#{addNo},#{addD,jdbcType=VARCHAR},#{gender})
 	</insert>
 	
