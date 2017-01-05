@@ -4,6 +4,39 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("").on("click",function(){
+		var user = {
+				userId:$(".id").val(),
+				userPw:$(".pw").val(),
+				userName:$(".name").val(),
+				email:$(".email").val(),
+				phone:$(".phone").val(),
+				gender:$("input[name='gender']").val(),
+				addNo:$(".addNo").val(),
+				addD:$(".addD").val()+$(".addD2").val()
+				
+		}
+		$.ajax({
+			url:"signIn",
+			data:user,
+			success:function(result){
+				if(result){ 
+					alert("가입성공");
+					location.href="boardList";
+				}else alert("가입 실패")
+			}
+		});
+		
+	})
+	
+	$("#findAddress").postcodifyPopUp();
+
+});
+</script>
 <title>Insert title here</title>
 </head>
 <body>
