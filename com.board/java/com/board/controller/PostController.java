@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.stringtemplate.v4.ModelAdaptor;
 
+import com.board.DTO.Files;
 import com.board.DTO.Post;
 import com.board.service.PostService;
 
@@ -27,15 +29,18 @@ public class PostController {
 		return mav;
 	}//end postWrite
 	
-	//글 작성 후 처리 메서드
+	//글 작성 후 처리 메서s드
 	@RequestMapping(value = "/postWrite", method = RequestMethod.POST)
 	public ModelAndView postProWrite(Post post){
+		System.out.println(post);
 		ModelAndView mav = new ModelAndView();
 		postService.postWrite(post);
 		mav.setViewName("postList");
 		return mav;
 		/*post.setDate_in(new Date(System.currentTimeMillis()));;*/
 	}//end postProWrite
+	
+	
 	
 	@RequestMapping("postUpdate")
 	@ResponseBody
@@ -44,8 +49,10 @@ public class PostController {
 		return postService.postUpdate(post);
 	}
 	
-	@RequestMapping("postList")
-	public List<Post> postList(){
-		return postService.postList(0);
+	@RequestMapping(value = "/postList", method = RequestMethod.GET)
+	public ModelAndView postList(){
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("boardList");
+		return mav;
 	}
 }

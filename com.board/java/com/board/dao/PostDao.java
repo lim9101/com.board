@@ -2,6 +2,7 @@ package com.board.dao;
 
 import java.util.List;
 
+import com.board.DTO.Files;
 import com.board.DTO.Post;
 import com.board.DTO.Search;
 
@@ -11,4 +12,6 @@ public interface PostDao {
 	int addPost(Post post);
 	int updatePost(Post post);
 	int delPost(Post post);
+	int maxPost();
+	void addFile(Files file);
 	}

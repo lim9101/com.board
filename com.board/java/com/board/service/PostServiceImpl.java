@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.board.DTO.Files;
 import com.board.DTO.Post;
 import com.board.DTO.Search;
 import com.board.dao.PostDao;
@@ -19,18 +20,25 @@ public class PostServiceImpl implements PostService{
 		return postDao.getPosts(spNo);
 	}
 	
+	//공지 글 추가
+	@Override
 	public boolean postWrite(Post post){
+		int pno = postDao.maxPost()+1;
+		System.out.println(pno+"pno");
+		post.setpNo(pno);
+		postDao.addPost(post);
+		/*Files file = new Files();
+		file.setpNo(pno);
+		System.out.println("pno:"+file.getpNo());
+		file.setSpNo(0);
+		System.out.println("spno:"+file.getSpNo());
+		file.setFile_name("zzz.txt");
+		//System.out.println("파일명:"+post.getUpload().getName());
 		
-		List<Post> post2=postDao.getPosts(post.getSpNo());
-		System.out.println(post2);
-		if(post2.size()==0){
-			post.setpNo(1);
-		}else{
-		post.setpNo(post2.get(0).getpNo()+1);
-		System.out.println(post.getpNo());
-		}
-		return postDao.addPost(post)>0;
-	}
+		
+		postDao.addFile(file);*/
+		return true;
+	}//end postWrite
 	
 	public boolean postUpdate(Post post){
 		

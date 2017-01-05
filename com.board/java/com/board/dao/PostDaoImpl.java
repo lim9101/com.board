@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.board.DTO.Files;
 import com.board.DTO.Post;
 import com.board.DTO.Search;
 import com.board.dao.mapper.PostMapper;
@@ -33,5 +34,14 @@ public class PostDaoImpl implements PostDao{
 	
 	public int delPost(Post post){
 		return postMapper.delPost(post);
+	}
+
+	public int maxPost() {
+		return postMapper.maxPost();
+	}
+
+	@Override
+	public void addFile(Files file) {
+		postMapper.addFile(file);
 	}
 }
