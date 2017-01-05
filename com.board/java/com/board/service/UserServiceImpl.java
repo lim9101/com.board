@@ -1,5 +1,7 @@
 package com.board.service;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -45,6 +47,23 @@ public class UserServiceImpl implements UserService{
 		user.setUserPw(entool.encode(user.getUserPw()));
 		System.out.println(user);
 		return userDao.addUser(user)>0;
+	}
+	
+	//session에 사용자 정보저장
+	//parameter:HttpSession return:boolean
+	public boolean userInfo(HttpSession session){
+		boolean result=false;
+		User user=(User)session.getAttribute("user");
+		session.removeAttribute("user");
+		try{
+		session.setAttribute("user", getUser(user.getUserId()));
+		System.out.println((User)session.getAttribute("user"));
+		result=true;
+		}catch(Exception e){
+		}finally{
+			System.out.println("저장성공여부:"+result);
+			}
+		return result;
 	}
 	
 }

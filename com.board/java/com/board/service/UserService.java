@@ -1,5 +1,7 @@
 package com.board.service;
 
+import javax.servlet.http.HttpSession;
+
 import com.board.DTO.User;
 
 public interface UserService {
@@ -8,4 +10,5 @@ public interface UserService {
 	boolean updateUser(User user);
 	boolean delUser(User user);
 	boolean check(User user);
+	boolean userInfo(HttpSession session);
 }

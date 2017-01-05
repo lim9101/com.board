@@ -16,17 +16,21 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
+	
 	@RequestMapping("signIn")
 	@ResponseBody
 	public boolean signIn(User user,HttpSession session){
+		session.setAttribute("user",user);
 		boolean result=false;
 		try{
 			result=userService.signIn(user);
+			userService.userInfo(session);
 		}catch(Exception e){
 			System.err.print(e);
 		}finally{
 			System.out.println(result);
 		}
+		
 		return result;
 	}
 	
@@ -46,28 +50,7 @@ public class UserController {
 	}
 	
 	
-	//로그인사용자 정보조회
-	@RequestMapping("userIde")
-	@ResponseBody
-	public boolean userInfo(HttpSession session){
-		boolean result=false;
-		User user=(User)session.getAttribute("user");
-		session.removeAttribute("user");
-		try{
-		session.setAttribute("user", userService.getUser(user.getUserId()));
-		System.out.println((User)session.getAttribute("user"));
-		result=true;
-		}catch(Exception e){
-			System.err.println(e);
-		}finally{
-			if(result == true)
-			System.out.println(result);
-			else{
-				System.out.println(false);
-			}
-		}
-		return result;
-	}
+	
 	
 	
 	

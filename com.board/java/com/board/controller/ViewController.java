@@ -26,15 +26,7 @@ public class ViewController {
 		
 		@RequestMapping("userInfo")
 		public String userInfo(HttpSession session){
-			User user=(User)session.getAttribute("user");
-			session.removeAttribute("user");
-			try{
-			session.setAttribute("user", userService.getUser(user.getUserId()));
-			System.out.println((User)session.getAttribute("user"));
-			}catch(Exception e){
-			}finally{
-				
-				}
+			userService.userInfo(session);
 			return "userInfo";
 			}
 		
