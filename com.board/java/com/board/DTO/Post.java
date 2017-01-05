@@ -13,6 +13,7 @@ public class Post {
 	private Date date_in;
 	private Date date_up;
 	private int count;
+	private MultipartFile upload; 
 
 	public int getSpNo() {
 		return spNo;
@@ -77,5 +78,11 @@ public class Post {
 				+ getDate_in() + ", getDate_up()=" + getDate_up()
 				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
 				+ ", toString()=" + super.toString() + "]";
+	}
+	public MultipartFile getUpload() {
+		return upload;
+	}
+	public void setUpload(MultipartFile upload) {
+		this.upload = upload;
 	}
 }

@@ -27,16 +27,12 @@ public class PostServiceImpl implements PostService{
 		System.out.println(pno+"pno");
 		post.setpNo(pno);
 		postDao.addPost(post);
-		/*Files file = new Files();
+		Files file = new Files();
 		file.setpNo(pno);
-		System.out.println("pno:"+file.getpNo());
 		file.setSpNo(0);
-		System.out.println("spno:"+file.getSpNo());
 		file.setFile_name("zzz.txt");
-		//System.out.println("파일명:"+post.getUpload().getName());
-		
-		
-		postDao.addFile(file);*/
+		postDao.addFile(file);
+
 		return true;
 	}//end postWrite
 	

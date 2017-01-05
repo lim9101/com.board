@@ -30,7 +30,7 @@ form {
 <body>
 	<h1>글쓰기</h1>
 	<form class="form-horizontal" role="form" id="frmWR" name="frmWR"
-		method="post" action="postWrite">
+		method="post" action="postWrite" enctype= multipart/form-data>
 		<div class="form-group PostLabel">
 			<label for="title" class="col-sm-2 control-label">Title</label>
 			<div class="col-sm-10">
@@ -53,8 +53,8 @@ form {
 		</div>
 		
 		<div class="form-group">
-			<label for="inputEmail3" class="col-sm-2 control-label">file</label>
-			<input type="file" id="file_name" name="file_name" class="form-control file_name" placeholder="file_name" />
+			<label for="upload" class="col-sm-2 control-label">file</label>
+			<input type="file" id="upload" name="upload" class="form-control upload" placeholder="upload" />
 		</div>
 		
 		<div class="form-group">

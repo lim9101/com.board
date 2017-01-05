@@ -21,6 +21,7 @@ public class PostController {
 	@Autowired
 	private PostService postService;
 	
+	
 	//글 작성하는 페이지 이동
 	@RequestMapping(value = "/postWrite", method = RequestMethod.GET)
 	public ModelAndView postWrite(Post post){
