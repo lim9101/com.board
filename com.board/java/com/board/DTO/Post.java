@@ -2,6 +2,8 @@ package com.board.DTO;
 
 import java.sql.Date;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class Post {
 	private int spNo=0;
 	private int pNo=0;
@@ -11,6 +13,7 @@ public class Post {
 	private Date date_in;
 	private Date date_up;
 	private int count;
+	private MultipartFile upload; 
 
 	public int getSpNo() {
 		return spNo;
@@ -76,5 +79,10 @@ public class Post {
 				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
 				+ ", toString()=" + super.toString() + "]";
 	}
-	
+	public MultipartFile getUpload() {
+		return upload;
+	}
+	public void setUpload(MultipartFile upload) {
+		this.upload = upload;
+	}
 }
