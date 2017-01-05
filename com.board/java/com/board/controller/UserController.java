@@ -20,8 +20,6 @@ public class UserController {
 	@ResponseBody
 	public boolean signIn(User user,HttpSession session){
 		boolean result=false;
-		System.out.println(user);
-		
 		try{
 			result=userService.signIn(user);
 		}catch(Exception e){
@@ -46,5 +44,31 @@ public class UserController {
 		}
 		return result;
 	}
+	
+	
+	//로그인사용자 정보조회
+	@RequestMapping("userIde")
+	@ResponseBody
+	public boolean userInfo(HttpSession session){
+		boolean result=false;
+		User user=(User)session.getAttribute("user");
+		session.removeAttribute("user");
+		try{
+		session.setAttribute("user", userService.getUser(user.getUserId()));
+		System.out.println((User)session.getAttribute("user"));
+		result=true;
+		}catch(Exception e){
+			System.err.println(e);
+		}finally{
+			if(result == true)
+			System.out.println(result);
+			else{
+				System.out.println(false);
+			}
+		}
+		return result;
+	}
+	
+	
 	
 }
