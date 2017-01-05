@@ -16,6 +16,11 @@ public class ViewController {
 			return "userAdd";
 		}
 		
+		@RequestMapping("userInfo")
+		public String userInfo(){
+			return "userInfo";
+		}
+		
 		@RequestMapping("boardList")
 		public String boardList(){
 			return "boardList";
