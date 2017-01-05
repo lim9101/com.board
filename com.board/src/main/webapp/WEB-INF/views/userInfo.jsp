@@ -11,6 +11,7 @@
 $.ajax({
 	url:"userIde",
 	success:function(result){
+		location.reload();
 	}
 });
 $(document).ready(function(){
