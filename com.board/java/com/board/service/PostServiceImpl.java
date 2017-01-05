@@ -20,6 +20,7 @@ public class PostServiceImpl implements PostService{
 	}
 	
 	public boolean postWrite(Post post){
+		
 		List<Post> post2=postDao.getPosts(post.getSpNo());
 		System.out.println(post2);
 		if(post2.size()==0){

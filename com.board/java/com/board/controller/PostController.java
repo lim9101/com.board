@@ -6,7 +6,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.board.DTO.Post;
 import com.board.service.PostService;
@@ -17,12 +19,23 @@ public class PostController {
 	@Autowired
 	private PostService postService;
 	
-	@RequestMapping("postWrite")
-	@ResponseBody
-	public boolean postWrite(Post post){
-		post.setDate_in(new Date(System.currentTimeMillis()));
-		return postService.postWrite(post);
-	}
+	//글 작성하는 페이지 이동
+	@RequestMapping(value = "/postWrite", method = RequestMethod.GET)
+	public ModelAndView postWrite(Post post){
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("postAdd");
+		return mav;
+	}//end postWrite
+	
+	//글 작성 후 처리 메서드
+	@RequestMapping(value = "/postWrite", method = RequestMethod.POST)
+	public ModelAndView postProWrite(Post post){
+		ModelAndView mav = new ModelAndView();
+		postService.postWrite(post);
+		mav.setViewName("postList");
+		return mav;
+		/*post.setDate_in(new Date(System.currentTimeMillis()));;*/
+	}//end postProWrite
 	
 	@RequestMapping("postUpdate")
 	@ResponseBody

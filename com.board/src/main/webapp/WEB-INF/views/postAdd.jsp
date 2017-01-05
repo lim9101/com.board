@@ -8,22 +8,9 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-	$(".postAddBtn").on("click",function(){
-		var post = {
-				spNo:0,
-				 userId:$(".userId").val(),
-				title:$(".title").val(),
-				content:$(".content").val(),
-				count:0
-		}
-		$.ajax({
-			url:"postWrite",
-			data:post,
-			success:function(){
-				
-			}
-		});
-	});
+	$('.postAddBtn').bind('click',function(){
+		  $('#frmWR').attr('action','postWrite').submit();
+	  });
 })
 </script>
 <style type="text/css">
@@ -39,22 +26,22 @@ form{
 </head>
 <body>
 <h1>글쓰기</h1>	
-<form class="form-horizontal" role="form">
+<form class="form-horizontal" role="form" id="frmWR" name="frmWR" method="post" action="postWrite">
   <div class="form-group PostLabel">
     <label for="inputEmail3" class="col-sm-2 control-label">Title</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control title" placeholder="title"/>
+      <input type="text" id="title" name="title" class="form-control title" placeholder="title"/>
     </div>
   	<label for="inputEmail3" class="col-sm-2 control-label">User</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control userId"  value="${ user.userId }" readonly="readonly"/>
+      <input type="text" id="user_id" name="user_id" class="form-control user_id"  value="duri" readonly="readonly"/>
     </div>
   </div>
   
    <div class="form-group">
     <label for="inputEmail3" class="col-sm-2 control-label">Content</label>
     <div class="col-sm-10">
-      <textarea class="form-control content" cols="10" rows="10"></textarea>
+      <textarea id="content" name="content" class="form-control content" cols="10" rows="10"></textarea>
     </div>
   </div>
   
