@@ -9,7 +9,7 @@ public class User {
 	private String phone;
 	private int addNo;
 	private String addD;
-	private char gender;
+	private String gender;
 	public String getUserId() {
 		return userId;
 	}
@@ -52,10 +52,11 @@ public class User {
 	public void setAddD(String addD) {
 		this.addD = addD;
 	}
-	public char getGender() {
+	
+	public String getGender() {
 		return gender;
 	}
-	public void setGender(char gender) {
+	public void setGender(String gender) {
 		this.gender = gender;
 	}
 	@Override
