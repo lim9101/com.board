@@ -46,7 +46,7 @@ $(document).ready(function(){
 <div class="container">
 <h1>Board login</h1>
 	<div>
-		IDD:<input type="text" class="id"/>
+		ID:<input type="text" class="id"/>
 		PW:<input type="password" class="pw"/>
 		   <button type="button" class="btn btn-primary btn-mg login" value="login">login</button>
 		   <button type="button" class="btn btn-primary btn-mg cansel" value="cansel">cansel</button>

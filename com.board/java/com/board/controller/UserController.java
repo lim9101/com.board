@@ -16,27 +16,35 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
+	
+	//회원가입 기능
+	//ParameterType:User,HttpSession resultType:boolean
 	@RequestMapping("signIn")
 	@ResponseBody
 	public boolean signIn(User user,HttpSession session){
+		session.setAttribute("user",user);
 		boolean result=false;
 		try{
 			result=userService.signIn(user);
+			userService.userInfo(session);
 		}catch(Exception e){
 			System.err.print(e);
 		}finally{
 			System.out.println(result);
 		}
+		
 		return result;
 	}
 	
+	//사용자 정보 check
+	//ParameterType:User,HttpSession resultType:boolean
 	@RequestMapping("check")
 	@ResponseBody
 	public boolean check(User user,HttpSession session){
-		session.setAttribute("user", user);
 		boolean result=false;
 		try{
-			result=userService.check(user);
+			result=userService.check(user,session);
+			session.setAttribute("user", user);
 		}catch(Exception e){
 			System.err.print(e);
 		}finally{
@@ -45,29 +53,22 @@ public class UserController {
 		return result;
 	}
 	
-	
-	//로그인사용자 정보조회
-	@RequestMapping("userIde")
+	//사용자 회원탈퇴기능URL
+	//ParameterType:User,HttpSession resultType:boolean
+	@RequestMapping("delUser")
 	@ResponseBody
-	public boolean userInfo(HttpSession session){
+	public boolean delUser(User user,HttpSession session){
 		boolean result=false;
-		User user=(User)session.getAttribute("user");
-		session.removeAttribute("user");
-		try{
-		session.setAttribute("user", userService.getUser(user.getUserId()));
-		System.out.println((User)session.getAttribute("user"));
-		result=true;
-		}catch(Exception e){
-			System.err.println(e);
-		}finally{
-			if(result == true)
-			System.out.println(result);
-			else{
-				System.out.println(false);
-			}
+		User sessionUser = (User)session.getAttribute("user");
+		user.setUserId(sessionUser.getUserId());
+		if(userService.check(user,session)){
+			result=userService.delUser(user);
+		}else{
+			System.out.println("성공여부:"+result);
 		}
 		return result;
 	}
+	
 	
 	
 	

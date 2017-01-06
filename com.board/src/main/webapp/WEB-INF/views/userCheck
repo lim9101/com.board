@@ -1,0 +1,23 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$(".checkBtn").on("click",function(){
+		
+	})
+});
+</script>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<form action="">
+		<label for="userPw">비밀번호:<input type="password" id="userPw" name="userPw"/></label>
+		<button type="submit" class="checkBtn">확인</button>
+	</form>
+</body>
+</html>
