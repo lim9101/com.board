@@ -24,11 +24,9 @@ public class UserServiceImpl implements UserService{
 	public boolean updateUser(User user){
 		return userDao.updateUser(user)>0;
 	}
-	public boolean delUser(User user){
-		return userDao.delUser(user)>0;
-	}
 	
-	//로그인 check
+	
+	//check(사용자정보 체크)
 	//parameter:User result:boolean
 	public boolean check(User user){
 		boolean result=false;
@@ -63,6 +61,16 @@ public class UserServiceImpl implements UserService{
 		}finally{
 			System.out.println("저장성공여부:"+result);
 			}
+		return result;
+	}
+	
+	//사용자삭제기능
+	//ParameterType:User resultType:boolean
+	public boolean delUser(User user){
+		boolean result=false;
+		try{
+			result=userDao.delUser(user)>0;
+		}catch(Exception e){}finally{};
 		return result;
 	}
 	

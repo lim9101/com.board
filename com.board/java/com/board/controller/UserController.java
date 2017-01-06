@@ -17,6 +17,8 @@ public class UserController {
 	private UserService userService;
 	
 	
+	//회원가입 기능
+	//ParameterType:User,HttpSession resultType:boolean
 	@RequestMapping("signIn")
 	@ResponseBody
 	public boolean signIn(User user,HttpSession session){
@@ -34,6 +36,8 @@ public class UserController {
 		return result;
 	}
 	
+	//사용자 정보 check
+	//ParameterType:User,HttpSession resultType:boolean
 	@RequestMapping("check")
 	@ResponseBody
 	public boolean check(User user,HttpSession session){
@@ -49,7 +53,21 @@ public class UserController {
 		return result;
 	}
 	
-	
+	//사용자 회원탈퇴기능URL
+	//ParameterType:User,HttpSession resultType:boolean
+	@RequestMapping("delUser")
+	@ResponseBody
+	public boolean delUser(User user,HttpSession session){
+		boolean result=false;
+		User sessionUser = (User)session.getAttribute("user");
+		user.setUserId(sessionUser.getUserId());
+		if(userService.check(user)){
+			result=userService.delUser(user);
+		}else{
+			System.out.println("성공여부:"+result);
+		}
+		return result;
+	}
 	
 	
 	

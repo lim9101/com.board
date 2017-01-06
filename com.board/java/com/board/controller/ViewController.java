@@ -38,4 +38,9 @@ public class ViewController {
 		public String postAdd(){
 			return "postAdd";
 		}
+		
+		@RequestMapping("userDel")
+		public String delUser(){
+			return "userDel";
+		}
 }
