@@ -45,7 +45,14 @@ public class ViewController {
 		}
 		
 		@RequestMapping("userCheck")
-		public String userCheck(){
+		public String userCheck(String checkPoint,HttpSession session){
+			System.out.println(checkPoint);
+			session.setAttribute("checkPoin", checkPoint);
 			return "userCheck";
+		}
+		
+		@RequestMapping("userUpdate")
+		public String userUpdate(){
+			return "userUpdate";
 		}
 }

@@ -10,7 +10,9 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	$(".updateBtn").on("click",function(){
-		location.href("check");
+			var popUrl = "userCheck";	//팝업창에 출력될 페이지 URL
+			var popOption = "width=370, height=360, resizable=no, scrollbars=no, status=no;";    //팝업창 옵션(optoin)
+			var infoWindow = window.open(popUrl,"check",popOption);
 	})
 /* 	$("#findAddress").postcodifyPopUp(); */
 });
@@ -20,9 +22,9 @@ $(document).ready(function(){
 <body>
 <div class="container">
 <h1>회원 정보${user.gender}</h1>
-	<div>
+	<form>
 		<P>ID:<input type="text" class="id" value="${user.userId}" readonly="readonly"/></P>
-		<P>PW:<input type="password" class="pw" value=""/></P>
+		<P>PW:<input type="password" class="pw" name="userPw"/></P>
 		<P>NAME:<input type="text" class="name" value="${user.userName}" readonly="readonly"/></P>
 		<P>EMAIL:<input type="email" class="email" value="${user.email}" readonly="readonly"/></P>
 		<P>PHONE:<input type="tel" class="phone" value="${user.phone}" readonly="readonly"/></P>
@@ -41,11 +43,11 @@ $(document).ready(function(){
 			<input type="text" class="postcodify_address form-control addD" value="${user.addD}" placeholder="주소" readonly="readonly"/>
 			</div>
 		</div>
-		
-		 <P><button type="button" class="btn btn-primary btn-mg updateBtn" value="update">update</button>
+		 <P><button type="submit" class="btn btn-primary btn-mg updateBtn" value="update">update</button>
 		   <button type="button" class="btn btn-primary btn-mg canselBtn" value="cansel">cansel</button>
+		   <input type="hidden" name="checkPoint" value="1"/>
 		</P>
-	</div>
+	</form>
 </div>
 </body>
 </html>
