@@ -57,7 +57,7 @@ public class PostController {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("pList", postService.postList());
 		System.out.println(postService.postList());
-		mav.setViewName("boardList");
+		mav.setViewName("postList");
 		return mav;
 	}
 	

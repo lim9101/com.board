@@ -21,7 +21,7 @@ $(document).ready(function(){
 			data:user,
 			success:function(result){
 				if(result){
-				location.href='boardList';
+				location.href='postList';
 				}else{
 					alert("로그인실패");
 				}

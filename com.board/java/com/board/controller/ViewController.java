@@ -29,11 +29,6 @@ public class ViewController {
 			return "userInfo";
 			}
 		
-		@RequestMapping("boardList")
-		public String boardList(){
-			return "boardList";
-		}
-		
 		@RequestMapping("postAdd")
 		public String postAdd(){
 			return "postAdd";
