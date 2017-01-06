@@ -19,7 +19,7 @@ $(document).ready(function(){
 <h1>회원 정보${user.gender}</h1>
 	<div>
 		<P>ID:<input type="text" class="id" value="${user.userId}" readonly="readonly"/></P>
-		<P>PW:<input type="password" class="pw" value=""/></P>
+		<P>PW:<input type="password" class="pw" id="userPw" name="userPw" value=""/></P>
 		<P>NAME:<input type="text" class="name" value="${user.userName}" readonly="readonly"/></P>
 		<P>EMAIL:<input type="email" class="email" value="${user.email}"/></P>
 		<P>PHONE:<input type="tel" class="phone" value="${user.phone}"/></P>
@@ -40,8 +40,9 @@ $(document).ready(function(){
 			</div>
 		</div>
 		
-		 <P><button type="button" class="btn btn-primary btn-mg signIn" value="signIn">update</button>
-		   <button type="button" class="btn btn-primary btn-mg" value="cansel">cansel</button>
+		 <P>
+		 <button type="button" class="btn btn-primary btn-mg signIn" value="signIn">update</button>
+	     <button type="button" class="btn btn-primary btn-mg" value="cansel">cansel</button>
 		</P>
 	</div>
 </div>
