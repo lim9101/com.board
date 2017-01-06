@@ -2,7 +2,7 @@ package com.board.DTO;
 
 import org.springframework.web.multipart.MultipartFile;
 
-public class Files {
+public class AttFile {
 	private int file_no;
 	private int spNo;
 	private int pNo;

@@ -1,13 +1,15 @@
 package com.board.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.board.DTO.Files;
+import com.board.DTO.AttFile;
 import com.board.DTO.Post;
 import com.board.DTO.Search;
+import com.board.dao.mapper.AttFileMapper;
 import com.board.dao.mapper.PostMapper;
 
 @Repository
@@ -16,13 +18,7 @@ public class PostDaoImpl implements PostDao{
 	@Autowired
 	private PostMapper postMapper;
 	
-	public List<Post> getPosts(int spNo){
-		return postMapper.getPosts(spNo);
-	}
 	
-	public Post getPost(int pno){
-		return postMapper.getPost(pno);
-	}
 	
 	public int addPost(Post post){
 		return postMapper.addPost(post);
@@ -41,7 +37,13 @@ public class PostDaoImpl implements PostDao{
 	}
 
 	@Override
-	public void addFile(Files file) {
-		postMapper.addFile(file);
+	public List<Post> listPost() {
+		return postMapper.listPost();
 	}
+
+	@Override
+	public Post viewPost(HashMap<String, Integer> map) {
+		return postMapper.viewPost(map);
+	}
+
 }

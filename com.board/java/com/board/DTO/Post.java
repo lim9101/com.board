@@ -14,6 +14,8 @@ public class Post {
 	private Date date_up;
 	private int count;
 	private MultipartFile upload; 
+	private AttFile attFile;
+	private User user;
 
 	public int getSpNo() {
 		return spNo;
@@ -84,5 +86,17 @@ public class Post {
 	}
 	public void setUpload(MultipartFile upload) {
 		this.upload = upload;
+	}
+	public AttFile getAttFile() {
+		return attFile;
+	}
+	public void setAttFile(AttFile attFile) {
+		this.attFile = attFile;
+	}
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
 	}
 }

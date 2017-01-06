@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="com.board.dao.mapper.AttFileMapper">
+ 	<!-- 파일추가 -->
+ 	<insert id="addFile" parameterType="AttFile">
+ 		insert into attfiles values(file_seq.nextval,#{spNo},#{pNo},#{file_name,jdbcType=VARCHAR})
+ 	</insert>
+ 	
+ 	<!-- 파일이름 검색 -->
+ 	<select id="fileName" parameterType="map" resultType="String">
+ 		<![CDATA[
+ 		select file_name from attFiles where spno=#{spNo} and pno=#{pNo};
+ 		]]>
+ 	</select>
+ </mapper>

@@ -10,15 +10,50 @@
  		,#{content,jdbcType=VARCHAR},sysdate,#{date_up,jdbcType=DATE},#{count})
  		]]>
  	</insert>
- 	
- 	<!-- 파일추가 -->
- 	<insert id="addFile" parameterType="Files">
- 		insert into files values(file_seq.nextval,#{spNo},#{pNo},#{file_name,jdbcType=VARCHAR})
- 	</insert>
+ 
  	
  	<select id="maxPost" resultType="int">
  		<![CDATA[ select max(pno) from posts ]]>
  	</select>
  	
+ 	<resultMap type="Post" id="Post">
+ 		<result property="spNo" column="spno"/>
+ 		<result property="pNo" column="pno"/>
+ 		<result property="user_id" column="user_id"/>
+ 		<result property="title" column="title"/>
+ 		<result property="content" column="content"/>
+ 		<result property="date_in" column="date_in"/>
+ 		<result property="count" column="count"/>
+ 		<collection property="attFile" resultMap="AttFile"/>
+ 		<collection property="user" resultMap="User"/>
+ 	</resultMap>
+
+ 	<resultMap type="AttFile" id="AttFile">
+ 		<result property="file_no" column="file_no"/>
+ 		<result property="file_name" column="file_name"/>
+ 	</resultMap>
  	
+ 	<resultMap type="User" id="User">
+ 		<result property="userId" column="user_id" />
+ 		<result property="userName" column="user_name"/>
+ 	</resultMap>
+ 	
+ 	<select id="listPost" resultMap="Post" resultType="com.board.DTO.Post">
+ 		<![CDATA[
+ 		select p.spno, p.pno, p.user_id, p.title, p.date_in, p.count, a.file_no, a.file_name
+		from posts p, attfiles a
+		where p.pno = a.pno(+)
+		order by pno desc
+		]]>
+ 	</select>
+ 	
+ 	<select id="viewPost" parameterType="map" resultMap="Post" resultType="com.board.DTO.Post" >
+ 		<![CDATA[
+ 		select p.spno, p.pno, p.user_id, p.content, u.user_name, p.title, p.date_in, p.count, a.file_no, a.file_name
+		from posts p, attfiles a, users u
+		where p.user_id = u.user_id and p.pno = a.pno(+) and 
+		p.spno=#{spNo} and p.pno=#{pNo}
+		order by p.pno desc
+		]]>
+ 	</select>
  </mapper>
