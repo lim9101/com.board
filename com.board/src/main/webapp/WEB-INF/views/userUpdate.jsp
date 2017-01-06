@@ -9,10 +9,7 @@
 <script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-	$(".updateBtn").on("click",function(){
-		location.href("check");
-	})
-/* 	$("#findAddress").postcodifyPopUp(); */
+	$("#findAddress").postcodifyPopUp();
 });
 </script>
 <title>Insert title here</title>
@@ -24,8 +21,8 @@ $(document).ready(function(){
 		<P>ID:<input type="text" class="id" value="${user.userId}" readonly="readonly"/></P>
 		<P>PW:<input type="password" class="pw" value=""/></P>
 		<P>NAME:<input type="text" class="name" value="${user.userName}" readonly="readonly"/></P>
-		<P>EMAIL:<input type="email" class="email" value="${user.email}" readonly="readonly"/></P>
-		<P>PHONE:<input type="tel" class="phone" value="${user.phone}" readonly="readonly"/></P>
+		<P>EMAIL:<input type="email" class="email" value="${user.email}"/></P>
+		<P>PHONE:<input type="tel" class="phone" value="${user.phone}"/></P>
 		 
 		 <c:if test='${user.gender eq "남"}'>
 		  <P>GENDER: 남<input type="radio" name="gender" value="남"  checked="checked"/> 여<input type="radio" name="gender" value="여"/></P>
@@ -36,14 +33,15 @@ $(document).ready(function(){
 		 <div class="form-group">
 		 	<div class="form-inline">
 			<input type="text" class="postcodify_postcode5 form-control addNo" value="${user.addNo}" placeholder="우편번호" readonly="readonly"/>
+			<button type="button" class="form-control  btn btn-primary" id="findAddress" >주소검색</button>
 			</div>
 			<div class="form-inline">
-			<input type="text" class="postcodify_address form-control addD" value="${user.addD}" placeholder="주소" readonly="readonly"/>
+			<input type="text" class="postcodify_address form-control addD" value="${user.addD}" placeholder="주소"/>
 			</div>
 		</div>
 		
-		 <P><button type="button" class="btn btn-primary btn-mg updateBtn" value="update">update</button>
-		   <button type="button" class="btn btn-primary btn-mg canselBtn" value="cansel">cansel</button>
+		 <P><button type="button" class="btn btn-primary btn-mg signIn" value="signIn">update</button>
+		   <button type="button" class="btn btn-primary btn-mg" value="cansel">cansel</button>
 		</P>
 	</div>
 </div>

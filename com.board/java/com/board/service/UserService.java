@@ -9,6 +9,6 @@ public interface UserService {
 	boolean signIn(User user);
 	boolean updateUser(User user);
 	boolean delUser(User user);
-	boolean check(User user);
+	boolean check(User user,HttpSession session);
 	boolean userInfo(HttpSession session);
 }

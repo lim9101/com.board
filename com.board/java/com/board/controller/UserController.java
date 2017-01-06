@@ -41,10 +41,10 @@ public class UserController {
 	@RequestMapping("check")
 	@ResponseBody
 	public boolean check(User user,HttpSession session){
-		session.setAttribute("user", user);
 		boolean result=false;
 		try{
-			result=userService.check(user);
+			result=userService.check(user,session);
+			session.setAttribute("user", user);
 		}catch(Exception e){
 			System.err.print(e);
 		}finally{
@@ -61,7 +61,7 @@ public class UserController {
 		boolean result=false;
 		User sessionUser = (User)session.getAttribute("user");
 		user.setUserId(sessionUser.getUserId());
-		if(userService.check(user)){
+		if(userService.check(user,session)){
 			result=userService.delUser(user);
 		}else{
 			System.out.println("성공여부:"+result);

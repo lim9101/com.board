@@ -43,4 +43,9 @@ public class ViewController {
 		public String delUser(){
 			return "userDel";
 		}
+		
+		@RequestMapping("userCheck")
+		public String userCheck(){
+			return "userCheck";
+		}
 }
