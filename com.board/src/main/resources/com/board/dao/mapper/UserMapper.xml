@@ -24,9 +24,16 @@
 	</insert>
 	
 	 <update id="updateUser" parameterType="user">
-		update users set user_id=#{userId},user_pw=#{userPw},user_name=#{userName}
+	 	<if test="true">
+	 	update users set user_id=#{userId},user_pw=#{userPw},user_name=#{userName}
 		,email=#{email},phone=#{phone},add_no=#{addNo},add_d=#{addD},gender=#{gender}
 		where user_id=#{userId}
+	 	</if>
+	 <!-- 	<if test="userPw!=null">
+	 	update users set user_id=#{userId},user_pw=#{userPw},user_name=#{userName}
+		,email=#{email},phone=#{phone},add_no=#{addNo},add_d=#{addD},gender=#{gender}
+		where user_id=#{userId}
+	 	</if> -->
 	</update>
 	
 	<delete id="delUser" parameterType="user">

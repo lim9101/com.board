@@ -8,20 +8,25 @@
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
 <script type="text/javascript">
+var checkfunction = function(){
+	if($("input[name=checkPoint]").val!=null){
+		location.href="userUpdate";			
+	}else{}
+	console.log(false);
+}
 $(document).ready(function(){
 	$(".updateBtn").on("click",function(){
 			var popUrl = "userCheck";	//팝업창에 출력될 페이지 URL
 			var popOption = "width=370, height=360, resizable=no, scrollbars=no, status=no;";    //팝업창 옵션(optoin)
 			var infoWindow = window.open(popUrl,"check",popOption);
 	})
-/* 	$("#findAddress").postcodifyPopUp(); */
 });
 </script>
 <title>Insert title here</title>
 </head>
 <body>
 <div class="container">
-<h1>회원 정보${user.gender}</h1>
+<h1>회원 정보</h1>
 	<form>
 		<P>ID:<input type="text" class="id" value="${user.userId}" readonly="readonly"/></P>
 		<P>PW:<input type="password" class="pw" name="userPw"/></P>
@@ -43,9 +48,9 @@ $(document).ready(function(){
 			<input type="text" class="postcodify_address form-control addD" value="${user.addD}" placeholder="주소" readonly="readonly"/>
 			</div>
 		</div>
-		 <P><button type="submit" class="btn btn-primary btn-mg updateBtn" value="update">update</button>
+		 <P><button type="button" class="btn btn-primary btn-mg updateBtn" value="update">update</button>
 		   <button type="button" class="btn btn-primary btn-mg canselBtn" value="cansel">cansel</button>
-		   <input type="hidden" name="checkPoint" value="1"/>
+		   <input type="hidden" name="checkPoint">
 		</P>
 	</form>
 </div>

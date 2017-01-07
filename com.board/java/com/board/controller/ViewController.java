@@ -25,7 +25,6 @@ public class ViewController {
 		
 		@RequestMapping("userInfo")
 		public String userInfo(HttpSession session){
-			userService.userInfo(session);
 			return "userInfo";
 			}
 		
@@ -41,8 +40,6 @@ public class ViewController {
 		
 		@RequestMapping("userCheck")
 		public String userCheck(String checkPoint,HttpSession session){
-			System.out.println(checkPoint);
-			session.setAttribute("checkPoin", checkPoint);
 			return "userCheck";
 		}
 		

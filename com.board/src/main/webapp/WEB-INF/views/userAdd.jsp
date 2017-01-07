@@ -27,7 +27,7 @@ $(document).ready(function(){
 			success:function(result){
 				if(result){ 
 					alert("가입성공");
-					location.href="boardList";
+					location.href="postList";
 				}else alert("가입 실패")
 			}
 		});

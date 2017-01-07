@@ -6,9 +6,8 @@ import com.board.DTO.User;
 
 public interface UserService {
 	User getUser(String userId);
-	boolean signIn(User user);
+	boolean signIn(User user,HttpSession session);
 	boolean updateUser(User user);
 	boolean delUser(User user);
 	boolean check(User user,HttpSession session);
-	boolean userInfo(HttpSession session);
 }

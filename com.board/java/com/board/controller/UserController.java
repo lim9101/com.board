@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.board.DTO.User;
@@ -25,8 +26,7 @@ public class UserController {
 		session.setAttribute("user",user);
 		boolean result=false;
 		try{
-			result=userService.signIn(user);
-			userService.userInfo(session);
+			result=userService.signIn(user,session);
 		}catch(Exception e){
 			System.err.print(e);
 		}finally{
@@ -44,11 +44,9 @@ public class UserController {
 		boolean result=false;
 		try{
 			result=userService.check(user,session);
-			session.setAttribute("user", user);
 		}catch(Exception e){
 			System.err.print(e);
 		}finally{
-			System.out.println(result);
 		}
 		return result;
 	}
@@ -69,7 +67,13 @@ public class UserController {
 		return result;
 	}
 	
-	
+	@RequestMapping(value="updateUser", method=RequestMethod.POST)
+	@ResponseBody
+	public boolean updateUser(User user,HttpSession session){
+		User sessionUser = (User)session.getAttribute("user"); 
+		user.setUserPw(sessionUser.getUserPw());
+		return userService.updateUser(user);
+	}
 	
 	
 }
