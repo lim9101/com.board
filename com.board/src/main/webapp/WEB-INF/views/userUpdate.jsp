@@ -9,8 +9,28 @@
 <script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-	$("#findAddress").postcodifyPopUp();
-})
+	$(".findAddress").postcodifyPopUp();
+	
+	$(".updateBtn").on("click",function(){
+		 var formData = $("form").serialize();
+		 console.log(formData);
+		$.ajax({
+			method:"POST",
+			url:"updateUser",
+			data:formData,
+			success:function(result){
+				console.log(result);
+				if(result){
+					alert("정보수정 성공");
+					location.href="postList";
+				}else{
+					alert("정보수정 실패");
+				}
+				
+			}
+		});
+	})
+
 });
 </script>
 <title>Insert title here</title>
@@ -18,7 +38,7 @@ $(document).ready(function(){
 <body>
 <div class="container">
 <h1>회원 정보 수정</h1>
-	<form method="post" action="updateUser">
+	<form>
 		<P>ID:<input type="text" class="id" name="userId" value="${user.userId}" readonly="readonly"/></P>
 		<P>PW:<input type="password" class="pw" id="userPw" name="userPw" readonly="readonly"/></P>
 		<P>NAME:<input type="text" class="name" name="userName" value="${user.userName}" readonly="readonly"/></P>
@@ -34,7 +54,7 @@ $(document).ready(function(){
 		 <div class="form-group">
 		 	<div class="form-inline">
 			<input type="text" class="postcodify_postcode5 form-control addNo" name="addNo" value="${user.addNo}" placeholder="우편번호" readonly="readonly"/>
-			<button type="button" class="form-control  btn btn-primary" id="findAddress" >주소검색</button>
+			<button type="button" class="form-control  btn btn-primary findAddress">주소검색</button>
 			</div>
 			<div class="form-inline">
 			<input type="text" class="postcodify_address form-control addD" name="addD" value="${user.addD}" placeholder="주소"/>
@@ -42,7 +62,7 @@ $(document).ready(function(){
 		</div>
 		
 		 <P>
-		 <button type="submit" class="btn btn-primary btn-mg updateBtn">update</button>
+		 <button type="button" class="btn btn-primary btn-mg updateBtn">update</button>
 	     <button type="button" class="btn btn-primary btn-mg">cansel</button>
 		</P>
 	</form>

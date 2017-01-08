@@ -21,10 +21,15 @@ $(document).ready(function(){
 			data:user,
 			success:function(result){
 				console.log(result);
-				$(opener.document).find("input[name=checkPoint]").val("true");
-				opener.checkfunction();
-				 window.open("","check","");
-					window.close();
+				if(result){
+					opener.checkfunction(result);
+					 window.open("","check","");
+						window.close();
+
+				}else{
+					alert("비밀번호가 같지 않습니다.");
+				}
+				
 			}
 		});
 	

@@ -34,9 +34,10 @@ public class UserServiceImpl implements UserService{
 		User sessionUser = (User)session.getAttribute("user");
 		if(sessionUser!=null && user.getUserId()==null){//받은user값에 비밀번호정보뿐이면 세션에 있는 pw갑과 비교
 			if(sessionUser.getUserPw().equals(user.getUserPw())){
+				System.out.println("in true");
 				result=true;
 			}else{
-				
+				System.out.println("return false");
 			}
 		}else{
 			User daoUser = userDao.getUser(user.getUserId());

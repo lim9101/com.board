@@ -8,17 +8,25 @@
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
 <script type="text/javascript">
-var checkfunction = function(){
-	if($("input[name=checkPoint]").val!=null){
+var checkfunction = function(result){
+	if(result){
 		location.href="userUpdate";			
-	}else{}
-	console.log(false);
+	}else{
+	}
 }
 $(document).ready(function(){
 	$(".updateBtn").on("click",function(){
-			var popUrl = "userCheck";	//팝업창에 출력될 페이지 URL
-			var popOption = "width=370, height=360, resizable=no, scrollbars=no, status=no;";    //팝업창 옵션(optoin)
-			var infoWindow = window.open(popUrl,"check",popOption);
+		  var winWidth = 370;
+		 var winHeight = 360;
+		 var winURL = "userCheck";
+		 var winName = "check";
+		 var winPosLeft = (screen.width - winWidth) / 2;
+		 var winPosTop = (screen.height - winHeight) / 2;
+		 var winOpt = "width="+winWidth+",height="+winHeight+",top="+winPosTop+",left="+winPosLeft;
+		 window.open(winURL, winName, winOpt + ",menubar=no,status=no,scrollbars=no,resizable=no"); 
+			/* var popUrl = "userCheck";	//팝업창에 출력될 페이지 URL
+			var popOption = "width=370, height=360, resizable=no, scrollbars=no, status=no top="+winPosTop+",left="+winPosLeft;";    //팝업창 옵션(optoin)
+			var infoWindow = window.open(popUrl,"check",popOption); */
 	})
 });
 </script>
