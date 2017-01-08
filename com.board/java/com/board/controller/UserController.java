@@ -16,7 +16,7 @@ public class UserController {
 	
 	@Autowired
 	private UserService userService;
-	
+	//commit;실험
 	
 	//회원가입 기능
 	//ParameterType:User,HttpSession resultType:boolean
