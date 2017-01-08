@@ -14,7 +14,8 @@ public class ViewController {
 	@Autowired private UserService userService;
 	
 		@RequestMapping("/")
-		public String index(){
+		public String index(HttpSession session){
+			session.removeAttribute("user");
 			return "index";
 		}
 		
