@@ -9,7 +9,7 @@
         username="board"
         password="board"
         type="javax.sql.DataSource"
-        url="jdbc:oracle:thin:@127.0.0.1:1521:xe" 
+        url="jdbc:oracle:thin:@172.29.14.86:1521:xe" 
          maxActive="2" 
 		 minIdle="2"/>
 </Context>
