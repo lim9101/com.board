@@ -16,7 +16,7 @@ public class UserController {
 	
 	@Autowired
 	private UserService userService;
-	//commit;실험
+	
 	
 	//회원가입 기능
 	//ParameterType:User,HttpSession resultType:boolean
@@ -67,6 +67,7 @@ public class UserController {
 		return result;
 	}
 	
+	//회원정보수정
 	@RequestMapping(value="updateUser", method=RequestMethod.POST)
 	@ResponseBody
 	public boolean updateUser(User user,HttpSession session){
