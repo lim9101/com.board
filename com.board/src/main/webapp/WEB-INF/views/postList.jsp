@@ -71,7 +71,7 @@
 				<c:forEach items="${pList}" var="dto">
 					<tr>
 						<td>${dto.pNo }</td>
-						<td><a href="#">${dto.title }</a></td>
+						<td><a href="postView?spNo=${dto.spNo}&pNo=${dto.pNo}">${dto.title }</a></td>
 						<td>
 						<c:if test="${!empty dto.attFile.file_name}">
 							<img src="images/file.png" width="15"/>
