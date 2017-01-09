@@ -1,9 +1,9 @@
 package com.board.DTO;
 
-public class PageDTO {
+public class Page {
 	private int currentPage; // 현재페이지
 	private int totalCount; // 총 레코드수
-	private int blockCount = 5; // 한 페이지에 보여줄 레코드수
+	private int blockCount = 10; // 한 페이지에 보여줄 레코드수
 	private int blockPage = 3; // 한 블록에 보여줄 페이지수  < 1 2 3 >
 	private int totalPage; // 총 페이지수
 	private int startRow; // 시작 레코드 번호
@@ -14,19 +14,19 @@ public class PageDTO {
 	private String searchKey;
 	private String searchWord;
 
-	public PageDTO() {
+	public Page() {
 
 	}
 
 	//검색어가 추가된 페이지
-	public PageDTO(int currentPage, int totalCount, String searchKey, String searchWord) {
+	public Page(int currentPage, int totalCount, String searchKey, String searchWord) {
        this(currentPage,totalCount);
        this.searchKey=searchKey;
        this.searchWord=searchWord;
 	}
 	//한페이지에서 몇번부터 몇번까지 보여줘야하는지
 	//int currentPage 현재 페이지 번호, int totalCount 전체 레코드 수 
-	public PageDTO(int currentPage, int totalCount) {
+	public Page(int currentPage, int totalCount) {
 		this.currentPage = currentPage;
 		this.totalCount = totalCount;
 

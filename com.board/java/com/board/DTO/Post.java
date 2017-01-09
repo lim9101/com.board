@@ -6,13 +6,15 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class Post {
 	private int spNo=0;
-	private int pNo=0;
+	private int pNo;
 	private String user_id;
 	private String title;
 	private String content;
 	private Date date_in;
 	private Date date_up;
 	private int count;
+	private int plevel=0;
+	private int depth=0;
 	private MultipartFile upload; 
 	private AttFile attFile;
 	private User user;
@@ -98,5 +100,17 @@ public class Post {
 	}
 	public void setUser(User user) {
 		this.user = user;
+	}
+	public int getPlevel() {
+		return plevel;
+	}
+	public void setPlevel(int plevel) {
+		this.plevel = plevel;
+	}
+	public int getDepth() {
+		return depth;
+	}
+	public void setDepth(int depth) {
+		this.depth = depth;
 	}
 }

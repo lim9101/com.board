@@ -5,12 +5,32 @@
  
  	<!-- 공지 글 추가 -->
  	<insert id="addPost" parameterType="post">
- 		<![CDATA[
- 		insert into posts values(#{spNo},#{pNo},#{user_id,jdbcType=VARCHAR},#{title,jdbcType=VARCHAR}
- 		,#{content,jdbcType=VARCHAR},sysdate,#{date_up,jdbcType=DATE},#{count})
- 		]]>
+ 		
+ 		insert into posts values(
+ 		<choose>
+			<when test="spNo==0"> <!-- 제목글 -->
+				pno_seq.nextval
+			</when>
+			<otherwise>
+				#{spNo}<!-- 답변글 -->
+			</otherwise>
+		</choose>
+ 		
+ 		,pno_seq.nextval,#{user_id,jdbcType=VARCHAR},#{title,jdbcType=VARCHAR}
+ 		,#{content,jdbcType=VARCHAR},sysdate,#{date_up,jdbcType=DATE},#{count},#{plevel,jdbcType=DATE},#{depth,jdbcType=DATE})
+ 		
  	</insert>
- 
+ 	
+ 	<!-- 레코드 총 수 -->
+ 	<select id="totalCount" resultType="int">
+ 		select count(*) from posts
+ 	</select>
+ 	
+ 	<update id="depthCount" parameterType="Post">
+ 		<![CDATA[
+ 		update posts set depth=depth+1 where spno=#{pNo} and depth>#{depth}
+ 		]]>
+ 	</update>
  	
  	<select id="maxPost" resultType="int">
  		<![CDATA[ select max(pno) from posts ]]>
@@ -23,6 +43,8 @@
  		<result property="title" column="title"/>
  		<result property="content" column="content"/>
  		<result property="date_in" column="date_in"/>
+ 		<result property="depth" column="depth"/>
+ 		<result property="plevel" column="plevel"/>
  		<result property="count" column="count"/>
  		<collection property="attFile" resultMap="AttFile"/>
  		<collection property="user" resultMap="User"/>
@@ -38,21 +60,24 @@
  		<result property="userName" column="user_name"/>
  	</resultMap>
  	
- 	<select id="listPost" resultMap="Post" resultType="com.board.DTO.Post">
+ 	<select id="listPost" resultMap="Post" resultType="com.board.DTO.Post" parameterType="Page">
  		<![CDATA[
- 		select p.spno, p.pno, p.user_id, p.title, p.date_in, p.count, a.file_no, a.file_name
+ 		select b.*
+  		from (select rownum as rm, a.*
+		from (select p.spno, p.pno, p.depth, p.plevel, p.user_id, p.title, p.date_in, p.count, a.file_no, a.file_name
 		from posts p, attfiles a
 		where p.pno = a.pno(+)
-		order by pno desc
+		order by p.spno desc, p.depth asc)a)b
+   		where b.rm>=#{startRow} and b.rm<=#{endRow}
 		]]>
  	</select>
  	
- 	<select id="viewPost" parameterType="map" resultMap="Post" resultType="com.board.DTO.Post" >
+ 	<select id="viewPost" parameterType="int" resultMap="Post" resultType="com.board.DTO.Post" >
  		<![CDATA[
- 		select p.spno, p.pno, p.user_id, p.content, u.user_name, p.title, p.date_in, p.count, a.file_no, a.file_name
+ 		select p.spno, p.pno, p.user_id, p.depth, p.plevel, p.content, u.user_name, p.title, p.date_in, p.count, a.file_no, a.file_name
 		from posts p, attfiles a, users u
 		where p.user_id = u.user_id and p.pno = a.pno(+) and 
-		p.spno=#{spNo} and p.pno=#{pNo}
+		p.pno=#{pNo}
 		order by p.pno desc
 		]]>
  	</select>
