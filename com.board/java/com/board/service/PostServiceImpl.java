@@ -16,6 +16,7 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.board.DTO.AttFile;
+import com.board.DTO.Page;
 import com.board.DTO.Post;
 import com.board.dao.AttFileDao;
 import com.board.dao.PostDao;
@@ -33,12 +34,17 @@ public class PostServiceImpl implements PostService{
 	//공지 글 추가
 	@Override
 	public boolean postWrite(Post post, HttpServletRequest request){
-		int pno = postDao.maxPost()+1;
-		//MultipartFile file = post.getUpload();
-		post.setpNo(pno);
+		System.out.println("pNo"+post.getpNo());
+		//답변 글이면
+		if(post.getpNo()>0){
+			postDao.depthCount(post);
+			post.setSpNo(post.getSpNo());
+			post.setDepth(post.getDepth()+1);
+			post.setPlevel(post.getPlevel()+1);
+		}
 		postDao.addPost(post);
 		
-		MultipartFile sendFile = post.getUpload();
+		/*MultipartFile sendFile = post.getUpload();
 		
 		//전송하는 파일이 있으면
 		if(!sendFile.isEmpty()){
@@ -66,7 +72,7 @@ public class PostServiceImpl implements PostService{
 			file.setSpNo(0);
 			file.setFile_name(random+"_"+fileName);
 			fileDao.addFile(file);
-		}
+		}*/
 		return true;
 	}//end postWrite
 	
@@ -76,13 +82,18 @@ public class PostServiceImpl implements PostService{
 	}
 
 	@Override
-	public List<Post> postList() {
-		return postDao.listPost();
+	public List<Post> postList(Page pv) {
+		return postDao.listPost(pv);
 	}
 
 	@Override
-	public Post postView(HashMap<String, Integer> map) {
-		return postDao.viewPost(map);
+	public Post postView(int pNo) {
+		return postDao.viewPost(pNo);
+	}
+
+	@Override
+	public int totalCount() {
+		return postDao.totalCount();
 	}
 
 }

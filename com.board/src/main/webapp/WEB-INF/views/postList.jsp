@@ -20,6 +20,13 @@
 	margin: 0 auto;
  	width:1000px;
 }
+.container .noticeTitel{
+	float: left;
+}
+.container .postAdd{
+	float: right;
+	margin-right: 70px;
+}
 .noticeList table{
 	border-collapse: collapse;
     border-spacing: 0;
@@ -57,7 +64,8 @@
 </head>
 <body>
 	<div class="container">
-		공지 글 목록
+		<div class="noticeTitel">공지 글 목록</div>
+		<div class="postAdd"><a href="postAdd">글쓰기</a></div>
 		<div class="noticeList">
 			<table>
 				<tr>
@@ -71,7 +79,12 @@
 				<c:forEach items="${pList}" var="dto">
 					<tr>
 						<td>${dto.pNo }</td>
-						<td><a href="postView?spNo=${dto.spNo}&pNo=${dto.pNo}">${dto.title }</a></td>
+						<td><a href="postView?pNo=${dto.pNo}">
+						<c:if test="${dto.depth>0 }">
+						<img src="images/level.gif" width="${20*dto.plevel}" height="15" />
+						<img src="images/re.gif"></c:if>
+						${dto.title }
+						</a></td>
 						<td>
 						<c:if test="${!empty dto.attFile.file_name}">
 							<img src="images/file.png" width="15"/>
@@ -83,8 +96,13 @@
 					</tr>
 				</c:forEach>
 			</table>
+			
 		</div><!-- end noticeList -->
-
+		<div class="page">
+			<c:forEach var="i" begin="${pv.startPage}" end="${pv.endPage}">
+			<a href="postList?currentPage=${i}">${i}</a>
+			</c:forEach>
+		</div>
 	</div>
 </body>
 </html>

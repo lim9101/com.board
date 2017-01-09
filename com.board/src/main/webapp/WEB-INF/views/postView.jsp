@@ -35,6 +35,11 @@
 				</c:if>
 			</td>
 		</tr>
+		<tr>
+			<td><a href="postAdd?pNo=${dto.pNo}">답변쓰기</a>
+				<a href="postList">목록</a>
+			</td>
+		</tr>
 	</table>
 	
 </div><!-- end container -->

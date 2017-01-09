@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.board.DTO.AttFile;
+import com.board.DTO.Page;
 import com.board.DTO.Post;
 import com.board.DTO.Search;
 import com.board.dao.mapper.AttFileMapper;
@@ -37,13 +38,22 @@ public class PostDaoImpl implements PostDao{
 	}
 
 	@Override
-	public List<Post> listPost() {
-		return postMapper.listPost();
+	public List<Post> listPost(Page pv) {
+		return postMapper.listPost(pv);
 	}
 
 	@Override
-	public Post viewPost(HashMap<String, Integer> map) {
-		return postMapper.viewPost(map);
+	public Post viewPost(int pNo) {
+		return postMapper.viewPost(pNo);
 	}
 
+	@Override
+	public int totalCount() {
+		return postMapper.totalCount();
+	}
+
+	@Override
+	public void depthCount(Post post) {
+		postMapper.depthCount(post);
+	}
 }

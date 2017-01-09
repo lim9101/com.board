@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +12,7 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('.postAddBtn').bind('click', function() {
-			$('#frmWR').attr('action', 'postWrite').submit();
+			$('#frmWR').attr('action', 'postAdd').submit();
 		});
 	})
 </script>
@@ -32,12 +33,15 @@ form {
 	<form class="form-horizontal" role="form" id="frmWR" name="frmWR"
 		method="post" action="postWrite" enctype= multipart/form-data>
 		<div class="form-group PostLabel">
-			<label for="title" class="col-sm-2 control-label">Title</label>
+			<label for="title" class="col-sm-2 control-label">
+			<c:if test="${!empty param.pNo}">답변</c:if>
+	
+			제목</label>
 			<div class="col-sm-10">
 				<input type="text" id="title" name="title"
 					class="form-control title" placeholder="title" />
 			</div>
-			<label for="inputEmail3" class="col-sm-2 control-label">User</label>
+			<label for="inputEmail3" class="col-sm-2 control-label">작성자</label>
 			<div class="col-sm-10">
 				<input type="text" id="user_id" name="user_id"
 					class="form-control user_id" value="duri" readonly="readonly" />
@@ -45,7 +49,7 @@ form {
 		</div>
 
 		<div class="form-group">
-			<label for="content" class="col-sm-2 control-label">Content</label>
+			<label for="content" class="col-sm-2 control-label">내용</label>
 			<div class="col-sm-10">
 				<textarea id="content" name="content" class="form-control content"
 					cols="10" rows="10"></textarea>
@@ -59,10 +63,18 @@ form {
 		
 		<div class="form-group">
 			<div class="col-sm-offset-2 col-sm-10">
+				<a href="#"><button class="btn btn-default postAddBtn">답변쓰기</button></a>
 				<button type="submit" class="btn btn-default postAddBtn">글쓰기</button>
+				<a href="postList">목록</a>
 				<button type="submit" class="btn btn-default">취소</button>
 			</div>
 		</div>
+		<c:if test="${!empty dto.pNo }">
+		<input type="text" name="pNo" value="${dto.pNo }"/>
+		<input type="text" name="spNo" value="${dto.spNo }"/>
+		<input type="text" name="depth" value="${dto.depth }"/>
+		<input type="text" name="plevel" value="${dto.plevel }"/>
+		</c:if>
 	</form>
 </body>
 </html>
