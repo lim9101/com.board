@@ -5,9 +5,9 @@ import javax.servlet.http.HttpSession;
 import com.board.DTO.User;
 
 public interface UserService {
-	User getUser(String userId);
+	User getUser(User user);
 	boolean signIn(User user,HttpSession session);
-	boolean updateUser(User user);
+	boolean updateUser(User user,HttpSession session);
 	boolean delUser(User user);
 	boolean check(User user,HttpSession session);
 }

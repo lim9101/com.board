@@ -71,10 +71,32 @@ public class UserController {
 	@RequestMapping(value="updateUser", method=RequestMethod.POST)
 	@ResponseBody
 	public boolean updateUser(User user,HttpSession session){
-		User sessionUser = (User)session.getAttribute("user"); 
-		user.setUserPw(sessionUser.getUserPw());
-		return userService.updateUser(user);
+		/*User sessionUser = (User)session.getAttribute("user"); 
+		user.setUserPw(sessionUser.getUserPw());*/
+		return userService.updateUser(user,session);
+	}
+	
+	//널갑들어갔을때 defind success미처리
+	@RequestMapping(value="findId", method=RequestMethod.POST)
+	@ResponseBody
+	public User findId(User user){
+		try{
+			user = userService.getUser(user);
+		}catch(Exception e){
+			user.setUserId("");
+		}
+ 		return user;
 	}
 	
 	
+	@RequestMapping(value="findPw", method=RequestMethod.POST)
+	@ResponseBody
+	public User findPw(User user,HttpSession session){
+		try{
+			user = userService.getUser(user);
+			session.setAttribute("user",user);
+		}catch(Exception e){
+		}
+ 		return user;
+	}
 }

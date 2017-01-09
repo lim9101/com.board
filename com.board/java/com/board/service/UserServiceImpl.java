@@ -18,11 +18,29 @@ public class UserServiceImpl implements UserService{
 	private AES256 entool;//암호화 클래스
 	
 	//get,add,update,del
-	public User getUser(String userId){
-		return userDao.getUser(userId);
+	public User getUser(User user){
+		return userDao.getUser(user);
 	}
-	public boolean updateUser(User user){
-		return userDao.updateUser(user)>0;
+	public boolean updateUser(User user,HttpSession session){
+		boolean result=false;
+		String userPw;
+		if(user.getUserId()!=null){
+		try{
+			User sessionUser = (User)session.getAttribute("user"); 
+			user.setUserPw(sessionUser.getUserPw());
+			session.setAttribute("user",user);
+			result = userDao.updateUser(user)>0;
+		}catch(Exception e){
+			
+		}finally{
+		}
+		}else{
+			userPw=entool.encode(user.getUserPw());
+			user=userDao.getUser(user);
+			user.setUserPw(userPw);
+			result = userDao.updateUser(user)>0;
+		}
+		return result;
 	}
 	
 	
@@ -40,7 +58,7 @@ public class UserServiceImpl implements UserService{
 				System.out.println("return false");
 			}
 		}else{
-			User daoUser = userDao.getUser(user.getUserId());
+			User daoUser = userDao.getUser(user);
 			if(daoUser.getUserPw().equals(user.getUserPw())){//로그인시 비교
 				result=true;
 				session.setAttribute("user",daoUser);

@@ -37,6 +37,28 @@ $(document).ready(function(){
 		location.href='userAdd';
 	});
 	
+	$(".idFind").on("click",function(){
+		 var winWidth = 370;
+		 var winHeight = 360;
+		 var winURL = "idFind";
+		 var winName = "idFind";
+		 var winPosLeft = (screen.width - winWidth) / 2;
+		 var winPosTop = (screen.height - winHeight) / 2;
+		 var winOpt = "width="+winWidth+",height="+winHeight+",top="+winPosTop+",left="+winPosLeft;
+		 window.open(winURL, winName, winOpt + ",menubar=no,status=no,scrollbars=no,resizable=no"); 
+	});
+	
+	$(".pwFind").on("click",function(){
+		 var winWidth = 370;
+		 var winHeight = 360;
+		 var winURL = "pwFind";
+		 var winName = "pwFind";
+		 var winPosLeft = (screen.width - winWidth) / 2;
+		 var winPosTop = (screen.height - winHeight) / 2;
+		 var winOpt = "width="+winWidth+",height="+winHeight+",top="+winPosTop+",left="+winPosLeft;
+		 window.open(winURL, winName, winOpt + ",menubar=no,status=no,scrollbars=no,resizable=no"); 
+	});
+	
 });
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -52,6 +74,8 @@ $(document).ready(function(){
 		   <button type="button" class="btn btn-primary btn-mg cansel" value="cansel">cansel</button>
 	</div>
 			<button type="button" class="btn btn-primary btn-mg signIn" value="signIn">signIN</button>
+			<button type="button" class="btn btn-primary btn-mg idFind" value="idFind">idFind</button>
+			<button type="button" class="btn btn-primary btn-mg pwFind" value="pwFind">pwFind</button>
 </div>
 </body>
 </html>

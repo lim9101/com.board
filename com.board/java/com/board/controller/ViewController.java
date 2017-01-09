@@ -48,4 +48,19 @@ public class ViewController {
 		public String userUpdate(){
 			return "userUpdate";
 		}
+		
+		@RequestMapping("idFind")
+		public String idFind(){
+			return "idFind";
+		}
+		
+		@RequestMapping("pwFind")
+		public String pwFind(){
+			return "pwFind";
+		}
+		
+		@RequestMapping("rePw")
+		public String rePw(){
+			return "rePw";
+		}
 }

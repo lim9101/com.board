@@ -2,31 +2,34 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper  namespace="com.board.dao.mapper.UserMapper">
-<!-- <resultMap type="user" id="userMap">
-		<id property="userId" column="user_id"/>
-		<result property="userPw" column="user_pw"/>
-		<result property="userName" column="user_name"/>
-		<result property="email" column="email"/>
-		<result property="phone" column="phone"/>
-		<result property="addNo" column="add_no"/>
-		<result property="addD" column="add_d"/>
-		<result property="gender" column="gender"/>
-	</resultMap> -->
-	<select id="getUser" parameterType="string" resultType="user">
-		select user_id userId,user_pw userPw,user_name userName,email,phone,add_no addNo,add_d addD,gender
+	<select id="getUser" parameterType="user" resultType="user">
+		<if test="userId != null and pwQa !=null and pwAs != null">
+		select user_id userId
 		from users
-		where user_id =#{value}
+		where user_id =#{userId}
+		</if>
+		<if test="userId != null">	
+		select user_id userId,user_pw userPw,user_name userName,email,phone,add_no addNo,add_d addD,gender,pw_qa,pw_as
+		from users
+		where user_id =#{userId}
+		</if>
+		<if test="userId == null">
+		select user_id userId
+		from users
+		where user_name=#{userName} and pw_qa=#{pwQa} and pw_as=#{pwAs} and phone=#{phone}
+		</if>
 	</select>
 	
 	<insert id="addUser" parameterType="user">
-		insert into users(user_id,user_pw,user_name,email,phone,add_no,add_d,gender) values( #{userId,jdbcType=VARCHAR},#{userPw,jdbcType=VARCHAR},#{userName,jdbcType=VARCHAR},#{email,jdbcType=VARCHAR},
-		 		#{phone,jdbcType=VARCHAR},#{addNo},#{addD,jdbcType=VARCHAR},#{gender})
+		insert into users(user_id,user_pw,user_name,email,phone,add_no,add_d,gender,pw_qa,pw_as) values( #{userId,jdbcType=VARCHAR},#{userPw,jdbcType=VARCHAR},#{userName,jdbcType=VARCHAR},#{email,jdbcType=VARCHAR},
+		 		#{phone,jdbcType=VARCHAR},#{addNo},#{addD,jdbcType=VARCHAR},#{gender},#{pwQa,jdbcType=VARCHAR},#{pwAs,jdbcType=VARCHAR})
 	</insert>
 	
 	 <update id="updateUser" parameterType="user">
 	 	<if test="true">
 	 	update users set user_id=#{userId},user_pw=#{userPw},user_name=#{userName}
 		,email=#{email},phone=#{phone},add_no=#{addNo},add_d=#{addD},gender=#{gender}
+		,pw_qa=#{pwQa},pw_as=#{pwAs}
 		where user_id=#{userId}
 	 	</if>
 	 <!-- 	<if test="userPw!=null">

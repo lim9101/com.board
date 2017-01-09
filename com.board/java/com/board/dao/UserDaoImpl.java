@@ -12,8 +12,8 @@ public class UserDaoImpl implements UserDao{
 	@Autowired
 	private UserMapper userMapper;
 	
-	public User getUser(String userId){
-		return userMapper.getUser(userId);
+	public User getUser(User user){
+		return userMapper.getUser(user);
 	}
 	public int addUser(User user){
 		return userMapper.addUser(user);

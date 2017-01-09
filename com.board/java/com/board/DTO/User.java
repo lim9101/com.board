@@ -10,6 +10,20 @@ public class User {
 	private int addNo;
 	private String addD;
 	private String gender;
+	private String pwQa;
+	private String pwAs;
+	public String getPwQa() {
+		return pwQa;
+	}
+	public void setPwQa(String pwQa) {
+		this.pwQa = pwQa;
+	}
+	public String getPwAs() {
+		return pwAs;
+	}
+	public void setPwAs(String pwAs) {
+		this.pwAs = pwAs;
+	}
 	public String getUserId() {
 		return userId;
 	}
@@ -64,15 +78,14 @@ public class User {
 		return "User [userId=" + userId + ", userPw=" + userPw + ", userName="
 				+ userName + ", email=" + email + ", phone=" + phone
 				+ ", addNo=" + addNo + ", addD=" + addD + ", gender=" + gender
-				+ ", getUserId()=" + getUserId() + ", getUserPw()="
-				+ getUserPw() + ", getUserName()=" + getUserName()
-				+ ", getEmail()=" + getEmail() + ", getPhone()=" + getPhone()
-				+ ", getAddNo()=" + getAddNo() + ", getAddD()=" + getAddD()
-				+ ", getGender()=" + getGender() + ", getClass()=" + getClass()
-				+ ", hashCode()=" + hashCode() + ", toString()="
-				+ super.toString() + "]";
+				+ ", pwQa=" + pwQa + ", pwAs=" + pwAs + ", getPwQa()="
+				+ getPwQa() + ", getPwAs()=" + getPwAs() + ", getUserId()="
+				+ getUserId() + ", getUserPw()=" + getUserPw()
+				+ ", getUserName()=" + getUserName() + ", getEmail()="
+				+ getEmail() + ", getPhone()=" + getPhone() + ", getAddNo()="
+				+ getAddNo() + ", getAddD()=" + getAddD() + ", getGender()="
+				+ getGender() + ", getClass()=" + getClass() + ", hashCode()="
+				+ hashCode() + ", toString()=" + super.toString() + "]";
 	}
-	
-	
 	
 }

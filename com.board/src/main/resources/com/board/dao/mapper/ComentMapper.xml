@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper  namespace="com.board.dao.mapper.ComentMapper">
-
+<mapper namespace="com.board.dao.mapper.ComentMapper">
+	<select id="getComents" parameterType="int" resultType="Coment">
+	select pno pNo,user_id userId,date_in dateIn,date_up dateUp
+	from coments
+	where pno=#{pNo}
+	order by date_in desc
+	</select>
+	<insert id="addComent" parameterType="int">
+	
+	</insert>
+	<update id="updateComent">
+	
+	</update>
+	<delete id="delComent">
+	
+	</delete>
 </mapper>

@@ -18,7 +18,9 @@ $(document).ready(function(){
 				phone:$(".phone").val(),
 				gender:$("input[name='gender']").val(),
 				addNo:$(".addNo").val(),
-				addD:$(".addD").val()+$(".addD2").val()
+				addD:$(".addD").val()+$(".addD2").val(),
+				pwQa:$(".pwQa").val(),
+				pwAs:$(".pwAs").val()
 				
 		}
 		$.ajax({
@@ -51,6 +53,17 @@ $(document).ready(function(){
 		<P>EMAIL:<input type="email" class="email"/></P>
 		<P>PHONE:<input type="tel" class="phone"/></P>
 		 <P>GENDER: 남<input type="radio" name="gender" value="남"/> 여<input type="radio" name="gender" value="여"/></P>
+		비밀번호 찾기
+		 <div>
+		 질문 선택<br>
+		 <select name="pwQa" class="pwQa">
+			    <option value="" selected="selected">질문선택</option>
+			    <option value="나의 좌우명은?">나의 좌우명은?</option>
+			    <option value="가장 기억에 남는 장소는?">가장 기억에 남는 장소는?</option>
+			    <option value="가장 좋아하는 스포츠종목은?">가장 좋아하는 스포츠종목은?</option>
+		</select>
+		<label for="pwAs">답변:<input class="pwAs" name="pwAs"></label>
+		 </div>
 		 <div class="form-group">
 		 	<div class="form-inline">
 			<input type="text" class="postcodify_postcode5 form-control addNo" value="" placeholder="우편번호" disabled/>

@@ -47,5 +47,5 @@
 	id="multipartResolver" />
 
 	
-	<mvc:resources mapping="/upload/**" location="/resources/upload/" />
+	<mvc:resources mapping="/js/**" location="/resources/js/" />
 </beans>
