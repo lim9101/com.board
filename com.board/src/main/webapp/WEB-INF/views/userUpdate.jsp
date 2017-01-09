@@ -9,8 +9,6 @@
 <script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-	$(".findAddress").postcodifyPopUp();
-	
 	$(".updateBtn").on("click",function(){
 		 var formData = $("form").serialize();
 		 console.log(formData);
@@ -29,7 +27,9 @@ $(document).ready(function(){
 				
 			}
 		});
-	})
+	});
+	
+	$(".findAddress").postcodifyPopUp();
 
 });
 </script>
