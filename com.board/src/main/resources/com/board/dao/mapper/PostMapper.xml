@@ -28,7 +28,7 @@
  	
  	<update id="depthCount" parameterType="Post">
  		<![CDATA[
- 		update posts set depth=depth+1 where spno=#{pNo} and depth>#{depth}
+ 		update posts set depth=depth+1 where spno=#{pNo} and depth>=#{depth}
  		]]>
  	</update>
  	
