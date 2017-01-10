@@ -10,7 +10,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="delUser">
+	<form action="delUser" method="post">
 	<label for="userPw">비밀번호 입력:<input type="text" name="userPw" /></label>
 	<button type="submit" >삭제</button>
 	</form>

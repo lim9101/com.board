@@ -23,22 +23,17 @@ public class UserServiceImpl implements UserService{
 	}
 	public boolean updateUser(User user,HttpSession session){
 		boolean result=false;
-		String userPw;
-		if(user.getUserId()!=null){
+		User sessionUser = (User)session.getAttribute("user");
+		String userPw=entool.encode(user.getUserPw());
 		try{
-			User sessionUser = (User)session.getAttribute("user"); 
-			user.setUserPw(sessionUser.getUserPw());
+			user.setUserId(sessionUser.getUserId());
+			user.setUserPw(userPw);
+			session.removeAttribute("user");
 			session.setAttribute("user",user);
 			result = userDao.updateUser(user)>0;
 		}catch(Exception e){
 			
 		}finally{
-		}
-		}else{
-			userPw=entool.encode(user.getUserPw());
-			user=userDao.getUser(user);
-			user.setUserPw(userPw);
-			result = userDao.updateUser(user)>0;
 		}
 		return result;
 	}

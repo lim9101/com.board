@@ -39,7 +39,6 @@ $(document).ready(function(){
 <h1>회원 정보 수정</h1>
 	<form>
 		<P>ID:<input type="text" class="id" name="userId" value="${user.userId}" readonly="readonly"/></P>
-		<P>PW:<input type="password" class="pw" id="userPw" name="userPw" readonly="readonly"/></P>
 		<P>NAME:<input type="text" class="name" name="userName" value="${user.userName}" readonly="readonly"/></P>
 		<P>EMAIL:<input type="email" class="email" name="email" value="${user.email}"/></P>
 		<P>PHONE:<input type="tel" class="phone" name="phone" value="${user.phone}"/></P>
@@ -48,31 +47,32 @@ $(document).ready(function(){
 		  <P>GENDER: 남<input type="radio" name="gender" value="남"  checked="checked"/> 여<input type="radio" name="gender" value="여"/></P>
 		 </c:if>
 		 <c:if test='${user.gender eq "여"}'>
-		 <P>GENDER: 남<input type="radio" name="gender" value="남"/> 여<input type="radio" name="gender" value="여"  checked="checked"/></P>
+		 <P>GENDER: 남<input type="radio" name="gender" value="남"/> 여<input type="radio" name="gender" value="여" checked="checked"/></P>
 		 </c:if>
 		  비밀번호 찾기
 		 <div>
 		 질문 선택<br>
-		 <select name="pwQa" class="pwQa" >
-			    <c:if test='${user.pwQa eq "나의 좌우명은?"}'>
+		 <select name="pwQa" class="pwQa">
+			    <c:choose>
+				<c:when test="${user.pwQa eq '좌우명'}">
+				    <option value="">질문선택</option>
+				    <option value="좌우명" selected="selected">나의 좌우명은?</option>
+				    <option value="장소">가장 기억에 남는 장소는?</option>
+				    <option value="스포츠">가장 좋아하는 스포츠종목은?</option>
+				</c:when>
+				<c:when test="${user.pwQa eq '장소'}">
 				    <option value="" >질문선택</option>
-				    <option value="나의 좌우명은?" selected="selected">나의 좌우명은?</option>
-				    <option value="가장 기억에 남는 장소는?">가장 기억에 남는 장소는?</option>
-				    <option value="가장 좋아하는 스포츠종목은?">가장 좋아하는 스포츠종목은?</option>
-				</c:if>
-				<c:if test='${user.pwQa eq "가장 기억에 남는 장소는?"}'>
+				    <option value="좌우명">나의 좌우명은?</option>
+				    <option value="장소" selected="selected">가장 기억에 남는 장소는?</option>
+				    <option value="스포츠">가장 좋아하는 스포츠종목은?</option>
+				</c:when>
+				<c:when test="${user.pwQa eq '스포츠'}">
 				    <option value="" >질문선택</option>
-				    <option value="나의 좌우명은?">나의 좌우명은?</option>
-				    <option value="가장 기억에 남는 장소는?" selected="selected">가장 기억에 남는 장소는?</option>
-				    <option value="가장 좋아하는 스포츠종목은?">가장 좋아하는 스포츠종목은?</option>
-				</c:if>
-				<c:if test='${user.pwQa eq "가장 좋아하는 스포츠종목은?"}'>
-				    <option value="" >질문선택</option>
-				    <option value="나의 좌우명은?">나의 좌우명은?</option>
-				    <option value="가장 기억에 남는 장소는?">가장 기억에 남는 장소는?</option>
-				    <option value="가장 좋아하는 스포츠종목은?" selected="selected">가장 좋아하는 스포츠종목은?</option>
-				</c:if>
-			    
+				    <option value="좌우명">나의 좌우명은?</option>
+				    <option value="장소">가장 기억에 남는 장소는?</option>
+				    <option value="스포츠" selected="selected">가장 좋아하는 스포츠종목은?</option>
+				</c:when>
+				</c:choose>
 		</select>
 		<label for="pwAs">답변:<input class="pwAs" name="pwAs" value="${user.pwAs}"></label>
 		 </div>
