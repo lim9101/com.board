@@ -53,7 +53,7 @@ public class UserController {
 	
 	//사용자 회원탈퇴기능URL
 	//ParameterType:User,HttpSession resultType:boolean
-	@RequestMapping("delUser")
+	@RequestMapping(value="delUser", method=RequestMethod.POST)
 	@ResponseBody
 	public boolean delUser(User user,HttpSession session){
 		boolean result=false;
@@ -71,8 +71,6 @@ public class UserController {
 	@RequestMapping(value="updateUser", method=RequestMethod.POST)
 	@ResponseBody
 	public boolean updateUser(User user,HttpSession session){
-		/*User sessionUser = (User)session.getAttribute("user"); 
-		user.setUserPw(sessionUser.getUserPw());*/
 		return userService.updateUser(user,session);
 	}
 	
@@ -91,12 +89,17 @@ public class UserController {
 	
 	@RequestMapping(value="findPw", method=RequestMethod.POST)
 	@ResponseBody
-	public User findPw(User user,HttpSession session){
+	public boolean findPw(User user,HttpSession session){
+		boolean result=false;
 		try{
 			user = userService.getUser(user);
-			session.setAttribute("user",user);
+			if(user!=null){
+				session.setAttribute("user",user);
+				result = true;
+			}else{
+			}
 		}catch(Exception e){
 		}
- 		return user;
+ 		return result;
 	}
 }

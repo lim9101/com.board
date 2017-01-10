@@ -3,21 +3,23 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper  namespace="com.board.dao.mapper.UserMapper">
 	<select id="getUser" parameterType="user" resultType="user">
-		<if test="userId != null and pwQa !=null and pwAs != null">
-		select user_id userId
-		from users
-		where user_id =#{userId}
-		</if>
-		<if test="userId != null">	
-		select user_id userId,user_pw userPw,user_name userName,email,phone,add_no addNo,add_d addD,gender,pw_qa,pw_as
-		from users
-		where user_id =#{userId}
-		</if>
-		<if test="userId == null">
+	<choose>
+		<when test="userId == null">
 		select user_id userId
 		from users
 		where user_name=#{userName} and pw_qa=#{pwQa} and pw_as=#{pwAs} and phone=#{phone}
-		</if>
+		</when>
+		<when test="userId != null and pwQa != null and pwAs != null">	
+		select user_id userId,user_pw userPw,user_name userName,email,phone,add_no addNo,add_d addD,gender,pw_qa pwQa,pw_as pwAs
+		from users
+		where user_id =#{userId} and pw_qa=#{pwQa} and pw_as=#{pwAs}
+		</when>
+		<otherwise>	
+		select user_id userId,user_pw userPw,user_name userName,email,phone,add_no addNo,add_d addD,gender,pw_qa pwQa,pw_as pwAs
+		from users
+		where user_id =#{userId}
+		</otherwise>
+	</choose>
 	</select>
 	
 	<insert id="addUser" parameterType="user">
@@ -26,19 +28,19 @@
 	</insert>
 	
 	 <update id="updateUser" parameterType="user">
-	 	<if test="true">
-	 	update users set user_id=#{userId},user_pw=#{userPw},user_name=#{userName}
-		,email=#{email},phone=#{phone},add_no=#{addNo},add_d=#{addD},gender=#{gender}
-		,pw_qa=#{pwQa},pw_as=#{pwAs}
-		where user_id=#{userId}
-	 	</if>
-	 <!-- 	<if test="userPw!=null">
-	 	update users set user_id=#{userId},user_pw=#{userPw},user_name=#{userName}
-		,email=#{email},phone=#{phone},add_no=#{addNo},add_d=#{addD},gender=#{gender}
-		where user_id=#{userId}
-	 	</if> -->
+	 <choose>
+	 	<when test="pwAs == null">
+	 		update users set user_pw=#{userPw}
+	 		where user_id=#{userId}
+	 	</when>
+	 	<otherwise>
+		 	update users set user_id=#{userId},user_name=#{userName}
+			,email=#{email},phone=#{phone},add_no=#{addNo},add_d=#{addD},gender=#{gender}
+			,pw_qa=#{pwQa},pw_as=#{pwAs}
+			where user_id=#{userId}
+	 	</otherwise>
+	 </choose>
 	</update>
-	
 	<delete id="delUser" parameterType="user">
 		delete users
 		where user_id=#{userId}

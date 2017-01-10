@@ -5,16 +5,19 @@
 	<select id="getComents" parameterType="int" resultType="Coment">
 	select pno pNo,user_id userId,date_in dateIn,date_up dateUp
 	from coments
-	where pno=#{pNo}
+	where pno=#{pNo} and spno={spNo}
 	order by date_in desc
 	</select>
-	<insert id="addComent" parameterType="int">
-	
+	<insert id="addComent" parameterType="Coment">
+	insert into coments (spno,pno,scno,cno,user_id,content)
+	 values(#{spNo},#{pNo},#{scNo},#{cNo},#{userId,jdbcType=VARCHAR},#{content,jdbcType=VARCHAR})
 	</insert>
-	<update id="updateComent">
-	
+	<update id="updateComent" parameterType="Coment">
+	update coments set content=#{content},date_up={dateUp}
+	where cno=#{cNo}
 	</update>
-	<delete id="delComent">
-	
+	<delete id="delComent" parameterType="int">
+	delete from coments
+	where cno=#{value}
 	</delete>
 </mapper>

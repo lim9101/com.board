@@ -37,7 +37,7 @@ $(document).ready(function(){
 <h1>회원 정보</h1>
 	<form>
 		<P>ID:<input type="text" class="id" value="${user.userId}" readonly="readonly"/></P>
-		<P>PW:<input type="password" class="pw" name="userPw"/></P>
+		<P>PW:<input type="password" class="pw" name="userPw" readonly="readonly"/></P>
 		<P>NAME:<input type="text" class="name" value="${user.userName}" readonly="readonly"/></P>
 		<P>EMAIL:<input type="email" class="email" value="${user.email}" readonly="readonly"/></P>
 		<P>PHONE:<input type="tel" class="phone" value="${user.phone}" readonly="readonly"/></P>
@@ -52,24 +52,26 @@ $(document).ready(function(){
 		 <div>
 		 질문 선택<br>
 		 <select name="pwQa" class="pwQa" disabled="disabled">
-			    <c:if test='${user.pwQa eq "나의 좌우명은?"}'>
+			 <c:choose>
+				<c:when test="${user.pwQa eq '좌우명'}">
 				    <option value="">질문선택</option>
-				    <option value="나의 좌우명은?" selected="selected">나의 좌우명은?</option>
-				    <option value="가장 기억에 남는 장소는?">가장 기억에 남는 장소는?</option>
-				    <option value="가장 좋아하는 스포츠종목은?">가장 좋아하는 스포츠종목은?</option>
-				</c:if>
-				<c:if test='${user.pwQa eq "가장 기억에 남는 장소는?"}'>
+				    <option value="좌우명" selected="selected">나의 좌우명은?</option>
+				    <option value="장소">가장 기억에 남는 장소는?</option>
+				    <option value="스포츠">가장 좋아하는 스포츠종목은?</option>
+				</c:when>
+				<c:when test="${user.pwQa eq '장소'}">
 				    <option value="" >질문선택</option>
-				    <option value="나의 좌우명은?">나의 좌우명은?</option>
-				    <option value="가장 기억에 남는 장소는?" selected="selected">가장 기억에 남는 장소는?</option>
-				    <option value="가장 좋아하는 스포츠종목은?">가장 좋아하는 스포츠종목은?</option>
-				</c:if>
-				<c:if test='${user.pwQa eq "가장 좋아하는 스포츠종목은?"}'>
+				    <option value="좌우명">나의 좌우명은?</option>
+				    <option value="장소" selected="selected">가장 기억에 남는 장소는?</option>
+				    <option value="스포츠">가장 좋아하는 스포츠종목은?</option>
+				</c:when>
+				<c:when test="${user.pwQa eq '스포츠'}">
 				    <option value="" >질문선택</option>
-				    <option value="나의 좌우명은?">나의 좌우명은?</option>
-				    <option value="가장 기억에 남는 장소는?">가장 기억에 남는 장소는?</option>
-				    <option value="가장 좋아하는 스포츠종목은?" selected="selected">가장 좋아하는 스포츠종목은?</option>
-				</c:if>
+				    <option value="좌우명">나의 좌우명은?</option>
+				    <option value="장소">가장 기억에 남는 장소는?</option>
+				    <option value="스포츠" selected="selected">가장 좋아하는 스포츠종목은?</option>
+				</c:when>
+				</c:choose>
 		</select>
 		<label for="pwAs">답변:<input class="pwAs" name="pwAs" value="${user.pwAs}" readonly="readonly"></label>
 		 </div>
