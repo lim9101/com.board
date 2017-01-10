@@ -9,13 +9,28 @@
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <script type="text/javascript">
-	$(document).ready(function() {
-
+	$(document).ready(function(){
 	});
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
+.mainFrame{
+position: relative;
+    top: -50px;
+    right:100px;
+
+}
+.logo{
+	position: relative;
+    top: -50px;
+    right:300px;
+}
+.info{
+position: relative;
+    top: -150px;
+    right:95px;
+}
 .container{
 	margin: 0 auto;
  	width:1000px;
@@ -64,6 +79,9 @@
 </head>
 <body>
 	<div class="container">
+	<h1 class="logo"><img src="images/meun_logo.png"></h1>
+	<div class="info">${user.userName}님이 로그인하셨습니다.<a href="userInfo">내정보</a><a class="userOut" href="index">로그아웃</a></div>
+	<div class="mainFrame">
 		<div class="noticeTitel">공지 글 목록</div>
 		<div class="postAdd"><a href="postAdd">글쓰기</a></div>
 		<div class="noticeList">
@@ -103,6 +121,7 @@
 			<a href="postList?currentPage=${i}">${i}</a>
 			</c:forEach>
 		</div>
+	</div>
 	</div>
 </body>
 </html>
