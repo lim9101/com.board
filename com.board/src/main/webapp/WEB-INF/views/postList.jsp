@@ -9,13 +9,28 @@
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <script type="text/javascript">
-	$(document).ready(function() {
-
+	$(document).ready(function(){
 	});
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
+.mainFrame{
+position: relative;
+    top: -50px;
+    right:100px;
+
+}
+.logo{
+	position: relative;
+    top: -50px;
+    right:300px;
+}
+.info{
+position: relative;
+    top: -150px;
+    right:95px;
+}
 .container{
 	margin: 0 auto;
  	width:1000px;
@@ -36,6 +51,7 @@
 }
 .noticeList table a{
 	color:black;
+	cursor: pointer;
 }
 .noticeList table th{
 	font-weight: normal;
@@ -64,6 +80,9 @@
 </head>
 <body>
 	<div class="container">
+	<h1 class="logo"><img src="images/meun_logo.png"></h1>
+	<div class="info">${user.userName}님이 로그인하셨습니다.<a href="userInfo">내정보</a><a class="userOut" href="index">로그아웃</a></div>
+	<div class="mainFrame">
 		<div class="noticeTitel">공지 글 목록</div>
 		<div class="postAdd"><a href="postAdd">글쓰기</a></div>
 		<div class="noticeList">
@@ -79,12 +98,19 @@
 				<c:forEach items="${pList}" var="dto">
 					<tr>
 						<td>${dto.pNo }</td>
-						<td><a href="postView?pNo=${dto.pNo}">
+						<td>
 						<c:if test="${dto.depth>0 }">
 						<img src="images/level.gif" width="${20*dto.plevel}" height="15" />
 						<img src="images/re.gif"></c:if>
-						${dto.title }
-						</a></td>
+						<c:choose>
+							<c:when test="${dto.title==null}">
+							삭제된 글입니다.
+							</c:when>
+							<c:otherwise>
+							<a href="postView?pNo=${dto.pNo}">${dto.title }</a>
+							</c:otherwise>
+						</c:choose>
+						</td>
 						<td>
 						<c:if test="${!empty dto.attFile.file_name}">
 							<img src="images/file.png" width="15"/>
@@ -103,6 +129,7 @@
 			<a href="postList?currentPage=${i}">${i}</a>
 			</c:forEach>
 		</div>
+	</div>
 	</div>
 </body>
 </html>

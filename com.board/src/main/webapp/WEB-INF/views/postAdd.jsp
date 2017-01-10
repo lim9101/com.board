@@ -4,11 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('.postAddBtn').bind('click', function() {
@@ -17,64 +13,80 @@
 	})
 </script>
 <style type="text/css">
-h1 {
-	margin-left: 10%;
+.container{
+	margin: 0 auto;
+ 	width:700px;
 }
-
-form {
-	margin-right: 25%;
+.noticeAdd table{
+	border-collapse: collapse;
+    border-spacing: 0;
+	width:700px;
+	border-top: 2px solid #BFAD9F;
+	border-bottom: 2px solid #BFAD9F;
+}
+.noticeAdd table th{
+	font-weight: normal;
+    height: 43px;
+    padding-left:15px;
+    text-align:center;
+    background: #f7f6f4;
+    border-bottom: 1px solid #E6E2DE;
+    font-size: 14px;
+    color: #664738;
+    text-align: left;
+}
+.noticeAdd table td.tdStyle {
+	border-bottom: 1px solid #E6E2DE;
+	color:#464646;
+	font-size: 14px;
+	padding-left: 10px;
+	height: 32px;
 }
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>글쓰기</h1>
-	<form class="form-horizontal" role="form" id="frmWR" name="frmWR"
+	<div class="container">
+		<form class="form-horizontal" role="form" id="frmWR" name="frmWR"
 		method="post" action="postWrite" enctype= multipart/form-data>
-		<div class="form-group PostLabel">
-			<label for="title" class="col-sm-2 control-label">
-			<c:if test="${!empty param.pNo}">답변</c:if>
-	
-			제목</label>
-			<div class="col-sm-10">
-				<input type="text" id="title" name="title"
-					class="form-control title" placeholder="title" />
-			</div>
-			<label for="inputEmail3" class="col-sm-2 control-label">작성자</label>
-			<div class="col-sm-10">
-				<input type="text" id="user_id" name="user_id"
-					class="form-control user_id" value="duri" readonly="readonly" />
-			</div>
-		</div>
-
-		<div class="form-group">
-			<label for="content" class="col-sm-2 control-label">내용</label>
-			<div class="col-sm-10">
-				<textarea id="content" name="content" class="form-control content"
-					cols="10" rows="10"></textarea>
-			</div>
-		</div>
+		<div class="noticeAdd">
+		<h1>글쓰기</h1>
+		<table>
+			<tr>
+				<th><label for="title">제목</label></th>
+				<td class="tdStyle"><input type="text" name="title" id="title" size="50"/></td>
+			</tr>
+			<tr>
+				<th><label for="user_id">작성자</label></th>
+				<td class="tdStyle"><input type="text" name="user_id" id="user_id" value="duri" readonly="readonly"/></td>
+			</tr>
+			<tr>
+				<td colspan="2"><textarea id="content" name="content" cols="97" rows="20"></textarea></td>
+			</tr>
+			<tr>
+				<th><label for="upload">첨부파일</label></th>
+				<td class="tdStyle"><input type="file" id="upload" name="upload" class="form-control upload" placeholder="upload" /></td>
+			</tr>
+		</table>
 		
-		<div class="form-group">
-			<label for="upload" class="col-sm-2 control-label">file</label>
-			<input type="file" id="upload" name="upload" class="form-control upload" placeholder="upload" />
-		</div>
+		</div><!-- end noticeAdd -->
+		<div class="Btn">
+			<c:if test="${!empty dto}">
+				<button class="postAddBtn">답변쓰기</button>
+			</c:if>
+			<button type="submit" class="postAddBtn">글쓰기</button>
+			<a href="postList">목록</a>
+			<button type="submit" class="btn btn-default">취소</button>
+			<c:if test="${!empty dto.pNo }">
+				<input type="text" name="pNo" value="${dto.pNo }"/>
+				<input type="text" name="spNo" value="${dto.spNo }"/>
+				<input type="text" name="depth" value="${dto.depth }"/>
+				<input type="text" name="plevel" value="${dto.plevel }"/>
+			</c:if>
+		</div><!-- end Btn -->
+		</form>
+	</div><!-- end container -->
 		
-		<div class="form-group">
-			<div class="col-sm-offset-2 col-sm-10">
-				<a href="#"><button class="btn btn-default postAddBtn">답변쓰기</button></a>
-				<button type="submit" class="btn btn-default postAddBtn">글쓰기</button>
-				<a href="postList">목록</a>
-				<button type="submit" class="btn btn-default">취소</button>
-			</div>
-		</div>
-		<c:if test="${!empty dto.pNo }">
-		<input type="text" name="pNo" value="${dto.pNo }"/>
-		<input type="text" name="spNo" value="${dto.spNo }"/>
-		<input type="text" name="depth" value="${dto.depth }"/>
-		<input type="text" name="plevel" value="${dto.plevel }"/>
-		</c:if>
-	</form>
 </body>
 </html>

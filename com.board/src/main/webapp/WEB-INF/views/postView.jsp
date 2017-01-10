@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
@@ -36,12 +36,32 @@
 			</td>
 		</tr>
 		<tr>
-			<td><a href="postAdd?pNo=${dto.pNo}">답변쓰기</a>
+			<td>
+			<c:if test="${dto.plevel <3}">
+				<a href="postAdd?pNo=${dto.pNo}">답변쓰기</a>
+			</c:if>
+				<a href="postUpdate?pNo=${dto.pNo}">수정</a>
+				
+				
+				<c:choose>
+					<c:when test="${!empty dto.attFile.file_no}">
+						<c:set var="fileNo" value="${dto.attFile.file_no}"/>
+					</c:when>
+					<c:otherwise>
+						<c:set var="fileNo" value="0"/>
+					</c:otherwise>
+					</c:choose>
+					파일:${fileNo}
+				<a href="postDelete?pNo=${dto.pNo}&spNo=${dto.spNo}&depth=${dto.depth}&fileNo=${fileNo}">삭제</a>
+				
 				<a href="postList">목록</a>
 			</td>
 		</tr>
 	</table>
-	
+	<div><p><a>댓글(3)</a><p></div>
+	<div class="comentLine" onclick="">
+	<div></div>
+	</div>
 </div><!-- end container -->
 </body>
 </html>

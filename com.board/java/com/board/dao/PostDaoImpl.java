@@ -1,16 +1,13 @@
 package com.board.dao;
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.board.DTO.AttFile;
 import com.board.DTO.Page;
 import com.board.DTO.Post;
-import com.board.DTO.Search;
-import com.board.dao.mapper.AttFileMapper;
+
 import com.board.dao.mapper.PostMapper;
 
 @Repository
@@ -25,12 +22,12 @@ public class PostDaoImpl implements PostDao{
 		return postMapper.addPost(post);
 	}
 	
-	public int updatePost(Post post){
-		return postMapper.updatePost(post);
+	public void updatePost(Post post){
+		postMapper.updatePost(post);
 	}
 	
-	public int delPost(Post post){
-		return postMapper.delPost(post);
+	public void delPost(int pNo){
+		postMapper.delPost(pNo);
 	}
 
 	public int maxPost() {
@@ -55,5 +52,20 @@ public class PostDaoImpl implements PostDao{
 	@Override
 	public void depthCount(Post post) {
 		postMapper.depthCount(post);
+	}
+
+	@Override
+	public int spnoCount(int spNo) {
+		return postMapper.spnoCount(spNo);
+	}
+
+	@Override
+	public void delUpdatePost(int pNo) {
+		postMapper.delUpdatePost(pNo);
+	}
+
+	@Override
+	public int maxDepth(int spNo) {
+		return postMapper.maxDepth(spNo);
 	}
 }

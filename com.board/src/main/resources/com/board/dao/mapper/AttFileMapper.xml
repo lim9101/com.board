@@ -8,9 +8,19 @@
  	</insert>
  	
  	<!-- 파일이름 검색 -->
- 	<select id="fileName" parameterType="map" resultType="String">
+ 	<select id="fileName" parameterType="int" resultType="String">
  		<![CDATA[
- 		select file_name from attFiles where spno=#{spNo} and pno=#{pNo};
+ 		select file_name from attFiles where pno=#{pNo}
  		]]>
  	</select>
+ 	
+ 	<!-- 파일 수정 -->
+ 	<update id="updateFile" parameterType="AttFile">
+ 		<![CDATA[ update attfiles set file_name=#{file_name} where file_no=#{file_no} ]]>
+ 	</update>
+ 	
+ 	<!-- 파일삭제 -->
+ 	<delete id="delFile" parameterType="int">
+ 		<![CDATA[ delete from attfiles where file_no=#{fileNo} ]]>
+ 	</delete>
  </mapper>

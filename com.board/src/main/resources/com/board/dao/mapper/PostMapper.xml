@@ -28,10 +28,16 @@
  	
  	<update id="depthCount" parameterType="Post">
  		<![CDATA[
- 		update posts set depth=depth+1 where spno=#{pNo} and depth>=#{depth}
+ 		update posts set depth=depth+1 where spno=#{spNo} and depth>#{depth}
  		]]>
  	</update>
  	
+ 	<!-- 공지 글 수정 -->
+ 	<update id="updatePost" parameterType="Post">
+ 		<![CDATA[ update posts set title=#{title}, content=#{content,jdbcType=VARCHAR} where pno=#{pNo} ]]>
+ 	</update>
+ 	
+ 	<!-- pNo 최대값 구하기 -->
  	<select id="maxPost" resultType="int">
  		<![CDATA[ select max(pno) from posts ]]>
  	</select>
@@ -60,6 +66,7 @@
  		<result property="userName" column="user_name"/>
  	</resultMap>
  	
+ 	<!-- 공지 리스트 출력 -->
  	<select id="listPost" resultMap="Post" resultType="com.board.DTO.Post" parameterType="Page">
  		<![CDATA[
  		select b.*
@@ -72,6 +79,7 @@
 		]]>
  	</select>
  	
+ 	<!-- 공지글 보기 -->
  	<select id="viewPost" parameterType="int" resultMap="Post" resultType="com.board.DTO.Post" >
  		<![CDATA[
  		select p.spno, p.pno, p.user_id, p.depth, p.plevel, p.content, u.user_name, p.title, p.date_in, p.count, a.file_no, a.file_name
@@ -81,4 +89,27 @@
 		order by p.pno desc
 		]]>
  	</select>
+ 	
+ 	<!-- 제목에 답변에 달렸는지 확인하기 위해 -->
+ 	<select id="spnoCount" parameterType="int" resultType="int">
+ 		<![CDATA[ select count(spno) from posts where spno=#{spNo} ]]>
+ 	</select>
+ 	
+ 	<!-- 답변이 없을 경우 -->
+ 	<delete id="delPost" parameterType="int">
+ 		delete from posts where pno = #{pNo}
+ 	</delete>
+ 	
+ 	<!-- 최하위 답변 삭제하기 위해 -->
+ 	<select id="maxDepth" parameterType="int" resultType="int">
+ 		<![CDATA[ select max(depth) from posts where spno=#{spNo} ]]>
+ 	</select>
+ 	
+ 	<!-- 답변이 없을 있을경우 -->
+ 	<update id="delUpdatePost" parameterType="int">
+ 		<![CDATA[
+ 		update posts set user_id=null, title=null, content=null, date_in=null, date_up=null, count=0 where pno=#{pNo}
+ 		]]>
+ 	</update>
+ 	 	
  </mapper>

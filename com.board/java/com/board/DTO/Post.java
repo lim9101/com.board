@@ -15,7 +15,7 @@ public class Post {
 	private int count;
 	private int plevel=0;
 	private int depth=0;
-	private MultipartFile upload; 
+	private MultipartFile upload;
 	private AttFile attFile;
 	private User user;
 

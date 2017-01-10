@@ -1,7 +1,5 @@
 package com.board.dao;
 
-import java.util.HashMap;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -19,8 +17,18 @@ public class AttFileDaoImpl implements AttFileDao {
 	}
 
 	@Override
-	public String fileName(HashMap<String, Integer> map) {
-		return fileMapper.fileName(map);
+	public String fileName(int pNo) {
+		return fileMapper.fileName(pNo);
+	}
+
+	@Override
+	public void updateFile(AttFile file) {
+		fileMapper.updateFile(file);		
+	}
+
+	@Override
+	public void delFile(int fileNo) {
+		fileMapper.delFile(fileNo);
 	}
 
 }

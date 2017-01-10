@@ -10,10 +10,13 @@ public interface PostDao {
 	
 	List<Post> listPost(Page pv);
 	int addPost(Post post);
-	int updatePost(Post post);
-	int delPost(Post post);
+	void updatePost(Post post);
+	void delPost(int pNo);
+	void delUpdatePost(int pNo);
 	int maxPost();
 	Post viewPost(int pNo);
 	int totalCount();
 	void depthCount(Post post);
+	int spnoCount(int spNo);
+	int maxDepth(int spNo);
 	}
