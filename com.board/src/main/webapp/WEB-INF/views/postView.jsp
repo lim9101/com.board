@@ -48,7 +48,7 @@ $(document).ready(function(){
 			<th>첨부파일</th>
 			<td>
 				<c:if test="${!empty dto.attFile.file_name}">
-					<a href="filedownload?spNo=${dto.spNo}&pNo=${dto.pNo}">${fn:substringAfter(dto.attFile.file_name,"_")}</a>
+					<a href="fileDownLoad?pNo=${dto.pNo}">${fn:substringAfter(dto.attFile.file_name,"_")}</a>
 				</c:if>
 				<c:if test="${empty dto.attFile.file_name}">
 					파일없음

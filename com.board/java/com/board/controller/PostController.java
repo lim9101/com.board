@@ -72,7 +72,6 @@ public class PostController {
 	//검색안한 리스트
 	@RequestMapping(value = "/postList", method = RequestMethod.GET)
 	public ModelAndView postList(Page pv ,HttpSession session){
-		System.out.println("session:"+(int)session.getAttribute("pNo"));
 		ModelAndView mav = new ModelAndView();
 		int totalRecord=0;
 		if(pv.getSearchKey() ==null){
@@ -125,7 +124,6 @@ public class PostController {
 	@RequestMapping(value = "/postView", method = RequestMethod.GET)
 	public ModelAndView postView(int pNo, HttpSession session){
 		ModelAndView mav = new ModelAndView();	
-		System.out.println("session"+(Integer) session.getAttribute("pNo"));
 		if((Integer) session.getAttribute("pNo") != pNo){
 			postService.addCount(pNo);
 			session.setAttribute("pNo", pNo);
