@@ -7,33 +7,110 @@
 <head>
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script type="text/javascript">
+var temp=false;
+var comentsHiden = function(){
+	temp = !temp;
+	if(temp){
+		$(".comentLine").css("display","block");
+	}else{
+	$(".comentLine").css("display","none");
+}
+}
+var comentUpdate = function(cNo){
+	$(cNo).parent().parent().append($("<div><textarea id='content' class='comentContent' name='content' cols='77' rows='5'></textarea><br><button type='button' class='comentAddBtn'>댓글</button></div>"));
+	/* var coment ={
+			cNo:$(cNo).val(),
+			content:$(".comentContent").val()
+	}
+	$.ajax({
+		method:"POST",
+		url:"updateComent",
+		data:coment,
+		success:function(result){
+			$(".comentLine").empty();
+			comentView();
+		}
+	}); */
+}
+var comentDel = function(cNo){
+	var coment ={
+			cNo:$(cNo).val()
+	}
+	$.ajax({
+		method:"POST",
+		url:"delComent",
+		data:coment,
+		success:function(result){
+			$(".comentLine").empty();
+			comentView();
+		}
+	});
+}
+
+var comentList=function(coment){
+	var div = $("<div style='border:1px solid black;border-width:2px 1px; width:510px; height:100px; line-height:35px'></div><br>");
+	var dateIn= $("<div>"+coment.dateIn+"</div>");
+	var content=$("<span>"+coment.userId+"</span> &nbsp; &nbsp; <span>"+coment.content+"</span>"+
+	"<span><button type='button' onclick='comentUpdate(this)' value='"+coment.cNo+"'>수정</button>"+
+	"<button type='button' onclick='comentDel(this)' value='"+coment.cNo+"'>삭제</button></span><br>");
+	div.append(dateIn);
+	div.append(content);
+	$(".comentLine").append(div);
+}
+	var comentView = function(){
+	$.ajax({
+	url:"getComents",
+	data: {
+		pNo:"${dto.pNo}"
+	},
+	success:function(coments){
+		$(".comentLine").empty();
+		$(coments).each(function(idx,coment){
+			comentList(coment);
+		});
+	}
+});
+}
+	comentView();
+
 $(document).ready(function(){
-	
-	
 	$(".comentAddBtn").on("click",function(){
 		var coment= {
 				pNo:"${dto.pNo}",
+				userId:"${user.userId}",
 				content:$(".comentContent").val()
-		};
-		console.log(coment);
-		 $.ajax({
-			method:"POST",
-			url:"comentAdd",
-			data:coment,
-			success:function(result){
-				console.log(result);
-			}
-		});
+		}
+		if($(".comentContent").val()==""){
+			alert("내용을 입력하세요.");
+		}else{
+			$.ajax({
+				method:"POST",
+				url:"comentAdd",
+				data:coment,
+				success:function(result){
+					comentView();
+					$(".comentContent").val("");
+				}
+			});
+		}
+		 
 	});
+	
+	
+	
 });
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <style>
+.comentHiden{
+	cursor: pointer;
+}
 </style>
 <title>글-상세보기</title>
 </head>
 <body>
 <div class="container">
+
 	<table border=1>
 		<tr>
 			<th>작성자</th><td>${dto.user.userName}</td>
@@ -47,7 +124,7 @@ $(document).ready(function(){
 			<th>첨부파일</th>
 			<td>
 				<c:if test="${!empty dto.attFile.file_name}">
-					<a href="filedownload?spNo=${dto.spNo}&pNo=${dto.pNo}">${fn:substringAfter(dto.attFile.file_name,"_")}</a>
+					<a href="fileDownLoad?pNo=${dto.pNo}">${fn:substringAfter(dto.attFile.file_name,"_")}</a>
 				</c:if>
 				<c:if test="${empty dto.attFile.file_name}">
 					파일없음
@@ -77,20 +154,8 @@ $(document).ready(function(){
 			</td>
 		</tr>
 	</table>
-	<div><p><a>댓글(3)</a><p></div>
-	<div class="comentLine" onclick="">
-	<div>
-	<div>2017/01/17</div>
-	<span>${ user.userId }</span> &nbsp; &nbsp; <span>hello android</span><span><button type="button" >수정</button><button type="button">삭제</button></span>
-	</div>
-	<div>
-	<div>2017/01/17</div>
-	<span>${ user.userId }</span> &nbsp; &nbsp; <span>hello android</span><span><button type="button" >수정</button><button type="button">삭제</button></span>
-	</div>
-	<div>
-	<div>2017/01/17</div>
-	<span>${ user.userId }</span> &nbsp; &nbsp; <span>hello android</span><span><button type="button" >수정</button><button type="button">삭제</button></span>
-	</div>
+	<div><a class="comentHiden" onclick="comentsHiden()">댓글(3)</a></div>
+	<div class="comentLine" style="display:none">
 	</div>
 		<div><textarea id="content" class="comentContent" name="content" cols="77" rows="5"></textarea><br><button type="button" class="comentAddBtn">댓글</button></div>
 </div><!-- end container -->

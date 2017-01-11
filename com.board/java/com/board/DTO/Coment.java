@@ -5,7 +5,6 @@ import java.sql.Date;
 import org.springframework.web.multipart.MultipartFile;
 
 public class Coment {
-	private int spNo=0;
 	private int pNo=0;
 	private int scNo=0;
 	private int cNo=0;
@@ -31,12 +30,6 @@ public class Coment {
 	}
 	public void setDateUp(Date dateUp) {
 		this.dateUp = dateUp;
-	}
-	public int getSpNo() {
-		return spNo;
-	}
-	public void setSpNo(int spNo) {
-		this.spNo = spNo;
 	}
 	public int getpNo() {
 		return pNo;
@@ -65,7 +58,7 @@ public class Coment {
 	}
 	@Override
 	public String toString() {
-		return "Coment [spNo=" + spNo + ", pNo=" + pNo + ", scNo=" + scNo
+		return "Coment [ pNo=" + pNo + ", scNo=" + scNo
 				+ ", cNo=" + cNo + ", userId=" + userId + ", content="
 				+ content + ", dateIn=" + dateIn + ", dateUp=" + dateUp + "]";
 	}

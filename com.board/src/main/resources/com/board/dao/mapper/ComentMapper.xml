@@ -3,21 +3,21 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.board.dao.mapper.ComentMapper">
 	<select id="getComents" parameterType="int" resultType="Coment">
-	select pno pNo,user_id userId,date_in dateIn,date_up dateUp
+	select pno pNo,cno cNo,user_id userId,content,date_in dateIn,date_up dateUp
 	from coments
-	where pno=#{pNo} and spno={spNo}
-	order by date_in desc
+	where pno=#{value}
+	order by date_in asc
 	</select>
 	<insert id="addComent" parameterType="Coment">
 	insert into coments (pno,scno,cno,user_id,content)
 	 values(#{pNo},#{scNo},coment_seq.nextval,#{userId,jdbcType=VARCHAR},#{content,jdbcType=VARCHAR})
 	</insert>
 	<update id="updateComent" parameterType="Coment">
-	update coments set content=#{content},date_up={dateUp}
+	update coments set content=#{content},date_up={sysdate}
 	where cno=#{cNo}
 	</update>
-	<delete id="delComent" parameterType="int">
+	<delete id="delComent" parameterType="Coment">
 	delete from coments
-	where cno=#{value}
+	where cno=#{cNo}
 	</delete>
 </mapper>
