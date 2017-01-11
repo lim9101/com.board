@@ -9,10 +9,29 @@ public class Coment {
 	private int pNo=0;
 	private int scNo=0;
 	private int cNo=0;
-	private String user_id;
+	private String userId;
 	private String content;
-	private Date date_in;
-	private Date date_up;
+	private Date dateIn;
+	private Date dateUp;
+	
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+	public Date getDateIn() {
+		return dateIn;
+	}
+	public void setDateIn(Date dateIn) {
+		this.dateIn = dateIn;
+	}
+	public Date getDateUp() {
+		return dateUp;
+	}
+	public void setDateUp(Date dateUp) {
+		this.dateUp = dateUp;
+	}
 	public int getSpNo() {
 		return spNo;
 	}
@@ -37,28 +56,18 @@ public class Coment {
 	public void setcNo(int cNo) {
 		this.cNo = cNo;
 	}
-	public String getUser_id() {
-		return user_id;
-	}
-	public void setUser_id(String user_id) {
-		this.user_id = user_id;
-	}
+	
 	public String getContent() {
 		return content;
 	}
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public Date getDate_in() {
-		return date_in;
+	@Override
+	public String toString() {
+		return "Coment [spNo=" + spNo + ", pNo=" + pNo + ", scNo=" + scNo
+				+ ", cNo=" + cNo + ", userId=" + userId + ", content="
+				+ content + ", dateIn=" + dateIn + ", dateUp=" + dateUp + "]";
 	}
-	public void setDate_in(Date date_in) {
-		this.date_in = date_in;
-	}
-	public Date getDate_up() {
-		return date_up;
-	}
-	public void setDate_up(Date date_up) {
-		this.date_up = date_up;
-	}
+	
 }

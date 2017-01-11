@@ -6,11 +6,30 @@
 <html>
 <head>
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	
+	
+	$(".comentAddBtn").on("click",function(){
+		var coment= {
+				pNo:"${dto.pNo}",
+				content:$(".comentContent").val()
+		};
+		console.log(coment);
+		 $.ajax({
+			method:"POST",
+			url:"comentAdd",
+			data:coment,
+			success:function(result){
+				console.log(result);
+			}
+		});
+	});
+});
+</script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <style>
-
 </style>
-
 <title>글-상세보기</title>
 </head>
 <body>
@@ -60,7 +79,19 @@
 	</table>
 	<div><p><a>댓글(3)</a><p></div>
 	<div class="comentLine" onclick="">
-	<div></div>
+	<div>
+	<div>2017/01/17</div>
+	<span>${ user.userId }</span> &nbsp; &nbsp; <span>hello android</span><span><button type="button" >수정</button><button type="button">삭제</button></span>
 	</div>
+	<div>
+	<div>2017/01/17</div>
+	<span>${ user.userId }</span> &nbsp; &nbsp; <span>hello android</span><span><button type="button" >수정</button><button type="button">삭제</button></span>
+	</div>
+	<div>
+	<div>2017/01/17</div>
+	<span>${ user.userId }</span> &nbsp; &nbsp; <span>hello android</span><span><button type="button" >수정</button><button type="button">삭제</button></span>
+	</div>
+	</div>
+		<div><textarea id="content" class="comentContent" name="content" cols="77" rows="5"></textarea><br><button type="button" class="comentAddBtn">댓글</button></div>
 </div><!-- end container -->
 </html>

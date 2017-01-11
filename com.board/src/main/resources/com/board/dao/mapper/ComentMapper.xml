@@ -9,8 +9,8 @@
 	order by date_in desc
 	</select>
 	<insert id="addComent" parameterType="Coment">
-	insert into coments (spno,pno,scno,cno,user_id,content)
-	 values(#{spNo},#{pNo},#{scNo},#{cNo},#{userId,jdbcType=VARCHAR},#{content,jdbcType=VARCHAR})
+	insert into coments (pno,scno,cno,user_id,content)
+	 values(#{pNo},#{scNo},coment_seq.nextval,#{userId,jdbcType=VARCHAR},#{content,jdbcType=VARCHAR})
 	</insert>
 	<update id="updateComent" parameterType="Coment">
 	update coments set content=#{content},date_up={dateUp}

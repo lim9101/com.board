@@ -45,8 +45,10 @@
 	<bean
 	class="org.springframework.web.multipart.commons.CommonsMultipartResolver"
 	id="multipartResolver" />
-
-	
 	<mvc:resources mapping="/js/**" location="/resources/js/" />
 	<mvc:resources mapping="/images/**" location="/images/" />
+	
+	<bean id="mav"
+		class="org.springframework.web.servlet.ModelAndView">
+	</bean>
 </beans>
