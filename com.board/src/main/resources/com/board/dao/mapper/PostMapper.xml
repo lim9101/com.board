@@ -17,7 +17,7 @@
 		</choose>
  		
  		,pno_seq.nextval,#{user_id,jdbcType=VARCHAR},#{title,jdbcType=VARCHAR}
- 		,#{content,jdbcType=VARCHAR},sysdate,#{date_up,jdbcType=DATE},#{count},#{plevel,jdbcType=DATE},#{depth,jdbcType=DATE})
+ 		,#{content,jdbcType=VARCHAR},sysdate,#{date_up,jdbcType=DATE},#{count},#{plevel,jdbcType=DATE},#{depth,jdbcType=DATE},#{kind,jdbcType=DATE})
  		
  	</insert>
  	
@@ -52,6 +52,7 @@
  		<result property="depth" column="depth"/>
  		<result property="plevel" column="plevel"/>
  		<result property="count" column="count"/>
+ 		<result property="kind" column="kind"/>
  		<collection property="attFile" resultMap="AttFile"/>
  		<collection property="user" resultMap="User"/>
  	</resultMap>
@@ -71,18 +72,19 @@
  		<![CDATA[
  		select b.*
   		from (select rownum as rm, a.*
-		from (select p.spno, p.pno, p.depth, p.plevel, p.user_id, p.title, p.date_in, p.count, a.file_no, a.file_name
-		from posts p, attfiles a
-		where p.pno = a.pno(+)
-		order by p.spno desc, p.depth asc)a)b
+		from (select p.spno, p.pno, p.depth, p.kind, p.plevel, p.user_id, u.user_name, p.title, p.date_in, p.count, a.file_no, a.file_name
+		from posts p, attfiles a, users u
+		where p.pno = a.pno(+) and p.user_id = u.user_id
+		order by p.kind desc, p.spno desc, p.depth asc)a)b
    		where b.rm>=#{startRow} and b.rm<=#{endRow}
+     	order by b.kind desc, b.spno desc, b.depth asc
 		]]>
  	</select>
  	
  	<!-- 공지글 보기 -->
  	<select id="viewPost" parameterType="int" resultMap="Post" resultType="com.board.DTO.Post" >
  		<![CDATA[
- 		select p.spno, p.pno, p.user_id, p.depth, p.plevel, p.content, u.user_name, p.title, p.date_in, p.count, a.file_no, a.file_name
+ 		select p.spno, p.pno, p.user_id, p.kind, p.depth, p.plevel, p.content, u.user_name, p.title, p.date_in, p.count, a.file_no, a.file_name
 		from posts p, attfiles a, users u
 		where p.user_id = u.user_id and p.pno = a.pno(+) and 
 		p.pno=#{pNo}

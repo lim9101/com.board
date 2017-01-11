@@ -70,7 +70,6 @@ public class PostServiceImpl implements PostService{
 			}
 			AttFile file = new AttFile();
 			file.setpNo(post1.getpNo());
-			file.setSpNo(post1.getSpNo());
 			file.setFile_name(random+"_"+fileName);
 			fileDao.addFile(file);
 		}
@@ -104,7 +103,6 @@ public class PostServiceImpl implements PostService{
 			file.setFile_name(random+"_"+fileName);
 			System.out.println("random+fileName"+random+"_"+fileName);
 			file.setpNo(post.getpNo());
-			file.setSpNo(post.getSpNo());
 			file.setFile_no(fileNo);
 			
 			if(fileNo > 0){

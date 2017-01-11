@@ -49,6 +49,9 @@
     color: #664738;
     text-align: left;
 }
+.noticeList table tr.noti{
+	background: #f7f6f4;
+}
 .noticeList table td {
 	border-bottom: 1px solid #E6E2DE;
 	color:#464646;
@@ -82,7 +85,15 @@
 					<th width="15%">등록일</th>
 				</tr>
 				<c:forEach items="${pList}" var="dto">
-					<tr>
+					<c:choose>
+						<c:when test="${dto.kind==1}">
+							<tr class="noti">
+						</c:when>
+						<c:otherwise>
+						<tr>
+						</c:otherwise>
+					</c:choose>
+									
 						<td>${dto.pNo }</td>
 						<td>
 						<c:if test="${dto.depth>0 }">
@@ -93,7 +104,11 @@
 							삭제된 글입니다.
 							</c:when>
 							<c:otherwise>
-							<a href="postView?pNo=${dto.pNo}">${dto.title }</a>
+							<a href="postView?pNo=${dto.pNo}">
+							<c:if test="${dto.kind==1}">
+								<img src="images/noti.png" width="30"/>
+							</c:if>
+							${dto.title }</a>
 							</c:otherwise>
 						</c:choose>
 						</td>

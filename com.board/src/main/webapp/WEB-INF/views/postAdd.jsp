@@ -53,13 +53,19 @@
 		<div class="noticeAdd">
 		<h1>글쓰기</h1>
 		<table>
+			<c:if test="${user.userId=='admin'}">
+				<tr>
+					<th><label for="kind">공지</label></th>
+					<td><input type="checkbox" value="1" name="kind"></td>
+				</tr>
+			</c:if>
 			<tr>
 				<th><label for="title">제목</label></th>
 				<td class="tdStyle"><input type="text" name="title" id="title" size="50"/></td>
 			</tr>
 			<tr>
 				<th><label for="user_id">작성자</label></th>
-				<td class="tdStyle"><input type="text" name="user_id" id="user_id" value="duri" readonly="readonly"/></td>
+				<td class="tdStyle"><input type="text" name="user_id" id="user_id" value="${user.userId}" readonly="readonly"/></td>
 			</tr>
 			<tr>
 				<td colspan="2"><textarea id="content" name="content" cols="97" rows="20"></textarea></td>

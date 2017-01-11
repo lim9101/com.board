@@ -15,6 +15,7 @@ public class Post {
 	private int count;
 	private int plevel=0;
 	private int depth=0;
+	private int kind=0;
 	private MultipartFile upload;
 	private AttFile attFile;
 	private User user;
@@ -112,5 +113,11 @@ public class Post {
 	}
 	public void setDepth(int depth) {
 		this.depth = depth;
+	}
+	public int getKind() {
+		return kind;
+	}
+	public void setKind(int kind) {
+		this.kind = kind;
 	}
 }

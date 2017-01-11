@@ -4,7 +4,7 @@
  <mapper namespace="com.board.dao.mapper.AttFileMapper">
  	<!-- 파일추가 -->
  	<insert id="addFile" parameterType="AttFile">
- 		insert into attfiles values(file_seq.nextval,#{spNo},#{pNo},#{file_name,jdbcType=VARCHAR})
+ 		insert into attfiles values(file_seq.nextval,#{pNo},#{file_name,jdbcType=VARCHAR})
  	</insert>
  	
  	<!-- 파일이름 검색 -->
