@@ -74,7 +74,25 @@
   		from (select rownum as rm, a.*
 		from (select p.spno, p.pno, p.depth, p.kind, p.plevel, p.user_id, u.user_name, p.title, p.date_in, p.count, a.file_no, a.file_name
 		from posts p, attfiles a, users u
-		where p.pno = a.pno(+) and p.user_id = u.user_id
+		where p.pno = a.pno(+) and p.user_id = u.user_id 
+		]]>
+		<trim prefix="and">
+			<if test="searchWord!=null">
+				<choose>
+					<when test="searchKey=='title'">
+						<![CDATA[ 
+							 p.title like '%' || #{searchWord} || '%' 
+						]]>	
+					</when>
+					<when test="searchKey=='user_id'">
+						<![CDATA[ 
+							 p.user_id like '%' || #{searchWord} || '%' 
+						]]>	
+					</when>
+				</choose>
+			</if>
+		</trim>
+		<![CDATA[
 		order by p.kind desc, p.spno desc, p.depth asc)a)b
    		where b.rm>=#{startRow} and b.rm<=#{endRow}
      	order by b.kind desc, b.spno desc, b.depth asc

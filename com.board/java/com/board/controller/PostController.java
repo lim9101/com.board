@@ -68,6 +68,7 @@ public class PostController {
 		return mav;
 	}
 	
+	//검색안한 리스트
 	@RequestMapping(value = "/postList", method = RequestMethod.GET)
 	public ModelAndView postList(Page pv){
 		ModelAndView mav = new ModelAndView();
@@ -85,6 +86,32 @@ public class PostController {
 		}
 		
 		mav.setViewName("postList");
+		return mav;
+	}
+	
+	//검색한 리스트
+	@RequestMapping(value = "/postList", method = RequestMethod.POST)
+	public ModelAndView postSearchList(Page pv){
+		ModelAndView mav = new ModelAndView();
+		if(pv.getSearchKey()==null){
+			mav.setViewName("redirect:/postList");
+		}else{
+			int totalRecord = postService.totalCount();
+			if(totalRecord >=1){
+				if (pv.getCurrentPage() == 0)
+					currentPage = 1;
+				else
+					currentPage = pv.getCurrentPage();
+				
+				pdto = new Page(currentPage, totalRecord, pv.getSearchKey(), pv.getSearchWord());
+				mav.addObject("pv", pdto); // 페이지번호를 출력하기위해 mav에 담음
+				mav.addObject("pList", postService.postList(pdto));
+				//System.out.println(postService.postList(pdto));
+			}
+			
+			mav.setViewName("postList");
+		}
+		
 		return mav;
 	}
 	

@@ -11,6 +11,18 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
+		$('[name=searchBtn]').bind("click",function(){
+			$('form').attr('action','postList');
+			$('form').submit();
+		});
+
+		$('[name=searchWord]').val('${pv.searchWord}');
+		switch('${pv.searchKey}'){
+		case 'all':$('[value=all]').prop('selected','selected');
+					$('[name=searchWord]').val(''); break;
+		case 'title':$('[value=title]').prop('selected','selected');break;
+		case 'user_id':$('[value=user_id]').prop('selected','selected');break;
+		}
 	});
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -71,9 +83,20 @@
 	<div class="container">
 	<h1 class="logo"><img src="images/meun_logo.png"></h1>
 	<div class="info">${user.userName}님이 로그인하셨습니다.<a href="userInfo">내정보</a><a class="userOut" href="index">로그아웃</a></div>
-	<div class="mainFrame">
 		<div class="noticeTitel">공지 글 목록</div>
 		<div class="postAdd"><a href="postAdd">글쓰기</a></div>
+		<div class="search">
+			<span>검색:</span>
+			<form name="frm" method="post">
+		 		<select name="searchKey">
+		 		<option value="all">전체</option>
+		 		<option value="title">제목</option>
+		 		<option value="user_id">작성자</option>
+		 		</select>
+		 		<input type="text" name="searchWord"/>
+		 		<input type="button" name="searchBtn" value="검색"/>
+		 	</form>
+		</div>
 		<div class="noticeList">
 			<table>
 				<tr>
@@ -130,7 +153,6 @@
 			<a href="postList?currentPage=${i}">${i}</a>
 			</c:forEach>
 		</div>
-	</div>
 	</div>
 </body>
 </html>
