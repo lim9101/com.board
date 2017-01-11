@@ -19,7 +19,7 @@
 		$('[name=searchWord]').val('${pv.searchWord}');
 		switch('${pv.searchKey}'){
 		case 'all':$('[value=all]').prop('selected','selected');
-					$('[name=searchWord]').val(''); break;
+					$('[value=searchWord]').val(''); break;
 		case 'title':$('[value=title]').prop('selected','selected');break;
 		case 'user_id':$('[value=user_id]').prop('selected','selected');break;
 		}
@@ -149,9 +149,15 @@
 			
 		</div><!-- end noticeList -->
 		<div class="page">
+			<c:if test="${pv.startPage > 1 }">
+	  		<span><a href="postList?currentPage=${pv.startPage-pv.blockPage}&searchKey=${pv.searchKey}&searchWord=${pv.searchWord}">이전</a></span>
+	  		</c:if>
 			<c:forEach var="i" begin="${pv.startPage}" end="${pv.endPage}">
-			<a href="postList?currentPage=${i}">${i}</a>
+			<a href="postList?currentPage=${i}&searchKey=${pv.searchKey}&searchWord=${pv.searchWord}">${i}</a>
 			</c:forEach>
+			<c:if test="${pv.totalPage > pv.endPage }">
+	  		<span><a href="postList?currentPage=${pv.startPage+pv.blockPage}&searchKey=${pv.searchKey}&searchWord=${pv.searchWord}">다음</a></span>
+	  		</c:if>
 		</div>
 	</div>
 </body>

@@ -71,15 +71,21 @@ public class PostController {
 	//검색안한 리스트
 	@RequestMapping(value = "/postList", method = RequestMethod.GET)
 	public ModelAndView postList(Page pv){
+		System.out.println(pv.getSearchKey()+pv.getSearchWord());
 		ModelAndView mav = new ModelAndView();
-		int totalRecord = postService.totalCount();
+		int totalRecord=0;
+		if(pv.getSearchKey() ==null){
+			totalRecord = postService.totalCount();
+		}else{
+			totalRecord = postService.searchCount(pv);
+		}
 		if(totalRecord >=1){
 			if (pv.getCurrentPage() == 0)
 				currentPage = 1;
 			else
 				currentPage = pv.getCurrentPage();
 			
-			pdto = new Page(currentPage, totalRecord);
+			pdto = new Page(currentPage, totalRecord, pv.getSearchKey(), pv.getSearchWord());
 			mav.addObject("pv", pdto); // 페이지번호를 출력하기위해 mav에 담음
 			mav.addObject("pList", postService.postList(pdto));
 			//System.out.println(postService.postList(pdto));
