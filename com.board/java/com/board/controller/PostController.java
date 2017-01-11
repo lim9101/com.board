@@ -96,7 +96,7 @@ public class PostController {
 		if(pv.getSearchKey()==null){
 			mav.setViewName("redirect:/postList");
 		}else{
-			int totalRecord = postService.totalCount();
+			int totalRecord = postService.searchCount(pv);
 			if(totalRecord >=1){
 				if (pv.getCurrentPage() == 0)
 					currentPage = 1;

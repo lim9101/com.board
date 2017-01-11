@@ -18,5 +18,6 @@ public interface PostDao {
 	int totalCount();
 	void depthCount(Post post);
 	int spnoCount(int spNo);
+	int searchCount(Page pv);
 	int maxDepth(int spNo);
 	}

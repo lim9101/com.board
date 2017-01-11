@@ -20,4 +20,5 @@ public interface PostMapper {
 	void depthCount(Post post);
 	int spnoCount(int spNo);
 	int maxDepth(int spNo);
+	int searchCount(Page pv);
 }

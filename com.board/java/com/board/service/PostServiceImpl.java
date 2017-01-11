@@ -154,4 +154,9 @@ public class PostServiceImpl implements PostService{
 		}
 	}
 
+	@Override
+	public int searchCount(Page pv) {
+		return postDao.searchCount(pv);
+	}
+
 }

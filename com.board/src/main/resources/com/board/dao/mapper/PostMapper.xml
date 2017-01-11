@@ -26,6 +26,23 @@
  		select count(*) from posts
  	</select>
  	
+ 	<!-- 레코드 검색한 수 -->
+ 	<select id="searchCount" parameterType="com.board.DTO.Post" resultType="int">
+ 		 select count(*) from posts 
+ 		<choose>
+			<when test="searchKey=='title'">
+				<![CDATA[ 
+					where  title like '%' || #{searchWord} || '%' 
+				]]>	
+			</when>
+			<when test="searchKey=='user_id'">
+				<![CDATA[ 
+					where  user_id like '%' || #{searchWord} || '%' 
+				]]>	
+			</when>
+		</choose>
+ 	</select>
+ 	
  	<update id="depthCount" parameterType="Post">
  		<![CDATA[
  		update posts set depth=depth+1 where spno=#{spNo} and depth>#{depth}
