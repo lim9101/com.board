@@ -21,6 +21,7 @@ public class ViewController {
 		@RequestMapping("index")
 		public String index(HttpSession session){
 			session.removeAttribute("user");
+			session.removeAttribute("pNo");
 			return "index";
 		}
 		

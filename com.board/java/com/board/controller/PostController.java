@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.board.DTO.Page;
 import com.board.DTO.Post;
+import com.board.DTO.User;
 import com.board.service.AttFileService;
 import com.board.service.PostService;
 
@@ -70,8 +71,8 @@ public class PostController {
 	
 	//검색안한 리스트
 	@RequestMapping(value = "/postList", method = RequestMethod.GET)
-	public ModelAndView postList(Page pv){
-		System.out.println(pv.getSearchKey()+pv.getSearchWord());
+	public ModelAndView postList(Page pv ,HttpSession session){
+		System.out.println("session:"+(int)session.getAttribute("pNo"));
 		ModelAndView mav = new ModelAndView();
 		int totalRecord=0;
 		if(pv.getSearchKey() ==null){
@@ -122,8 +123,13 @@ public class PostController {
 	}
 	
 	@RequestMapping(value = "/postView", method = RequestMethod.GET)
-	public ModelAndView postView(int pNo){
-		ModelAndView mav = new ModelAndView();
+	public ModelAndView postView(int pNo, HttpSession session){
+		ModelAndView mav = new ModelAndView();	
+		System.out.println("session"+(Integer) session.getAttribute("pNo"));
+		if((Integer) session.getAttribute("pNo") != pNo){
+			postService.addCount(pNo);
+			session.setAttribute("pNo", pNo);
+		}
 		mav.addObject("dto", postService.postView(pNo));
 		mav.setViewName("postView");
 		return mav;

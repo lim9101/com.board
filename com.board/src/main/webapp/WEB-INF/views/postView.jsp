@@ -34,6 +34,7 @@ $(document).ready(function(){
 </head>
 <body>
 <div class="container">
+
 	<table border=1>
 		<tr>
 			<th>작성자</th><td>${dto.user.userName}</td>

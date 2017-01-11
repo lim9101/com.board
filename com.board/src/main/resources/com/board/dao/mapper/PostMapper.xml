@@ -43,6 +43,11 @@
 		</choose>
  	</select>
  	
+ 	<!-- 조회수 -->
+ 	<update id="addCount" parameterType="int">
+ 		update posts set count=count+1 where pno=#{pNo}
+ 	</update>
+ 	
  	<update id="depthCount" parameterType="Post">
  		<![CDATA[
  		update posts set depth=depth+1 where spno=#{spNo} and depth>#{depth}

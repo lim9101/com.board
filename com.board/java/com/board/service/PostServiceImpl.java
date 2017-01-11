@@ -159,4 +159,9 @@ public class PostServiceImpl implements PostService{
 		return postDao.searchCount(pv);
 	}
 
+	@Override
+	public void addCount(int pNo) {
+		postDao.addCount(pNo);
+	}
+
 }

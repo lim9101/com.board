@@ -21,4 +21,5 @@ public interface PostMapper {
 	int spnoCount(int spNo);
 	int maxDepth(int spNo);
 	int searchCount(Page pv);
+	void addCount(int pNo);
 }
