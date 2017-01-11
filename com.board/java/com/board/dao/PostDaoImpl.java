@@ -68,4 +68,14 @@ public class PostDaoImpl implements PostDao{
 	public int maxDepth(int spNo) {
 		return postMapper.maxDepth(spNo);
 	}
+
+	@Override
+	public int searchCount(Page pv) {
+		return postMapper.searchCount(pv);
+	}
+
+	@Override
+	public void addCount(int pNo) {
+		postMapper.addCount(pNo);
+	}
 }

@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.board.DTO.Page;
 import com.board.DTO.Post;
+import com.board.DTO.User;
 import com.board.service.AttFileService;
 import com.board.service.PostService;
 
@@ -68,17 +69,23 @@ public class PostController {
 		return mav;
 	}
 	
+	//검색안한 리스트
 	@RequestMapping(value = "/postList", method = RequestMethod.GET)
-	public ModelAndView postList(Page pv){
+	public ModelAndView postList(Page pv ,HttpSession session){
 		ModelAndView mav = new ModelAndView();
-		int totalRecord = postService.totalCount();
+		int totalRecord=0;
+		if(pv.getSearchKey() ==null){
+			totalRecord = postService.totalCount();
+		}else{
+			totalRecord = postService.searchCount(pv);
+		}
 		if(totalRecord >=1){
 			if (pv.getCurrentPage() == 0)
 				currentPage = 1;
 			else
 				currentPage = pv.getCurrentPage();
 			
-			pdto = new Page(currentPage, totalRecord);
+			pdto = new Page(currentPage, totalRecord, pv.getSearchKey(), pv.getSearchWord());
 			mav.addObject("pv", pdto); // 페이지번호를 출력하기위해 mav에 담음
 			mav.addObject("pList", postService.postList(pdto));
 			//System.out.println(postService.postList(pdto));
@@ -88,9 +95,39 @@ public class PostController {
 		return mav;
 	}
 	
-	@RequestMapping(value = "/postView", method = RequestMethod.GET)
-	public ModelAndView postView(int pNo){
+	//검색한 리스트
+	@RequestMapping(value = "/postList", method = RequestMethod.POST)
+	public ModelAndView postSearchList(Page pv){
 		ModelAndView mav = new ModelAndView();
+		if(pv.getSearchKey()==null){
+			mav.setViewName("redirect:/postList");
+		}else{
+			int totalRecord = postService.searchCount(pv);
+			if(totalRecord >=1){
+				if (pv.getCurrentPage() == 0)
+					currentPage = 1;
+				else
+					currentPage = pv.getCurrentPage();
+				
+				pdto = new Page(currentPage, totalRecord, pv.getSearchKey(), pv.getSearchWord());
+				mav.addObject("pv", pdto); // 페이지번호를 출력하기위해 mav에 담음
+				mav.addObject("pList", postService.postList(pdto));
+				//System.out.println(postService.postList(pdto));
+			}
+			
+			mav.setViewName("postList");
+		}
+		
+		return mav;
+	}
+	
+	@RequestMapping(value = "/postView", method = RequestMethod.GET)
+	public ModelAndView postView(int pNo, HttpSession session){
+		ModelAndView mav = new ModelAndView();	
+		if((Integer) session.getAttribute("pNo") != pNo){
+			postService.addCount(pNo);
+			session.setAttribute("pNo", pNo);
+		}
 		mav.addObject("dto", postService.postView(pNo));
 		mav.setViewName("postView");
 		return mav;

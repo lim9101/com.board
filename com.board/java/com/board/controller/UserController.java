@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.board.DTO.Post;
 import com.board.DTO.User;
 import com.board.service.UserService;
 
@@ -41,6 +42,8 @@ public class UserController {
 	@RequestMapping("check")
 	@ResponseBody
 	public boolean check(User user,HttpSession session){
+		int pNo=0;
+		session.setAttribute("pNo", pNo);
 		boolean result=false;
 		try{
 			result=userService.check(user,session);

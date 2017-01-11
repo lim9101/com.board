@@ -16,4 +16,6 @@ public interface PostService {
 	Post postView(int pNo);
 	int totalCount();
 	void delPost(int pNo, int spNo, int depth);
+	int searchCount(Page pv);
+	void addCount(int pNo);
 }
