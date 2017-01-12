@@ -14,8 +14,8 @@ public class ComentServiceImpl implements ComentService{
 	@Autowired
 	private ComentDao comentDao;
 
-	public List<Coment> getComents(int pNo){
-		return comentDao.getComents(pNo);
+	public List<Coment> getComents(Coment coment){
+		return comentDao.getComents(coment);
 	}
 	
 	public boolean addComent(Coment coment){

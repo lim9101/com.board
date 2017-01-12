@@ -13,8 +13,8 @@ public class ComentDaoImpl implements ComentDao{
 	@Autowired
 	private ComentMapper comentMapper;
 	
-	public List<Coment> getComents(int pNo){
-		return comentMapper.getComents(pNo);
+	public List<Coment> getComents(Coment coment){
+		return comentMapper.getComents(coment);
 	}
 	public int addComent(Coment coment){
 		return comentMapper.addComent(coment);
