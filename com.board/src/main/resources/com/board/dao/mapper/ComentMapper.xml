@@ -13,7 +13,7 @@
 	 values(#{pNo},#{scNo},coment_seq.nextval,#{userId,jdbcType=VARCHAR},#{content,jdbcType=VARCHAR})
 	</insert>
 	<update id="updateComent" parameterType="Coment">
-	update coments set content=#{content},date_up={sysdate}
+	update coments set content=#{content},date_up=sysdate
 	where cno=#{cNo}
 	</update>
 	<delete id="delComent" parameterType="Coment">

@@ -40,8 +40,10 @@ public class ComentController {
 		return comentService.addComent(coment);
 	}
 	
-	@RequestMapping("updateComent")
+	@RequestMapping(value="updateComent",method=RequestMethod.POST)
+	@ResponseBody
 	public boolean updateComent(Coment coment){
+		System.out.println(coment);
 		return comentService.updateComent(coment);
 	}
 	

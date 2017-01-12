@@ -16,9 +16,14 @@ var comentsHiden = function(){
 	$(".comentLine").css("display","none");
 }
 }
-var comentUpdate = function(cNo){
-	$(cNo).parent().parent().append($("<div><textarea id='content' class='comentContent' name='content' cols='77' rows='5'></textarea><br><button type='button' class='comentAddBtn'>댓글</button></div>"));
-	/* var coment ={
+var updateArea = function(cNo){
+	$(cNo).parent().parent().empty().append($("<textarea id='content'"+
+			" class='comentContent' name='content' cols='65' rows='6'>"+
+			"</textarea><span style='position:relative; top:-64px;right:-4px'><button type='button'  style='display:inline' onclick='updateComent(this)' class='updateBtn' value='"+$(cNo).val()+"'>댓글수정</button><button type='button'  style='position:relative; right:-450px' onclick='canselArea()' class='canselBtn'>취소</button></span>"));
+}
+
+var updateComent = function(cNo){
+	var coment ={
 			cNo:$(cNo).val(),
 			content:$(".comentContent").val()
 	}
@@ -30,8 +35,9 @@ var comentUpdate = function(cNo){
 			$(".comentLine").empty();
 			comentView();
 		}
-	}); */
+	});
 }
+
 var comentDel = function(cNo){
 	var coment ={
 			cNo:$(cNo).val()
@@ -47,15 +53,32 @@ var comentDel = function(cNo){
 	});
 }
 
+var canselArea = function(){
+	comentView();
+}
+
 var comentList=function(coment){
-	var div = $("<div style='border:1px solid black;border-width:2px 1px; width:510px; height:100px; line-height:35px'></div><br>");
-	var dateIn= $("<div>"+coment.dateIn+"</div>");
-	var content=$("<span>"+coment.userId+"</span> &nbsp; &nbsp; <span>"+coment.content+"</span>"+
-	"<span><button type='button' onclick='comentUpdate(this)' value='"+coment.cNo+"'>수정</button>"+
+	var div = $("<div style='border:1px solid black;border-width:2px 1px; width:510px; height:100px; line-height:35px; position:relative'></div><br>");
+	var dateIn= $("<span>"+"입력날짜:"+coment.dateIn+"</span>&nbsp;&nbsp;<span>"+"수정날짜:"+coment.dateUp+"<span><br>");
+	if(coment.dateUp == null){
+		dateIn= $("<span>"+"입력날짜:"+coment.dateIn+"</span>&nbsp;&nbsp;<span>"+"수정날짜:"+""+"<span><br>");
+	}else{
+		
+	}
+	var contentUser=$("<span>"+coment.userId+"</span> &nbsp; &nbsp; <span>"+coment.content+"</span>"+
+	"<span><button type='button' onclick='updateArea(this)' value='"+coment.cNo+"'>수정</button>"+
 	"<button type='button' onclick='comentDel(this)' value='"+coment.cNo+"'>삭제</button></span><br>");
-	div.append(dateIn);
-	div.append(content);
-	$(".comentLine").append(div);
+	var content=$("<span>"+coment.userId+"</span> &nbsp; &nbsp; <span>"+coment.content+"</span><br>");
+	if(coment.userId == "${user.userId}"){
+		div.append(dateIn);
+		div.append(contentUser);
+		$(".comentLine").append(div);
+	}else{
+		div.append(dateIn);
+		div.append(content);
+		$(".comentLine").append(div);
+	}
+	
 }
 	var comentView = function(){
 	$.ajax({
@@ -64,6 +87,7 @@ var comentList=function(coment){
 		pNo:"${dto.pNo}"
 	},
 	success:function(coments){
+		$(".comentHiden").text("댓글"+"("+coments.length+")");
 		$(".comentLine").empty();
 		$(coments).each(function(idx,coment){
 			comentList(coment);
@@ -95,9 +119,6 @@ $(document).ready(function(){
 		}
 		 
 	});
-	
-	
-	
 });
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -109,7 +130,7 @@ $(document).ready(function(){
 <title>글-상세보기</title>
 </head>
 <body>
-<div class="container">
+<div class="container" style="position:relative">
 
 	<table border=1>
 		<tr>
@@ -154,8 +175,9 @@ $(document).ready(function(){
 			</td>
 		</tr>
 	</table>
-	<div><a class="comentHiden" onclick="comentsHiden()">댓글(3)</a></div>
-	<div class="comentLine" style="display:none">
+	<div><a class="comentHiden" onclick="comentsHiden()"></a></div>
+	<div class="comentLine" style="display:none; position:relative">
+	
 	</div>
 		<div><textarea id="content" class="comentContent" name="content" cols="77" rows="5"></textarea><br><button type="button" class="comentAddBtn">댓글</button></div>
 </div><!-- end container -->
