@@ -15,14 +15,13 @@
 			}
 			$('[name=content]').val(
 					$('[name=content]').val().replace(/\n/gi, '<br/>'));
-			
 			$('#frmWR').attr('action', 'postAdd').submit();
 		});
 		
 		//첨부파일 용량체크, 이미지 체크 
 		$('#filepath').on('change',function(){
 			var str=$('#filepath').val();
-			var patt=/(.jpg$|.gif$)/ig;
+			var patt=/(.jpg$|.gif$|.png$)/ig;
 			var result=str.match(patt);
 			if(!result){
 				alert('jpg, gif만 가능합니다.');

@@ -17,7 +17,8 @@
 		</choose>
  		
  		,pno_seq.nextval,#{user_id,jdbcType=VARCHAR},#{title,jdbcType=VARCHAR}
- 		,#{content,jdbcType=VARCHAR},sysdate,#{date_up,jdbcType=DATE},#{count},#{plevel,jdbcType=DATE},#{depth,jdbcType=DATE},#{kind,jdbcType=DATE},#{tspNo,jdbcType=DATE})
+
+ 		,#{content,jdbcType=VARCHAR},sysdate,#{date_up,jdbcType=DATE},#{count},#{plevel,jdbcType=DATE},#{depth,jdbcType=DATE},#{kind,jdbcType=DATE},#{tspNo})
  		
  	</insert>
  	
