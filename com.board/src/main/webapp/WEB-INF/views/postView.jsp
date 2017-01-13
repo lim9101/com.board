@@ -83,7 +83,7 @@ var comentDel = function(cNo){
 		data:coment,
 		success:function(result){
 			$(".comentLine").empty();
-			comentView(coment);
+			comentView(null);
 		}
 	});
 }
