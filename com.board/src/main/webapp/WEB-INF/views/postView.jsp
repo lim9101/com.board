@@ -253,7 +253,6 @@ $(document).ready(function(){
 					</c:when>
 					<c:otherwise>	</c:otherwise>
 				</c:choose>
-				
 				<a href="postList">목록</a>
 	</div>
 	<div><a class="comentHiden" onclick="comentsHiden()"></a></div>
