@@ -1,30 +1,36 @@
 package com.board.util.image;
 
-import java.io.File;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.tika.Tika;
+import org.springframework.web.multipart.MultipartFile;
 
 
 public class ImageType {
-	private static boolean isValidMimeType(File[] files){
+	public static boolean isValidMimeType(MultipartFile file){
+		System.out.println("이미지타입판별클레스");
 		Tika tika =new Tika();
 		String mimeType;
+
 		try{
-			for(File file : files){
-				mimeType = tika.detect(file);
+				mimeType = tika.detect(file.getInputStream());
 				if(!isPermittedMimeType(mimeType)){
 					return false;
 				}
-			}
 		}catch(Exception e){
+			e.printStackTrace();
+			System.out.println("파일 가져오기 실패:false");
 			return false;
 		}
 		return true;
 	}
 	
 	private static boolean isPermittedMimeType(String mimeType) {
-		String[] validMimeTypes = {"image" };
+		System.out.println("#########################");
+		System.out.println("#########################");
+		System.out.println(mimeType);
+		System.out.println("#########################");
+		System.out.println("#########################");
+		String[] validMimeTypes = {"image/png","image/jpeg","image/bmp" };
 		for (String validMimeType : validMimeTypes) {
 			if (StringUtils.startsWith(mimeType, validMimeType)) {
 				return true;

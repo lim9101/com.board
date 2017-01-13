@@ -16,10 +16,17 @@ public class Post {
 	private int plevel=0;
 	private int depth=0;
 	private int kind=0;
+	private int tspNo=0;
 	private MultipartFile upload;
 	private AttFile attFile;
 	private User user;
 
+	public int getTspNo() {
+		return tspNo;
+	}
+	public void setTspNo(int tspNo) {
+		this.tspNo = tspNo;
+	}
 	public int getSpNo() {
 		return spNo;
 	}
@@ -119,5 +126,11 @@ public class Post {
 	}
 	public void setKind(int kind) {
 		this.kind = kind;
+	}
+	public int getTspNo() {
+		return tspNo;
+	}
+	public void setTspNo(int tspNo) {
+		this.tspNo = tspNo;
 	}
 }
