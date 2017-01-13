@@ -14,8 +14,8 @@ public class ComentServiceImpl implements ComentService{
 	@Autowired
 	private ComentDao comentDao;
 
-	public List<Coment> getComents(int pNo){
-		return comentDao.getComents(pNo);
+	public List<Coment> getComents(Coment coment){
+		return comentDao.getComents(coment);
 	}
 	
 	public boolean addComent(Coment coment){
@@ -26,5 +26,15 @@ public class ComentServiceImpl implements ComentService{
 	}
 	public boolean delComent(Coment coment){
 		return comentDao.delComent(coment)>0;
+	}
+
+	@Override
+	public void allDelComent(int pNo) {
+		comentDao.allDelComent(pNo);
+	}
+
+	@Override
+	public int countComent(int pNo) {
+		return comentDao.countComent(pNo);
 	}
 }

@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
@@ -39,6 +40,7 @@ public class PostServiceImpl implements PostService{
 		if(post.getpNo()>0){
 			postDao.depthCount(post);
 			post.setSpNo(post.getSpNo());
+			post.setTspNo(post.getpNo());
 			post.setDepth(post.getDepth()+1);
 			post.setPlevel(post.getPlevel()+1);
 		}
@@ -141,16 +143,89 @@ public class PostServiceImpl implements PostService{
 	}
 
 	@Override
-	public void delPost(int pNo, int spNo, int depth) {
+	public void delPost(int pNo, int spNo, int depth, int plevel) {
 		int spNoCount = postDao.spnoCount(spNo);
+		int searchLev = 0;
+		int maxPlevel = 0;
+		List<Post> delDTO=null;
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		map.put("spNo", spNo);
+		map.put("depth", depth);
+			
 		
-		//제목글에 답변이 없을 경우
-		if(spNoCount==1 || depth == postDao.maxDepth(spNo)){
-			postDao.delPost(pNo);
+		//제목글만 있을 경우
+		if(spNoCount == 1){
+			System.out.println("제목글만 있음");
+			postDao.delPost(pNo); return;
+		}
+		
+		if(spNoCount > 1 && postDao.searchTspno(pNo)!=0){
+			postDao.delUpdatePost(pNo); return;
+		}
+		
+		//답변 삭제시 상위글도 삭제된 글이면 같이 삭제
+		if(spNoCount > 1){
+			delDTO = postDao.delSPno(spNo);
+			int chk=0; 
+			for(int i=0; i<delDTO.size() ; i++){
+				System.out.println("size:"+delDTO.size());
+				System.out.println("i:"+i);
+				if(delDTO.get(i).getPlevel()==1){
+					chk++;  
+				}
+				if(chk==2){
+					break;
+				}
+				if(i==0&&postDao.searchTspno(pNo)==0){
+					postDao.delPost(pNo); continue;
+				}
+				if(delDTO.get(i).getTitle()==null){
+					postDao.delPost(delDTO.get(i).getpNo()); continue;
+				}else{
+					System.out.println("break");
+					break;
+				}
+			}
+			return;
+		}
+		
+						
+		//답변글 중에 답변이 있거나 없는 경우
+		if(spNoCount > 1 && depth!=postDao.maxDepth(spNo)){
+			System.out.println("4");
+			searchLev = postDao.pLevel(map);
+			System.out.println("plevel:"+plevel+"pLevel(map)"+searchLev);
+			System.out.println("searchLev"+searchLev);
+			System.out.println("maxPlevel"+maxPlevel);
+			maxPlevel = postDao.maxPlevel(spNo);
+			
+			if(postDao.searchTspno(pNo)!=0){
+				postDao.delUpdatePost(pNo); return;
+			}
+			
+			if((maxPlevel == 3 && plevel==2)){
+				System.out.println();
+				postDao.delUpdatePost(pNo); return;
+			}
+			
+			if(plevel >= searchLev){
+				System.out.println("3");
+				postDao.delPost(pNo); return;
+			}
+			
+		} 	
+		
+		//제일 마지막 답변
+		if(spNoCount>1 && depth==postDao.maxDepth(spNo)){
+			System.out.println("답변중 제일 마지막 답변");
+			postDao.delPost(pNo); return;
+		}
 
-		//제목글에 답변이 있는 경우
-		}else{
-			postDao.delUpdatePost(pNo);
+
+		//답변이 있는 제목글 삭제 아닌 업데이트로 
+		if(spNoCount > 1){
+			System.out.println("5");
+			postDao.delUpdatePost(pNo); return;
 		}
 	}
 

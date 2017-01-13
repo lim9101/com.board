@@ -2,23 +2,20 @@ package com.board.controller;
 
 
 
-import java.sql.Date;
-import java.util.HashMap;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.board.DTO.Page;
 import com.board.DTO.Post;
-import com.board.DTO.User;
+import com.board.dao.ComentDao;
 import com.board.service.AttFileService;
+import com.board.service.ComentService;
 import com.board.service.PostService;
 
 @Controller
@@ -29,6 +26,9 @@ public class PostController {
 	
 	@Autowired
 	private AttFileService fileService;
+	
+	@Autowired
+	private ComentService comentService;
 	
 	private int currentPage;
 	private Page pdto;
@@ -134,11 +134,14 @@ public class PostController {
 	}
 	
 	@RequestMapping("postDelete")
-	public String postDelete(int pNo, int spNo, int depth, int fileNo){
+	public String postDelete(int pNo, int spNo, int depth, int fileNo, int plevel){
+		if(comentService.countComent(pNo) !=0){
+			comentService.allDelComent(pNo);
+		}
 		if(fileNo!=0){
 			fileService.fileDelete(fileNo, pNo);
 		}
-		postService.delPost(pNo,spNo,depth);
+		postService.delPost(pNo,spNo,depth,plevel);
 		return "redirect:/postList";
 	}//end postDelete 
 }

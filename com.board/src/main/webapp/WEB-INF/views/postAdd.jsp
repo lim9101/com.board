@@ -8,7 +8,45 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('.postAddBtn').bind('click', function() {
+			
+			if($('[name=title]').val()==''){
+				alert("제목을 입력하세요");
+				return false;
+			}
+			$('[name=content]').val(
+					$('[name=content]').val().replace(/\n/gi, '<br/>'));
+			
 			$('#frmWR').attr('action', 'postAdd').submit();
+		});
+		
+		//첨부파일 용량체크, 이미지 체크 
+		$('#filepath').on('change',function(){
+			var str=$('#filepath').val();
+			var patt=/(.jpg$|.gif$)/ig;
+			var result=str.match(patt);
+			if(!result){
+				alert('jpg, gif만 가능합니다.');
+				$('#filepath').val("");
+				return false;
+			}
+
+			if(this.files && this.files[0]){
+			
+				if(this.files[0].size>1000000000){
+					alert("1GB바이트 이하만 첨부할 수 있습니다.");
+					$('#filepath').val("");
+					return false;
+				}
+				//파일을 읽기 위한 FileReader객체 생성
+				var reader = new FileReader();
+				//file내용을 읽어 dataURL형식의 문자열로 저장
+				reader.readAsDataURL(this.files[0]);
+				//파일을 읽어 들이기를 성공했을 때 호출되는 이벤트 핸들러
+				reader.onload=function(e){
+				//이미지 Tag의 src속성에 읽어들인 File내용을 지정
+				$('img').attr('src',e.target.result);	
+				}
+			}
 		});
 	})
 </script>
@@ -72,7 +110,7 @@
 			</tr>
 			<tr>
 				<th><label for="upload">첨부파일</label></th>
-				<td class="tdStyle"><input type="file" id="upload" name="upload" class="form-control upload" placeholder="upload" /></td>
+				<td class="tdStyle"><input type="file" id="filepath" name="upload" class="form-control upload" placeholder="upload" /></td>
 			</tr>
 		</table>
 		

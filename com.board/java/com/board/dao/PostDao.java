@@ -1,6 +1,7 @@
 package com.board.dao;
 
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.board.DTO.Page;
@@ -21,4 +22,8 @@ public interface PostDao {
 	int searchCount(Page pv);
 	void addCount(int pNo);
 	int maxDepth(int spNo);
+	int pLevel(HashMap<String, Integer> map);
+	int maxPlevel(int spNo);
+	List<Post> delSPno(int spNo);
+	int searchTspno(int pNo);
 	}
