@@ -18,4 +18,5 @@ public interface PostService {
 	void delPost(int pNo, int spNo, int depth, int plevel);
 	int searchCount(Page pv);
 	void addCount(int pNo);
+	List<Post> userDelPost(String user_id);
 }

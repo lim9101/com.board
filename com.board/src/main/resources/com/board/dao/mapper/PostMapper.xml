@@ -175,5 +175,11 @@
  	<select id="pLevel" parameterType="map" resultType="int">
  		<![CDATA[ select plevel from posts where spno=#{spNo} and depth=(select min(depth) from posts where spno=#{spNo} and depth<>0 and depth <> #{depth}) ]]>
  	</select>
- 	 	
+ 	<select id="userDelPost" parameterType="String" resultType="post" resultMap="Post">
+ 		<![CDATA[
+ 		select p.pno,p.spno,p.depth,a.file_no,p.plevel
+		from posts p, attfiles a 
+		where p.pno = a.pno(+) and p.user_id=#{value}	
+		]]>	
+ 	</select>
  </mapper>

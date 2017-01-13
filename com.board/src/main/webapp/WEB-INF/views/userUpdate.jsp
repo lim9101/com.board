@@ -9,6 +9,9 @@
 <script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
+	$(".canselBtn").on("click",function(){
+		location.href="postList";
+	});
 	$(".updateBtn").on("click",function(){
 		 var formData = $("form").serialize();
 		$.ajax({
@@ -88,7 +91,7 @@ $(document).ready(function(){
 		
 		 <P>
 		 <button type="button" class="btn btn-primary btn-mg updateBtn">update</button>
-	     <button type="button" class="btn btn-primary btn-mg">cansel</button>
+	     <button type="button" class="btn btn-primary btn-mg canselBtn">cansel</button>
 		</P>
 	</form>
 </div>

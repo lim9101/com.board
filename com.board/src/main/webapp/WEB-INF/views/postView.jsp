@@ -204,6 +204,7 @@ $(document).ready(function(){
 <body>
 <div class="container" style="position:relative">
 	<div class="view">
+	<h1>글 보기</h1>
 		<table>
 			<tr>
 				<th>작성자</th><td>${dto.user.userName}</td>
@@ -231,11 +232,11 @@ $(document).ready(function(){
 	</div><!-- end view -->
 	<div class="btn">
 		<c:if test="${dto.plevel <3}">
-				<a href="postAdd?pNo=${dto.pNo}">답변쓰기</a>
+				<a href="postAdd?pNo=${dto.pNo}"><button>답변쓰기</button></a>
 			</c:if>
 				<c:choose>
 					<c:when test="${dto.user_id eq user.userId }">
-					<a href="postUpdate?pNo=${dto.pNo}">수정</a>
+					<a href="postUpdate?pNo=${dto.pNo}"><button>수정</button></a>
 					</c:when>
 					<c:otherwise>	</c:otherwise>
 				</c:choose>				
@@ -249,11 +250,11 @@ $(document).ready(function(){
 					</c:choose>
 					<c:choose>
 					<c:when test="${dto.user_id eq user.userId }">
-					<a href="postDelete?pNo=${dto.pNo}&spNo=${dto.spNo}&depth=${dto.depth}&fileNo=${fileNo}&plevel=${dto.plevel}">삭제</a>
+					<a href="postDelete?pNo=${dto.pNo}&spNo=${dto.spNo}&depth=${dto.depth}&fileNo=${fileNo}&plevel=${dto.plevel}"><button>삭제</button></a>
 					</c:when>
 					<c:otherwise>	</c:otherwise>
 				</c:choose>
-				<a href="postList">목록</a>
+				<a href="postList"><button>목록</button></a>
 	</div>
 	<div><a class="comentHiden" onclick="comentsHiden()"></a></div>
 	<div class="comentLine" style="display:none; position:relative">

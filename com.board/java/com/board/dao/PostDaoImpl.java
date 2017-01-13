@@ -99,5 +99,12 @@ public class PostDaoImpl implements PostDao{
 		return postMapper.searchTspno(pNo);
 	}
 
+	@Override
+	public List<Post> userDelPost(String user_id) {
+		return postMapper.userDelPost(user_id);
+	}
+	
+	
+
 	
 }

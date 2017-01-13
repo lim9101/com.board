@@ -35,12 +35,6 @@ public class ViewController {
 		public String userInfo(HttpSession session){
 			return "userInfo";
 			}
-		
-		@RequestMapping("postAdd")
-		public String postAdd(){
-			return "postAdd";
-		}
-		
 		@RequestMapping("userDel")
 		public String delUser(){
 			return "userDel";

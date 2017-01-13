@@ -84,18 +84,18 @@ $(document).ready(function(){
 		</div><!-- end noticeUpdate -->
 		<div class="Btn">
 			<button type="submit" class="postUpdateBtn">수정하기</button>
-			<a href="postList">목록</a>
+			<a href="postList"><button>목록</button></a>
 			<c:choose>
 				<c:when test="${!empty dto.attFile.file_no}">
-					<input type="text" value="${dto.attFile.file_no}" name="fileNo"/>
+					<input type="hidden" value="${dto.attFile.file_no}" name="fileNo"/>
 				</c:when>
 				<c:otherwise>
-					<input type="text" value="0" name="fileNo"/>
+					<input type="hidden" value="0" name="fileNo"/>
 				</c:otherwise>
 			</c:choose>
 			
-			<input type="text" value="${dto.pNo}" name="pNo"/>
-			<input type="text" value="${dto.spNo}" name="spNo"/>
+			<input type="hidden" value="${dto.pNo}" name="pNo"/>
+			<input type="hidden" value="${dto.spNo}" name="spNo"/>
 		</div><!-- end Btn -->
 		</form>
 	</div><!-- end container -->

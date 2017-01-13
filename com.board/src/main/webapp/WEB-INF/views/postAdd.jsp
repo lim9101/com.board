@@ -7,6 +7,9 @@
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
+		$(".canselBtn").on("click",function(){
+			location.href="postList";
+		});
 		$('.postAddBtn').bind('click', function() {
 			
 			if($('[name=title]').val()==''){
@@ -15,7 +18,26 @@
 			}
 			$('[name=content]').val(
 					$('[name=content]').val().replace(/\n/gi, '<br/>'));
-			$('#frmWR').attr('action', 'postAdd').submit();
+			/* $('#frmWR').attr('action', 'postAdd').submit(); */
+			var formData = new FormData($("#frmWR")[0]);
+			$.ajax({
+				method: "post",
+				url: "postAdd",
+				data: formData,
+				processData: false,
+				contentType: false,
+				success: function(result){
+					if(result){
+						alert("업로드 성공");
+						location.href="postList";
+					}else{
+						alert("이미지파일이 아닙니다.");
+					}
+				},
+				error: function(){
+					console.log("업로드 실패");
+				}
+			}); 
 		});
 		
 		//첨부파일 용량체크, 이미지 체크 
@@ -86,7 +108,7 @@
 <body>
 	<div class="container">
 		<form class="form-horizontal" role="form" id="frmWR" name="frmWR"
-		method="post" action="postWrite" enctype= multipart/form-data>
+		method="post" enctype= multipart/form-data>
 		<div class="noticeAdd">
 		<h1>글쓰기</h1>
 		<table>
@@ -115,17 +137,14 @@
 		
 		</div><!-- end noticeAdd -->
 		<div class="Btn">
-			<c:if test="${!empty dto}">
-				<button class="postAddBtn">답변쓰기</button>
-			</c:if>
-			<button type="submit" class="postAddBtn">글쓰기</button>
+			<button type="button" class="postAddBtn">글쓰기</button>
 			<a href="postList">목록</a>
-			<button type="submit" class="btn btn-default">취소</button>
+			<button type="button" class="btn btn-default canselBtn">취소</button>
 			<c:if test="${!empty dto.pNo }">
-				<input type="text" name="pNo" value="${dto.pNo }"/>
-				<input type="text" name="spNo" value="${dto.spNo }"/>
-				<input type="text" name="depth" value="${dto.depth }"/>
-				<input type="text" name="plevel" value="${dto.plevel }"/>
+				<input type="hidden" name="pNo" value="${dto.pNo }"/>
+				<input type="hidden" name="spNo" value="${dto.spNo }"/>
+				<input type="hidden" name="depth" value="${dto.depth }"/>
+				<input type="hidden" name="plevel" value="${dto.plevel }"/>
 			</c:if>
 		</div><!-- end Btn -->
 		</form>

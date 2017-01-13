@@ -27,4 +27,5 @@ public interface PostMapper {
 	int maxPlevel(int spNo);
 	List<Post> delSPno(int spNo);
 	int searchTspno(int pNo);
+	List<Post> userDelPost(String user_id);
 }

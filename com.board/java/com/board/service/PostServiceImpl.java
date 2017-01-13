@@ -247,4 +247,9 @@ public class PostServiceImpl implements PostService{
 		postDao.addCount(pNo);
 	}
 
+	@Override
+	public List<Post> userDelPost(String user_id) {
+		return postDao.userDelPost(user_id);
+	}
+
 }

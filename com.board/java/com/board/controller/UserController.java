@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.board.DTO.Post;
 import com.board.DTO.User;
 import com.board.service.UserService;
 
@@ -17,6 +16,9 @@ public class UserController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private PostController postController;
 	
 	
 	//회원가입 기능
@@ -60,11 +62,15 @@ public class UserController {
 	@ResponseBody
 	public boolean delUser(User user,HttpSession session){
 		boolean result=false;
-		User sessionUser = (User)session.getAttribute("user");
-		user.setUserId(sessionUser.getUserId());
 		if(userService.check(user,session)){
+			User sessionUser = (User)session.getAttribute("user");
+			user.setUserId(sessionUser.getUserId());
+			result=postController.userDelPost(user.getUserId());
+			System.out.println("글삭제여부:"+result);
 			result=userService.delUser(user);
-		}else{
+			System.out.println("회원탈퇴:"+result);
+		}
+		else{
 			System.out.println("성공여부:"+result);
 		}
 		return result;

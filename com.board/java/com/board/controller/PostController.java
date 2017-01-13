@@ -3,13 +3,15 @@ package com.board.controller;
 
 
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.board.DTO.Page;
@@ -44,7 +46,7 @@ public class PostController {
 	}//end postWrite
 	
 	//글 작성 후 처리 메서드
-	@RequestMapping(value = "/postAdd", method = RequestMethod.POST)
+	/*@RequestMapping(value = "/postAdd", method = RequestMethod.POST)
 	public ModelAndView postProWrite(Post post){
 		ModelAndView mav = new ModelAndView(); 
 		boolean result=false;
@@ -56,8 +58,18 @@ public class PostController {
 			mav.setViewName("postAdd");
 		}
 		return mav;
-		/*post.setDate_in(new Date(System.currentTimeMillis()));;*/
+		post.setDate_in(new Date(System.currentTimeMillis()));;
 	}//end
+*/	
+	@RequestMapping(value = "postAdd", method = RequestMethod.POST)
+	@ResponseBody
+	public boolean postProWrite(Post post){
+		boolean result=false;
+		System.out.println(post);
+		result = postService.postWrite(post);
+		System.out.println(result);
+		return result;
+	}
 	
 	@RequestMapping(value = "/postUpdate", method = RequestMethod.GET)
 	public ModelAndView postUpdate(Post dto){
@@ -141,6 +153,8 @@ public class PostController {
 	
 	@RequestMapping("postDelete")
 	public String postDelete(int pNo, int spNo, int depth, int fileNo, int plevel){
+		/**/
+		
 		if(comentService.countComent(pNo) !=0){
 			comentService.allDelComent(pNo);
 		}
@@ -150,4 +164,22 @@ public class PostController {
 		postService.delPost(pNo,spNo,depth,plevel);
 		return "redirect:/postList";
 	}//end postDelete 
+	
+	@RequestMapping("userDelPost")
+	public boolean userDelPost(String userId){
+		boolean result = false;
+		List<Post> posts = postService.userDelPost(userId);
+		System.out.println("글싸이즈:"+posts.size());
+		for(Post post : posts){
+			System.out.println(post);
+			if(post.getAttFile()== null){
+			postDelete(post.getpNo(), post.getSpNo(), post.getDepth(), 0,post.getPlevel());
+			result =true;
+			}else{
+				postDelete(post.getpNo(), post.getSpNo(), post.getDepth(), post.getAttFile().getpNo(),post.getPlevel());
+			}
+		}
+		 return result;
+	}
+	
 }

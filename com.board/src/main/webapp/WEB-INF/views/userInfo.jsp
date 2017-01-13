@@ -15,6 +15,9 @@ var checkfunction = function(result){
 	}
 }
 $(document).ready(function(){
+	$(".canselBtn").on("click",function(){
+		location.href="postList";
+	});
 	$(".updateBtn").on("click",function(){
 		  var winWidth = 370;
 		 var winHeight = 360;
@@ -27,6 +30,9 @@ $(document).ready(function(){
 			/* var popUrl = "userCheck";	//팝업창에 출력될 페이지 URL
 			var popOption = "width=370, height=360, resizable=no, scrollbars=no, status=no top="+winPosTop+",left="+winPosLeft;";    //팝업창 옵션(optoin)
 			var infoWindow = window.open(popUrl,"check",popOption); */
+	})
+	$(".userDelBtn").on("click",function(){
+		location.href="userDel";
 	})
 });
 </script>
@@ -83,8 +89,9 @@ $(document).ready(function(){
 			<input type="text" class="postcodify_address form-control addD" value="${user.addD}" placeholder="주소" readonly="readonly"/>
 			</div>
 		</div>
-		 <P><button type="button" class="btn btn-primary btn-mg updateBtn" value="update">update</button>
-		   <button type="button" class="btn btn-primary btn-mg canselBtn" value="cansel">cansel</button>
+		 <P><button type="button" class="btn btn-primary btn-mg updateBtn" value="update">정보수정</button>
+			<button type="button" class="btn btn-primary btn-mg userDelBtn" value="userDel">회원탈퇴</button>
+		   <button type="button" class="btn btn-primary btn-mg canselBtn" value="cansel">취소</button>
 		   <input type="hidden" name="checkPoint">
 		</P>
 	</form>
