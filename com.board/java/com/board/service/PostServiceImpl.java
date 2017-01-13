@@ -43,8 +43,6 @@ public class PostServiceImpl implements PostService{
 			post.setDepth(post.getDepth()+1);
 			post.setPlevel(post.getPlevel()+1);
 		}
-		postDao.addPost(post);
-		
 		MultipartFile sendFile = post.getUpload();
 		//전송하는 파일이 있으면
 		if(!sendFile.isEmpty()){
@@ -72,6 +70,7 @@ public class PostServiceImpl implements PostService{
 				file.setpNo(post1.getpNo());
 				file.setFile_name(random+"_"+fileName);
 				fileDao.addFile(file);
+				postDao.addPost(post);
 			}else{
 				System.out.println("이미지파일이아닙니다.");
 				return false;
