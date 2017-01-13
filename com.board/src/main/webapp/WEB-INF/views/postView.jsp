@@ -170,35 +170,67 @@ $(document).ready(function(){
 .comentHiden{
 	cursor: pointer;
 }
+.container{
+	margin: 0 auto;
+ 	width:580px;
+}
+.view table{
+	border-collapse: collapse;
+    border-spacing: 0;
+	width:580px;
+	border-top: 2px solid #BFAD9F;
+	border-bottom: 2px solid #BFAD9F;
+}
+.view table th{
+	font-weight: normal;
+    height: 43px;
+    text-align:center;
+    background: #f7f6f4;
+    border-bottom: 1px solid #E6E2DE;
+    font-size: 14px;
+    color: #664738;
+    text-align: center;
+}
+.view table td {
+	border-bottom: 1px solid #E6E2DE;
+	color:#464646;
+	font-size: 14px;
+	padding-left: 10px;
+	height: 32px;
+}
 </style>
 <title>글-상세보기</title>
 </head>
 <body>
 <div class="container" style="position:relative">
-
-	<table border=1>
-		<tr>
-			<th>작성자</th><td>${dto.user.userName}</td>
-			<th>조회수</th><td>${dto.count}</td>
-			<th>등록일</th><td>${dto.date_in}</td>
-		</tr>
-		<tr>
-			<td>${dto.content}</td>
-		</tr>
-		<tr>
-			<th>첨부파일</th>
-			<td>
-				<c:if test="${!empty dto.attFile.file_name}">
-					<a href="fileDownLoad?pNo=${dto.pNo}">${fn:substringAfter(dto.attFile.file_name,"_")}</a>
-				</c:if>
-				<c:if test="${empty dto.attFile.file_name}">
-					파일없음
-				</c:if>
-			</td>
-		</tr>
-		<tr>
-			<td>
-			<c:if test="${dto.plevel <3}">
+	<div class="view">
+		<table>
+			<tr>
+				<th>작성자</th><td>${dto.user.userName}</td>
+				<th>조회수</th><td>${dto.count}</td>
+				<th>등록일</th><td>${dto.date_in}</td>
+			</tr>
+			<tr>
+				<th>제목</th>
+				<td colspan="5">
+					${dto.title }
+				</td>
+			</tr>
+			<tr>
+				<td colspan="6">${dto.content}</td>
+			</tr>
+			<tr>
+				<th>첨부파일</th>
+				<td colspan="5">
+					<c:if test="${!empty dto.attFile.file_name}">
+						<a href="fileDownLoad?pNo=${dto.pNo}">${fn:substringAfter(dto.attFile.file_name,"_")}</a>
+					</c:if>
+				</td>
+			</tr>
+		</table>
+	</div><!-- end view -->
+	<div class="btn">
+		<c:if test="${dto.plevel <3}">
 				<a href="postAdd?pNo=${dto.pNo}">답변쓰기</a>
 			</c:if>
 				<c:choose>
@@ -206,10 +238,7 @@ $(document).ready(function(){
 					<a href="postUpdate?pNo=${dto.pNo}">수정</a>
 					</c:when>
 					<c:otherwise>	</c:otherwise>
-				</c:choose>
-				
-				
-				
+				</c:choose>				
 				<c:choose>
 					<c:when test="${!empty dto.attFile.file_no}">
 						<c:set var="fileNo" value="${dto.attFile.file_no}"/>
@@ -218,18 +247,15 @@ $(document).ready(function(){
 						<c:set var="fileNo" value="0"/>
 					</c:otherwise>
 					</c:choose>
-					파일:${fileNo}
 					<c:choose>
 					<c:when test="${dto.user_id eq user.userId }">
-					<a href="postDelete?pNo=${dto.pNo}&spNo=${dto.spNo}&depth=${dto.depth}&fileNo=${fileNo}">삭제</a>
+					<a href="postDelete?pNo=${dto.pNo}&spNo=${dto.spNo}&depth=${dto.depth}&fileNo=${fileNo}&plevel=${dto.plevel}">삭제</a>
 					</c:when>
 					<c:otherwise>	</c:otherwise>
 				</c:choose>
 				
 				<a href="postList">목록</a>
-			</td>
-		</tr>
-	</table>
+	</div>
 	<div><a class="comentHiden" onclick="comentsHiden()"></a></div>
 	<div class="comentLine" style="display:none; position:relative">
 	

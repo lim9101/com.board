@@ -10,6 +10,10 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
+	$('[name=content]').val($('[name=content]').val().trim());
+	$('[name=content]').val(
+			$('[name=content]').val().replace(/<br\s?\/?>/g, "\n"));
+
 	$('.postUpdateBtn').bind('click',function(){
 		$('#frmU').attr('action', 'postUpdate').submit();
 	});
