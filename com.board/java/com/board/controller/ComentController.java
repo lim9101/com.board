@@ -23,10 +23,9 @@ public class ComentController {
 	
 	@RequestMapping("getComents")
 	@ResponseBody
-	public List<Coment> getComents(int pNo){
-		System.out.println(pNo);
-		System.out.println(comentService.getComents(pNo));
-		return comentService.getComents(pNo);
+	public List<Coment> getComents(Coment coment){
+		System.out.println(coment);
+		return comentService.getComents(coment);
 	}
 	
 	@RequestMapping("addComent")
@@ -40,8 +39,10 @@ public class ComentController {
 		return comentService.addComent(coment);
 	}
 	
-	@RequestMapping("updateComent")
+	@RequestMapping(value="updateComent",method=RequestMethod.POST)
+	@ResponseBody
 	public boolean updateComent(Coment coment){
+		System.out.println(coment);
 		return comentService.updateComent(coment);
 	}
 	

@@ -81,7 +81,7 @@
 </head>
 <body>
 	<div class="container">
-	<h1 class="logo"><img src="images/meun_logo.png"></h1>
+	<h1 class="logo"><a href="http://www.nmplus.co.kr/"><img src="images/meun_logo.png"></a></h1>
 	<div class="info">${user.userName}님이 로그인하셨습니다.<a href="userInfo">내정보</a><a class="userOut" href="index">로그아웃</a></div>
 		<div class="noticeTitel">공지 글 목록</div>
 		<div class="postAdd"><a href="postAdd">글쓰기</a></div>

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
@@ -40,4 +41,37 @@
 	<select id="countComent" parameterType="int" resultType="int">
 		select count(*) from coments where pno=#{pNo}
 	</select>
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.board.dao.mapper.ComentMapper">
+	<select id="getComents" parameterType="coment" resultType="Coment">
+	select pno pNo,cno cNo,scno scNo,user_id userId,content,date_in dateIn,date_up dateUp
+	from coments
+	where pno=#{pNo}
+	order by scno asc 
+	</select>
+	<insert id="addComent" parameterType="Coment">
+	insert into coments (pno,scno,cno,user_id,content)
+	 values(#{pNo},
+	 <choose>
+		<when test="scNo == 0">
+			coment_seq.nextval
+		</when>
+		<otherwise>
+			#{scNo}
+		</otherwise>
+	 </choose>
+	 ,coment_seq.nextval,#{userId,jdbcType=VARCHAR},#{content,jdbcType=VARCHAR})
+	</insert>
+	<update id="updateComent" parameterType="Coment">
+	update coments set content=#{content},date_up=sysdate
+	where cno=#{cNo}
+	</update>
+	<delete id="delComent" parameterType="Coment">
+	delete from coments
+	where cno=#{cNo}
+	</delete>
+>>>>>>> branch 'master' of https://github.com/lim9101/com.board.git
 </mapper>
