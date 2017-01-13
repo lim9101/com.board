@@ -1,5 +1,6 @@
 package com.board.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import com.board.DTO.Page;
 import com.board.DTO.Post;
-
 import com.board.dao.mapper.PostMapper;
 
 @Repository
@@ -78,4 +78,26 @@ public class PostDaoImpl implements PostDao{
 	public void addCount(int pNo) {
 		postMapper.addCount(pNo);
 	}
+
+	@Override
+	public int pLevel(HashMap<String, Integer> map) {
+		return postMapper.pLevel(map);
+	}
+
+	@Override
+	public int maxPlevel(int spNo) {
+		return postMapper.maxPlevel(spNo);
+	}
+
+	@Override
+	public List<Post> delSPno(int spNo) {
+		return postMapper.delSPno(spNo);
+	}
+
+	@Override
+	public int searchTspno(int pNo) {
+		return postMapper.searchTspno(pNo);
+	}
+
+	
 }

@@ -4,12 +4,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -49,10 +46,6 @@ public class PostServiceImpl implements PostService{
 		postDao.addPost(post);
 		
 		MultipartFile sendFile = post.getUpload();
-		
-		System.out.println("####################");
-		System.out.println(sendFile);
-		System.out.println("####################");
 		//전송하는 파일이 있으면
 		if(!sendFile.isEmpty()){
 			Post post1 = postDao.viewPost(postDao.maxPost());

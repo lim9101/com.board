@@ -1,6 +1,7 @@
 package com.board.dao.mapper;
 
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.board.DTO.Page;
@@ -22,4 +23,8 @@ public interface PostMapper {
 	int maxDepth(int spNo);
 	int searchCount(Page pv);
 	void addCount(int pNo);
+	int pLevel(HashMap<String, Integer> map);
+	int maxPlevel(int spNo);
+	List<Post> delSPno(int spNo);
+	int searchTspno(int pNo);
 }

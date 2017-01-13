@@ -17,6 +17,7 @@
 		</choose>
  		
  		,pno_seq.nextval,#{user_id,jdbcType=VARCHAR},#{title,jdbcType=VARCHAR}
+
  		,#{content,jdbcType=VARCHAR},sysdate,#{date_up,jdbcType=DATE},#{count},#{plevel,jdbcType=DATE},#{depth,jdbcType=DATE},#{kind,jdbcType=DATE},#{tspNo})
  		
  	</insert>
@@ -75,6 +76,7 @@
  		<result property="plevel" column="plevel"/>
  		<result property="count" column="count"/>
  		<result property="kind" column="kind"/>
+ 		<result property="tspNo" column="tspno"/>
  		<collection property="attFile" resultMap="AttFile"/>
  		<collection property="user" resultMap="User"/>
  	</resultMap>
@@ -96,7 +98,7 @@
   		from (select rownum as rm, a.*
 		from (select p.spno, p.pno, p.depth, p.kind, p.plevel, p.user_id, u.user_name, p.title, p.date_in, p.count, a.file_no, a.file_name
 		from posts p, attfiles a, users u
-		where p.pno = a.pno(+) and p.user_id = u.user_id 
+		where p.pno = a.pno(+) and p.user_id = u.user_id(+)
 		]]>
 		<trim prefix="and">
 			<if test="searchWord!=null">
@@ -124,7 +126,7 @@
  	<!-- 공지글 보기 -->
  	<select id="viewPost" parameterType="int" resultMap="Post" resultType="com.board.DTO.Post" >
  		<![CDATA[
- 		select p.spno, p.pno, p.user_id, p.kind, p.depth, p.plevel, p.content, u.user_name, p.title, p.date_in, p.count, a.file_no, a.file_name
+ 		select p.spno, p.pno, p.user_id, p.kind, p.depth, p.plevel, p.tspno, p.content, u.user_name, p.title, p.date_in, p.count, a.file_no, a.file_name
 		from posts p, attfiles a, users u
 		where p.user_id = u.user_id and p.pno = a.pno(+) and 
 		p.pno=#{pNo}
@@ -147,11 +149,31 @@
  		<![CDATA[ select max(depth) from posts where spno=#{spNo} ]]>
  	</select>
  	
- 	<!-- 답변이 없을 있을경우 -->
+ 	<!-- 제목에 답변이 있을경우 삭제 아닌 업데이트 -->
  	<update id="delUpdatePost" parameterType="int">
  		<![CDATA[
  		update posts set user_id=null, title=null, content=null, date_in=null, date_up=null, count=0 where pno=#{pNo}
  		]]>
  	</update>
+ 	
+ 	<!-- 답변이 있는 레벨2인 답변 삭제 아닌 업데이트하기위해 -->
+ 	<select id="maxPlevel" parameterType="int" resultType="int">
+ 		select max(plevel)from posts where spno=#{spNo}
+ 	</select>
+ 	
+ 	<!-- 삭제된 답변의 답변을 삭제시 -->
+ 	<select id="delSPno" parameterType="int" resultType="Post">
+ 		  select * from posts where spno=#{spNo} order by depth desc, kind desc, spno desc
+ 	</select>
+ 	
+ 	<!-- 답변글중 하위답변이 있는지 -->
+ 	<select id="searchTspno" parameterType="int" resultType="int">
+ 		 select count(tspno) from posts where tspno=#{pNo}
+ 	</select>
+ 	
+ 	
+ 	<select id="pLevel" parameterType="map" resultType="int">
+ 		<![CDATA[ select plevel from posts where spno=#{spNo} and depth=(select min(depth) from posts where spno=#{spNo} and depth<>0 and depth <> #{depth}) ]]>
+ 	</select>
  	 	
  </mapper>

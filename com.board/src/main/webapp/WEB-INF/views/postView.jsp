@@ -221,7 +221,7 @@ $(document).ready(function(){
 					파일:${fileNo}
 					<c:choose>
 					<c:when test="${dto.user_id eq user.userId }">
-					<a href="postDelete?pNo=${dto.pNo}&spNo=${dto.spNo}&depth=${dto.depth}&fileNo=${fileNo}">삭제</a>
+					<a href="postDelete?pNo=${dto.pNo}&spNo=${dto.spNo}&depth=${dto.depth}&fileNo=${fileNo}&plevel=${dto.plevel}">삭제</a>
 					</c:when>
 					<c:otherwise>	</c:otherwise>
 				</c:choose>

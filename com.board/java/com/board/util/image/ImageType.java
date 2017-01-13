@@ -10,10 +10,11 @@ public class ImageType {
 		System.out.println("이미지타입판별클레스");
 		Tika tika =new Tika();
 		String mimeType;
-
+		
 		try{
 				mimeType = tika.detect(file.getInputStream());
 				if(!isPermittedMimeType(mimeType)){
+					System.out.println("isValidMime:"+mimeType);
 					return false;
 				}
 		}catch(Exception e){
@@ -25,11 +26,7 @@ public class ImageType {
 	}
 	
 	private static boolean isPermittedMimeType(String mimeType) {
-		System.out.println("#########################");
-		System.out.println("#########################");
-		System.out.println(mimeType);
-		System.out.println("#########################");
-		System.out.println("#########################");
+		System.out.println("isPermitted:"+mimeType);
 		String[] validMimeTypes = {"image/png","image/jpeg","image/bmp" };
 		for (String validMimeType : validMimeTypes) {
 			if (StringUtils.startsWith(mimeType, validMimeType)) {

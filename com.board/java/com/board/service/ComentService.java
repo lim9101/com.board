@@ -9,4 +9,6 @@ public interface ComentService {
 	boolean addComent(Coment coment);
 	boolean updateComent(Coment coment);
 	boolean delComent(Coment coment);
+	void allDelComent(int pNo);
+	int countComent(int pNo);
 }

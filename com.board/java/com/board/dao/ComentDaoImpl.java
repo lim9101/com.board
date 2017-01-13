@@ -25,4 +25,15 @@ public class ComentDaoImpl implements ComentDao{
 	public int delComent(Coment coment){
 		return comentMapper.delComent(coment);
 	}
+	
+	@Override
+	public void allDelComent(int pNo) {
+		comentMapper.allDelComent(pNo);
+	}
+	
+	@Override
+	public int countComent(int pNo) {
+		return comentMapper.countComent(pNo);
+	}
+	
 }

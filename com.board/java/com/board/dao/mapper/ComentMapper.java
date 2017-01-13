@@ -9,4 +9,6 @@ public interface ComentMapper {
 	int addComent(Coment coment);
 	int updateComent(Coment coment);
 	int delComent(Coment coment);
+	void allDelComent(int pNo);
+	int countComent(int pNo);
 }

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -14,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.board.DTO.Page;
 import com.board.DTO.Post;
 import com.board.service.AttFileService;
+import com.board.service.ComentService;
 import com.board.service.PostService;
 
 @Controller
@@ -24,6 +26,9 @@ public class PostController {
 	
 	@Autowired
 	private AttFileService fileService;
+	
+	@Autowired
+	private ComentService comentService;
 	
 	private int currentPage;
 	private Page pdto;
@@ -41,12 +46,17 @@ public class PostController {
 	//글 작성 후 처리 메서드
 	@RequestMapping(value = "/postAdd", method = RequestMethod.POST)
 	public ModelAndView postProWrite(Post post){
-		ModelAndView mav = new ModelAndView();
-		postService.postWrite(post);
-		mav.setViewName("redirect:/postList");
+		ModelAndView mav = new ModelAndView(); 
+		boolean result=false;
+		result = postService.postWrite(post);
+		if(result){
+			mav.addObject("result",result);
+		}else{
+			mav.addObject("result",result);
+		}
 		return mav;
 		/*post.setDate_in(new Date(System.currentTimeMillis()));;*/
-	}//end postProWrite
+	}//end
 	
 	@RequestMapping(value = "/postUpdate", method = RequestMethod.GET)
 	public ModelAndView postUpdate(Post dto){
@@ -129,11 +139,14 @@ public class PostController {
 	}
 	
 	@RequestMapping("postDelete")
-	public String postDelete(int pNo, int spNo, int depth, int fileNo){
+	public String postDelete(int pNo, int spNo, int depth, int fileNo, int plevel){
+		if(comentService.countComent(pNo) !=0){
+			comentService.allDelComent(pNo);
+		}
 		if(fileNo!=0){
 			fileService.fileDelete(fileNo, pNo);
 		}
-		postService.delPost(pNo,spNo,depth);
+		postService.delPost(pNo,spNo,depth,plevel);
 		return "redirect:/postList";
 	}//end postDelete 
 }
