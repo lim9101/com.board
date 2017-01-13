@@ -11,7 +11,8 @@ import com.board.service.UserService;
 @Controller
 public class ViewController {
 
-	@Autowired private UserService userService;
+	@Autowired 
+	private UserService userService;
 	
 		@RequestMapping("/")
 		public String index(){

@@ -35,6 +35,8 @@ public class PostServiceImpl implements PostService{
 	@Override
 	public boolean postWrite(Post post){
 		
+		boolean result = false;
+		
 		//답변 글이면
 		if(post.getpNo()>0){
 			postDao.depthCount(post);
@@ -46,19 +48,22 @@ public class PostServiceImpl implements PostService{
 		MultipartFile sendFile = post.getUpload();
 		//전송하는 파일이 있으면
 		if(!sendFile.isEmpty()){
-			Post post1 = postDao.viewPost(postDao.maxPost());
-			//getOriginalFilename() 파일명 추출
-			String fileName = sendFile.getOriginalFilename();
-			//랜덤 수 발생
-			UUID random = UUID.randomUUID();
-			String saveDirectory ="C:\\" + "temp" + File.separator;
-			File fe = new File(saveDirectory);
-			
-			if (!fe.exists()) {
-				fe.mkdirs();
-			} // end if
-			File ff = new File(saveDirectory, random + "_" + fileName);
-			if(imgType.isValidMimeType(sendFile)){
+			if (imgType.isValidMimeType(sendFile)) {
+				
+				result = postDao.addPost(post)>0;
+				Post post1 = postDao.viewPost(postDao.maxPost());
+				//getOriginalFilename() 파일명 추출
+				String fileName = sendFile.getOriginalFilename();
+				//랜덤 수 발생
+				UUID random = UUID.randomUUID();
+				String saveDirectory ="C:\\" + "temp" + File.separator;
+				File fe = new File(saveDirectory);
+				
+				if (!fe.exists()) {
+					fe.mkdirs();
+				} // end if
+				File ff = new File(saveDirectory, random + "_" + fileName);
+				
 				try {
 					FileCopyUtils.copy(sendFile.getInputStream(), new FileOutputStream(ff));
 				} catch (FileNotFoundException e) {
@@ -70,14 +75,15 @@ public class PostServiceImpl implements PostService{
 				file.setpNo(post1.getpNo());
 				file.setFile_name(random+"_"+fileName);
 				fileDao.addFile(file);
-				postDao.addPost(post);
-			}else{
+
+			} else {
 				System.out.println("이미지파일이아닙니다.");
-				return false;
+				return result;
 			}
-			
+		}else{
+			result = postDao.addPost(post)>0;
 		}
-		return true;
+		return result;
 	}//end postWrite
 	
 	//파일 수정

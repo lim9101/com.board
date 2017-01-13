@@ -51,8 +51,9 @@ public class PostController {
 		result = postService.postWrite(post);
 		if(result){
 			mav.addObject("result",result);
+			mav.setViewName("redirect:/postList");
 		}else{
-			mav.addObject("result",result);
+			mav.setViewName("postAdd");
 		}
 		return mav;
 		/*post.setDate_in(new Date(System.currentTimeMillis()));;*/
