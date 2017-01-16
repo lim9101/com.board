@@ -12,7 +12,7 @@ import com.board.DTO.Post;
 public interface PostService {
 	List<Post> postList(Page pv);
 	boolean postWrite(Post post);
-	void postUpdate(Post post, int fileNo);
+	boolean postUpdate(Post post, int fileNo);
 	Post postView(int pNo);
 	int totalCount();
 	void delPost(int pNo, int spNo, int depth, int plevel);

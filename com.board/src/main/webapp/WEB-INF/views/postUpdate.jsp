@@ -5,10 +5,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <script type="text/javascript">
+var fileCheck = "${fn:length(adto)}";
+var delFileInput =	function (fileDel){
+	$(fileDel).parent().remove();
+	fileCheck--;
+	
+}
+var delFile=function(fileNo){
+	$.ajax({
+		method: "get",
+		url: "delFile",
+		data: {file_no:$(fileNo).val()},
+		success: function(result){
+			$(fileNo).parent().parent().remove();
+			fileCheck--;
+		}
+	}); 
+}
 $(document).ready(function(){
 	$('[name=content]').val($('[name=content]').val().trim());
 	$('[name=content]').val(
@@ -18,16 +33,16 @@ $(document).ready(function(){
 		$('#frmU').attr('action', 'postUpdate').submit();
 	});
 	
-	$('.del').on('click',function(){
-		alert("삭제");
-		$.ajax({
-			method: "get",
-			url: "delFile",
-			data: $('.del').val(),
-			success: function(result){
-				
-			}
-		}); 
+	$('.fileAdd').bind('click',function(){
+		if(fileCheck==0 || fileCheck<3){
+			str="<div><input type='file' id='filepath' name='upload' class='form-control upload' /><button type='button'"
+				+" onclick='delFileInput(this)' class='fileDel'>X</button></div>";
+				$('.tdAddFile').append(str);
+				fileCheck++
+		}else{
+			alert("파일추가는 3개까지만 가능합니다.");
+			return false;
+		}
 	});
 })
 </script>
@@ -91,9 +106,13 @@ $(document).ready(function(){
 				<th><label for="upload">첨부파일</label></th>
 				<td class="tdStyle">
 					<c:forEach items="${adto}" var="dto">
-						<div>${fn:substringAfter(dto.file_name,"_")} <a href="#"><button type="button" class="del" value="${dto.file_no}">삭제</button></a><button>수정</button></div>
+						<div>${fn:substringAfter(dto.file_name,"_")} <a href="#"><button type="button" onclick="delFile(this)" class="del" value="${dto.file_no}">삭제</button></a><button>수정</button></div>
 					</c:forEach>
 				</td>
+			</tr>
+			<tr>
+				<th><label for="upload">첨부파일 <button type="button" class="fileAdd">+</button></label></th>
+				<td class="tdStyle tdAddFile"></td>
 			</tr>
 		</table>
 		</div><!-- end noticeUpdate -->

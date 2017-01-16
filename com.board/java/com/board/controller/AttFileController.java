@@ -29,8 +29,8 @@ public class AttFileController {
 	
 	@RequestMapping("delFile")
 	@ResponseBody
-	public void delFile(int fileNo){
-		fileDao.delFile(fileNo);
+	public void delFile(int file_no){
+		fileDao.delFile(file_no);
 	}
 	
 	@RequestMapping("fileDownLoad")

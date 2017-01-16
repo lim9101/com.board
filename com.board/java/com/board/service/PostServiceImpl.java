@@ -99,16 +99,61 @@ public class PostServiceImpl implements PostService{
 	}//end postWrite
 	
 	//파일 수정
-	public void postUpdate(Post post, int fileNo){
+	public boolean postUpdate(Post post, int fileNo){
 		System.out.println("kkjj"+fileNo);
+		boolean result = false;
 		postDao.updatePost(post);
 		String filename = fileDao.fileName(post.getpNo());
 		String saveDirectory ="C:\\" + "temp" + File.separator;
 		
 		List<MultipartFile> sendFiles = post.getUpload();
-		System.out.println("sendFiles size:"+sendFiles.size());
 		
-		for (MultipartFile sendFile : sendFiles) {
+		if(!sendFiles.get(0).isEmpty()){
+			System.out.println("sendFile size"+sendFiles.get(0).isEmpty());
+			for (MultipartFile sendFile : sendFiles) {
+				//이미지 파일 검사
+				if (imgType.isValidMimeType(sendFile)) {
+					
+				} else {
+					System.out.println("이미지파일이아닙니다.");
+					return result;
+				}
+			}
+		
+			post.setCheck_file(1);
+			result = postDao.addPost(post)>0;
+			for (MultipartFile sendFile : sendFiles) {
+			
+					
+						Post post1 = postDao.viewPost(postDao.maxPost());
+						//getOriginalFilename() 파일명 추출
+						String fileName = sendFile.getOriginalFilename();
+						//랜덤 수 발생
+						UUID random = UUID.randomUUID();
+						File fe = new File(saveDirectory);
+						
+						if (!fe.exists()) {
+							fe.mkdirs();
+						} // end if
+						File ff = new File(saveDirectory, random + "_" + fileName);
+						
+						try {
+							FileCopyUtils.copy(sendFile.getInputStream(), new FileOutputStream(ff));
+						} catch (FileNotFoundException e) {
+							e.printStackTrace();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+						AttFile file = new AttFile();
+						file.setpNo(post1.getpNo());
+						file.setFile_name(random+"_"+fileName);
+						fileDao.addFile(file);
+			}
+			
+			result =true;
+		}else{	
+		}
+	/*	for (MultipartFile sendFile : sendFiles) {
 			
 			//수정할 파일이 있으면
 			if(!sendFile.isEmpty()){
@@ -147,9 +192,9 @@ public class PostServiceImpl implements PostService{
 				}	
 			}// end if
 			
-		}
+		}*/
 		
-		
+		return result;
 	}
 
 	@Override
