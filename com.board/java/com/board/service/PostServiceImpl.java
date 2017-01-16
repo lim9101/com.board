@@ -99,103 +99,58 @@ public class PostServiceImpl implements PostService{
 	}//end postWrite
 	
 	//파일 수정
-	public boolean postUpdate(Post post, int fileNo){
-		System.out.println("kkjj"+fileNo);
-		boolean result = false;
+	public boolean postUpdate(Post post, int fileNo) {
+		System.out.println("kkjj" + fileNo);
 		postDao.updatePost(post);
-		String filename = fileDao.fileName(post.getpNo());
-		String saveDirectory ="C:\\" + "temp" + File.separator;
-		
+		boolean result = false;
+
 		List<MultipartFile> sendFiles = post.getUpload();
-		
-		if(!sendFiles.get(0).isEmpty()){
-			System.out.println("sendFile size"+sendFiles.get(0).isEmpty());
+		// 파일이 1개이상 있으면
+		if (!sendFiles.get(0).isEmpty()) {
+			System.out.println("sendFile size" + sendFiles.get(0).isEmpty());
 			for (MultipartFile sendFile : sendFiles) {
-				//이미지 파일 검사
+				// 이미지 파일 검사
 				if (imgType.isValidMimeType(sendFile)) {
-					
+
 				} else {
 					System.out.println("이미지파일이아닙니다.");
 					return result;
 				}
 			}
-		
-			post.setCheck_file(1);
-			result = postDao.addPost(post)>0;
 			for (MultipartFile sendFile : sendFiles) {
-			
-					
-						Post post1 = postDao.viewPost(postDao.maxPost());
-						//getOriginalFilename() 파일명 추출
-						String fileName = sendFile.getOriginalFilename();
-						//랜덤 수 발생
-						UUID random = UUID.randomUUID();
-						File fe = new File(saveDirectory);
-						
-						if (!fe.exists()) {
-							fe.mkdirs();
-						} // end if
-						File ff = new File(saveDirectory, random + "_" + fileName);
-						
-						try {
-							FileCopyUtils.copy(sendFile.getInputStream(), new FileOutputStream(ff));
-						} catch (FileNotFoundException e) {
-							e.printStackTrace();
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-						AttFile file = new AttFile();
-						file.setpNo(post1.getpNo());
-						file.setFile_name(random+"_"+fileName);
-						fileDao.addFile(file);
-			}
-			
-			result =true;
-		}else{	
-		}
-	/*	for (MultipartFile sendFile : sendFiles) {
-			
-			//수정할 파일이 있으면
-			if(!sendFile.isEmpty()){
-				UUID random = UUID.randomUUID();
-				
-				//기존에 파일이 있으면 기존파일 삭제
-				if(filename != null){
-					File fe = new File(saveDirectory, filename);
-					fe.delete();
-				}
-				
+
+				Post post1 = postDao.viewPost(postDao.maxPost());
+				// getOriginalFilename() 파일명 추출
 				String fileName = sendFile.getOriginalFilename();
-				System.out.println("fileName:"+fileName);
-				
-				AttFile file = new AttFile();
-				file.setFile_name(random+"_"+fileName);
-				System.out.println("random+fileName"+random+"_"+fileName);
-				file.setpNo(post.getpNo());
-				file.setFile_no(fileNo);
-				
-				if(fileNo > 0){
-					fileDao.updateFile(file);
-				}else{
-					//기존에 파일에 없던 게시글에 파일 추가
-					fileDao.addFile(file);
-				}
-				
-				
+				// 랜덤 수 발생
+				UUID random = UUID.randomUUID();
+				String saveDirectory = "C:\\" + "temp" + File.separator;
+				File fe = new File(saveDirectory);
+
+				if (!fe.exists()) {
+					fe.mkdirs();
+				} // end if
 				File ff = new File(saveDirectory, random + "_" + fileName);
+
 				try {
-					FileCopyUtils.copy(sendFile.getInputStream(), new FileOutputStream(ff));
+					FileCopyUtils.copy(sendFile.getInputStream(),
+							new FileOutputStream(ff));
 				} catch (FileNotFoundException e) {
 					e.printStackTrace();
 				} catch (IOException e) {
 					e.printStackTrace();
-				}	
-			}// end if
+				}
+				AttFile file = new AttFile();
+				file.setpNo(post.getpNo());
+				file.setFile_name(random + "_" + fileName);
+				fileDao.addFile(file);
+			}
+		} else {
 			
-		}*/
-		
+		}
 		return result;
 	}
+
 
 	@Override
 	public List<Post> postList(Page pv) {
@@ -240,7 +195,7 @@ public class PostServiceImpl implements PostService{
 			for(int i=0; i<delDTO.size() ; i++){
 				System.out.println("size:"+delDTO.size());
 				System.out.println("i:"+i);
-				if(delDTO.get(i).getPlevel()==1){
+				if(delDTO.get(i).getPlevel()==1 && delDTO.get(i).getTitle()!=null ){
 					chk++;  
 				}
 				if(chk==2){
