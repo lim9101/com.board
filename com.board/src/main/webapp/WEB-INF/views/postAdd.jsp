@@ -86,18 +86,6 @@ var delFile =	function (fileDel){
 				alert("파일추가는 3개까지만 가능합니다.");
 				return false;
 			}
-			/* var str;
-			if(chk>2){
-				alert("파일추가는 3개까지만 가능합니다.");
-				return false;
-			}else{
-				chk++;
-				str="<br/><div><input type='file' id='filepath' name='upload' class='form-control upload' /><button type='button'"
-				+" onclick='delFile(this)' class='fileDel'>X</button></div>";
-				$('.tdAddFile').append(str);
-				return false;
-			} */
-			
 		});
 })
 </script>
@@ -168,7 +156,7 @@ var delFile =	function (fileDel){
 		</div><!-- end noticeAdd -->
 		<div class="Btn">
 			<button type="button" class="postAddBtn">글쓰기</button>
-			<a href="postList">목록</a>
+			<a href="postList"><button type="button">목록</button></a>
 			<button type="button" class="btn btn-default canselBtn">취소</button>
 			<c:if test="${!empty dto.pNo }">
 				<input type="hidden" name="pNo" value="${dto.pNo }"/>

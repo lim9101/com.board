@@ -244,6 +244,12 @@ public class Post {
 	public void setTspNo(int tspNo) {
 		this.tspNo = tspNo;
 	}
+	public int getCheck_file() {
+		return check_file;
+	}
+	public void setCheck_file(int check_file) {
+		this.check_file = check_file;
+	}
 	@Override
 	public String toString() {
 		return "Post [spNo=" + spNo + ", pNo=" + pNo + ", user_id=" + user_id
@@ -253,11 +259,4 @@ public class Post {
 				+ ", tspNo=" + tspNo + ", upload=" + upload + ", attFile="
 				+ attFile + ", user=" + user + "]";
 	}
-	public int getCheck_file() {
-		return check_file;
-	}
-	public void setCheck_file(int check_file) {
-		this.check_file = check_file;
-	}
-	
 }
