@@ -20,22 +20,38 @@ public class AttFileServiceImpl implements AttFileService {
 	private AttFileDao fileDao;
 
 	@Override
-	public String fileName(int pNo) {
-		return fileDao.fileName(pNo);
+	public String fileName(int file_no) {
+		return fileDao.fileName(file_no);
 	}
 
 	@Override
 	public void fileDelete(int fileNo, int pNo) {
-		String fileName = fileDao.fileName(pNo);
 		
-		String saveDirectory ="C:\\" + "temp" + File.separator;
-		File fe = new File(saveDirectory, fileName);
-		fe.delete();
+		List<AttFile> attFile = fileDao.getFiles(pNo);
+		for (AttFile dto : attFile) {
+			String fileName = fileDao.fileName(dto.getFile_no());
+			
+			String saveDirectory ="C:\\" + "temp" + File.separator;
+			File fe = new File(saveDirectory, fileName);
+			fe.delete();
+			
+			fileDao.delFile(dto.getFile_no());
+			
+		}
 		
-		fileDao.delFile(fileNo);
 	}
 	
 	public List<AttFile> getAttFiles(String user_id){
 		return fileDao.getAttFiles(user_id);
+	}
+
+	@Override
+	public List<AttFile> getFiles(int pNo) {
+		return fileDao.getFiles(pNo);
+	}
+
+	@Override
+	public void delFile(int fileNo) {
+		fileDao.delFile(fileNo);		
 	}
 }

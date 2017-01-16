@@ -127,10 +127,9 @@
  	<!-- 공지글 보기 -->
  	<select id="viewPost" parameterType="int" resultMap="Post" resultType="com.board.DTO.Post" >
  		<![CDATA[
- 		select p.spno, p.pno, p.user_id, p.kind, p.depth, p.plevel, p.tspno, p.content, u.user_name, p.title, p.date_in, p.count, a.file_no, a.file_name
-		from posts p, attfiles a, users u
-		where p.user_id = u.user_id and p.pno = a.pno(+) and 
-		p.pno=#{pNo}
+ 		select p.spno, p.pno, p.user_id, p.kind, p.depth, p.plevel, p.tspno, p.content, u.user_name, p.title, p.date_in, p.count
+		from posts p, users u
+		where p.user_id = u.user_id and p.pno=#{pNo}
 		order by p.pno desc
 		]]>
  	</select>

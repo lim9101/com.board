@@ -74,7 +74,8 @@ public class PostController {
 	@RequestMapping(value = "/postUpdate", method = RequestMethod.GET)
 	public ModelAndView postUpdate(Post dto){
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("dto", postService.postView(dto.getpNo()));
+		mav.addObject("pdto", postService.postView(dto.getpNo()));
+		mav.addObject("adto", fileService.getFiles(dto.getpNo()));
 		mav.setViewName("postUpdate");
 		return mav;
 	}
@@ -146,7 +147,8 @@ public class PostController {
 			postService.addCount(pNo);
 			session.setAttribute("pNo", pNo);
 		}
-		mav.addObject("dto", postService.postView(pNo));
+		mav.addObject("pdto", postService.postView(pNo));
+		mav.addObject("adto", fileService.getFiles(pNo));
 		mav.setViewName("postView");
 		return mav;
 	}

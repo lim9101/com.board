@@ -10,15 +10,17 @@
  	<!-- 파일이름 검색 -->
  	<select id="fileName" parameterType="int" resultType="String">
  		<![CDATA[
- 		select file_name from attFiles where pno=#{pNo}
+ 		select file_name from attFiles where file_no=#{file_no}
  		]]>
  	</select>
  	
  	<!-- 파일 삭제검색 -->
  	<select id="getAttFiles" parameterType="string" resultType="AttFile">
+ 		<![CDATA[
  		select a.pno,a.file_no,a.file_name,p.user_id
 		from posts p, attfiles a 
-		where p.pno = a.pno(+) and p.user_id=#{value}  and a.file_no is not null	
+		where p.pno = a.pno(+) and p.user_id=#{value}  and a.file_no is not null
+		]]>	
  	</select>
  	
  	<!-- 파일 수정 -->
@@ -28,6 +30,12 @@
  	
  	<!-- 파일삭제 -->
  	<delete id="delFile" parameterType="int">
- 		<![CDATA[ delete from attfiles where file_no=#{fileNo} ]]>
+ 		 delete from attfiles where file_no=#{file_no} 
  	</delete>
+ 	
+ 	<!-- pno에 해당하는 파일들 불러오기 -->
+ 	<select id="getFiles" parameterType="int" resultType="AttFile">
+ 		select * from attfiles where pno=#{pNo}
+ 	</select>
+ 	
  </mapper>

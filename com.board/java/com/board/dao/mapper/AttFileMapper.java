@@ -10,4 +10,5 @@ public interface AttFileMapper {
 	void updateFile(AttFile file);
 	void delFile(int fileNo);
 	List<AttFile> getAttFiles(String user_id);
+	List<AttFile> getFiles(int pNo);
 }

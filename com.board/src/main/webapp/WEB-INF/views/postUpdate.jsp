@@ -17,6 +17,18 @@ $(document).ready(function(){
 	$('.postUpdateBtn').bind('click',function(){
 		$('#frmU').attr('action', 'postUpdate').submit();
 	});
+	
+	$('.del').on('click',function(){
+		alert("삭제");
+		$.ajax({
+			method: "get",
+			url: "delFile",
+			data: $('.del').val(),
+			success: function(result){
+				
+			}
+		}); 
+	});
 })
 </script>
 <style type="text/css">
@@ -66,36 +78,43 @@ $(document).ready(function(){
 		<table>
 			<tr>
 				<th><label for="title">제목</label></th>
-				<td class="tdStyle"><input type="text" name="title" id="title" size="50" value="${dto.title }"/></td>
+				<td class="tdStyle"><input type="text" name="title" id="title" size="50" value="${pdto.title }"/></td>
 			</tr>
 			<tr>
 				<th><label for="user_id">작성자</label></th>
-				<td class="tdStyle"><input type="text" name="userName" id="userName" value="${dto.user.userName}" readonly="readonly"/></td>
+				<td class="tdStyle"><input type="text" name="userName" id="userName" value="${pdto.user.userName}" readonly="readonly"/></td>
 			</tr>
 			<tr>
-				<td colspan="2"><textarea id="content" name="content" cols="97" rows="20">${dto.content }</textarea></td>
+				<td colspan="2"><textarea id="content" name="content" cols="97" rows="20">${pdto.content }</textarea></td>
 			</tr>
 			<tr>
 				<th><label for="upload">첨부파일</label></th>
-				<td class="tdStyle">${fn:substringAfter(dto.attFile.file_name,"_")}
-				<input type="file" id="upload" name="upload"  /></td>
+				<td class="tdStyle">
+					<c:forEach items="${adto}" var="dto">
+						<div>${fn:substringAfter(dto.file_name,"_")} <a href="#"><button type="button" class="del" value="${dto.file_no}">삭제</button></a><button>수정</button></div>
+					</c:forEach>
+				</td>
 			</tr>
 		</table>
 		</div><!-- end noticeUpdate -->
 		<div class="Btn">
 			<button type="submit" class="postUpdateBtn">수정하기</button>
-			<a href="postList"><button>목록</button></a>
-			<c:choose>
-				<c:when test="${!empty dto.attFile.file_no}">
-					<input type="hidden" value="${dto.attFile.file_no}" name="fileNo"/>
-				</c:when>
-				<c:otherwise>
-					<input type="hidden" value="0" name="fileNo"/>
-				</c:otherwise>
-			</c:choose>
+			<a href="postList"><button type="button">목록</button></a>
+				<c:choose>
+					<c:when test="${!empty adto}">
+						<c:forEach items="${adto}" var="dto">
+							<input type="text" value="${dto.file_no }" name="fileNo"/>
+						</c:forEach>
+					</c:when>
+					<c:otherwise>
+						<input type="text" value="0" name="fileNo"/>
+					</c:otherwise>
+				</c:choose>
 			
-			<input type="hidden" value="${dto.pNo}" name="pNo"/>
-			<input type="hidden" value="${dto.spNo}" name="spNo"/>
+			
+			<input type="text" value="${pdto.pNo}" name="pNo"/>
+			<input type="text" value="${pdto.spNo}" name="spNo"/>
+			
 		</div><!-- end Btn -->
 		</form>
 	</div><!-- end container -->

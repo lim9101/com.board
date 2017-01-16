@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.board.DTO.Post;
@@ -26,13 +27,19 @@ public class AttFileController {
 	@Autowired
 	private AttFileService fileService;
 	
+	@RequestMapping("delFile")
+	@ResponseBody
+	public void delFile(int fileNo){
+		fileDao.delFile(fileNo);
+	}
+	
 	@RequestMapping("fileDownLoad")
-	public ModelAndView fileDownLoad(int pNo, HttpServletResponse response)throws Exception {
+	public ModelAndView fileDownLoad(int file_no, int pNo, HttpServletResponse response)throws Exception {
 		ModelAndView mav = new ModelAndView();
 		
 		String saveDirectory ="C:\\" + "temp" + File.separator;
 		
-		String upload=fileDao.fileName(pNo);
+		String upload=fileDao.fileName(file_no);
 		String filename=upload.substring(upload.indexOf("_")+1);
 		
 		//파일명이 한글일때 인코딩 작업을 한다.

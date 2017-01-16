@@ -37,6 +37,11 @@ public class AttFileDaoImpl implements AttFileDao {
 	public List<AttFile> getAttFiles(String user_id) {
 		return fileMapper.getAttFiles(user_id);
 	}
+
+	@Override
+	public List<AttFile> getFiles(int pNo) {
+		return fileMapper.getFiles(pNo);
+	}
 	
 	
 

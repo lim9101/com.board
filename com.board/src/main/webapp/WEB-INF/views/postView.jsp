@@ -137,7 +137,7 @@ var comentList=function(coment){
 	
 		if(coment == null){
 			var coment ={
-					pNo:"${dto.pNo}"
+					pNo:"${pdto.pNo}"
 			}
 		}
 		
@@ -160,7 +160,7 @@ $(document).ready(function(){
 		var scNo = 0;
 		var coment= {
 				scNo:scNo,
-				pNo:"${dto.pNo}",
+				pNo:"${pdto.pNo}",
 				userId:"${user.userId}",
 				content:$(".comentContent").val()
 		}
@@ -210,50 +210,54 @@ $(document).ready(function(){
 	<h1>글 보기</h1>
 		<table>
 			<tr>
-				<th>작성자</th><td>${dto.user.userName}</td>
-				<th>조회수</th><td>${dto.count}</td>
-				<th>등록일</th><td>${dto.date_in}</td>
+				<th>작성자</th><td>${pdto.user.userName}</td>
+				<th>조회수</th><td>${pdto.count}</td>
+				<th>등록일</th><td>${pdto.date_in}</td>
 			</tr>
 			<tr>
 				<th>제목</th>
 				<td colspan="5">
-					${dto.title }
+					${pdto.title }
 				</td>
 			</tr>
 			<tr>
-				<td colspan="6">${dto.content}</td>
+				<td colspan="6">${pdto.content}</td>
 			</tr>
 			<tr>
 				<th>첨부파일</th>
 				<td colspan="5">
-					<c:if test="${!empty dto.attFile.file_name}">
-						<a href="fileDownLoad?pNo=${dto.pNo}">${fn:substringAfter(dto.attFile.file_name,"_")}</a>
-					</c:if>
+				<c:forEach items="${adto}" var="dto">
+					<a href="fileDownLoad?file_no=${dto.file_no}&pNo=${pdto.pNo}">${fn:substringAfter(dto.file_name,"_")}</a>
+				</c:forEach>
+
 				</td>
 			</tr>
 		</table>
 	</div><!-- end view -->
 	<div class="btn">
-		<c:if test="${dto.plevel <3}">
-				<a href="postAdd?pNo=${dto.pNo}"><button>답변쓰기</button></a>
+		<c:if test="${pdto.plevel <3}">
+				<a href="postAdd?pNo=${pdto.pNo}"><button>답변쓰기</button></a>
 			</c:if>
 				<c:choose>
-					<c:when test="${dto.user_id eq user.userId }">
-					<a href="postUpdate?pNo=${dto.pNo}"><button>수정</button></a>
+					<c:when test="${pdto.user_id eq user.userId }">
+					<a href="postUpdate?pNo=${pdto.pNo}"><button>수정</button></a>
 					</c:when>
 					<c:otherwise>	</c:otherwise>
 				</c:choose>				
 				<c:choose>
-					<c:when test="${!empty dto.attFile.file_no}">
-						<c:set var="fileNo" value="${dto.attFile.file_no}"/>
+					<c:when test="${!empty adto}">
+						<c:forEach items="${adto}" var="dto">
+						${dto.file_no}
+							<c:set var="fileNo" value="${dto.file_no}"/>
+						</c:forEach>
 					</c:when>
 					<c:otherwise>
 						<c:set var="fileNo" value="0"/>
 					</c:otherwise>
 					</c:choose>
 					<c:choose>
-					<c:when test="${dto.user_id eq user.userId }">
-					<a href="postDelete?pNo=${dto.pNo}&spNo=${dto.spNo}&depth=${dto.depth}&fileNo=${fileNo}&plevel=${dto.plevel}"><button>삭제</button></a>
+					<c:when test="${pdto.user_id eq user.userId }">
+					<a href="postDelete?pNo=${pdto.pNo}&spNo=${pdto.spNo}&depth=${pdto.depth}&fileNo=${fileNo}&plevel=${pdto.plevel}"><button>삭제</button></a>
 					</c:when>
 					<c:otherwise>	</c:otherwise>
 				</c:choose>
