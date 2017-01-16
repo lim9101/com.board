@@ -136,7 +136,7 @@
 						</c:choose>
 						</td>
 						<td>
-						<c:if test="${!empty dto.attFile.file_name}">
+						<c:if test="${dto.check_file == 1}">
 							<img src="images/file.png" width="15"/>
 						</c:if>
 						</td>

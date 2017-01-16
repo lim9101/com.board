@@ -146,6 +146,7 @@ public class Post {
 	private int depth=0;
 	private int kind=0;
 	private int tspNo=0;
+	private int check_file=0;
 	private List<MultipartFile> upload;
 	private AttFile attFile;
 	private User user;
@@ -251,6 +252,12 @@ public class Post {
 				+ ", plevel=" + plevel + ", depth=" + depth + ", kind=" + kind
 				+ ", tspNo=" + tspNo + ", upload=" + upload + ", attFile="
 				+ attFile + ", user=" + user + "]";
+	}
+	public int getCheck_file() {
+		return check_file;
+	}
+	public void setCheck_file(int check_file) {
+		this.check_file = check_file;
 	}
 	
 }

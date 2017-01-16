@@ -18,7 +18,7 @@
  		
  		,pno_seq.nextval,#{user_id,jdbcType=VARCHAR},#{title,jdbcType=VARCHAR}
 
- 		,#{content,jdbcType=VARCHAR},sysdate,#{date_up,jdbcType=DATE},#{count},#{plevel,jdbcType=DATE},#{depth,jdbcType=DATE},#{kind,jdbcType=DATE},#{tspNo})
+ 		,#{content,jdbcType=VARCHAR},sysdate,#{date_up,jdbcType=DATE},#{count},#{plevel,jdbcType=VARCHAR},#{depth,jdbcType=VARCHAR},#{kind,jdbcType=VARCHAR},#{tspNo},#{check_file})
  		
  	</insert>
  	
@@ -77,6 +77,7 @@
  		<result property="count" column="count"/>
  		<result property="kind" column="kind"/>
  		<result property="tspNo" column="tspno"/>
+ 		<result property="check_file" column="check_file"/>
  		<collection property="attFile" resultMap="AttFile"/>
  		<collection property="user" resultMap="User"/>
  	</resultMap>
@@ -96,9 +97,9 @@
  		<![CDATA[
  		select b.*
   		from (select rownum as rm, a.*
-		from (select p.spno, p.pno, p.depth, p.kind, p.plevel, p.user_id, u.user_name, p.title, p.date_in, p.count, a.file_no, a.file_name
-		from posts p, attfiles a, users u
-		where p.pno = a.pno(+) and p.user_id = u.user_id(+)
+		from (select p.spno, p.pno, p.depth, p.kind, p.plevel, p.user_id, u.user_name, p.check_file, p.title, p.date_in, p.count
+		from posts p, users u
+		where p.user_id = u.user_id(+)
 		]]>
 		<trim prefix="and">
 			<if test="searchWord!=null">

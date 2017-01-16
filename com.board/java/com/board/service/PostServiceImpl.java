@@ -48,52 +48,53 @@ public class PostServiceImpl implements PostService{
 		}
 		List<MultipartFile> sendFiles = post.getUpload();
 		
-		for (MultipartFile sendFile : sendFiles) {
-			if (imgType.isValidMimeType(sendFile)) {
-				
-			} else {
-				System.out.println("이미지파일이아닙니다.");
-				return result;
-			}
-		}
-		
-		result = postDao.addPost(post)>0;
-		for (MultipartFile sendFile : sendFiles) {
-			//전송하는 파일이 있으면
-			if(!sendFile.isEmpty()){
+		//파일이 1개이상 있으면
+		if(!sendFiles.get(0).isEmpty()){
+			System.out.println("sendFile size"+sendFiles.get(0).isEmpty());
+			for (MultipartFile sendFile : sendFiles) {
 				//이미지 파일 검사
-			
-					Post post1 = postDao.viewPost(postDao.maxPost());
-					//getOriginalFilename() 파일명 추출
-					String fileName = sendFile.getOriginalFilename();
-					//랜덤 수 발생
-					UUID random = UUID.randomUUID();
-					String saveDirectory ="C:\\" + "temp" + File.separator;
-					File fe = new File(saveDirectory);
+				if (imgType.isValidMimeType(sendFile)) {
 					
-					if (!fe.exists()) {
-						fe.mkdirs();
-					} // end if
-					File ff = new File(saveDirectory, random + "_" + fileName);
-					
-					try {
-						FileCopyUtils.copy(sendFile.getInputStream(), new FileOutputStream(ff));
-					} catch (FileNotFoundException e) {
-						e.printStackTrace();
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-					AttFile file = new AttFile();
-					file.setpNo(post1.getpNo());
-					file.setFile_name(random+"_"+fileName);
-					fileDao.addFile(file);
-
-				
-			}else{
-				result = postDao.addPost(post)>0;
+				} else {
+					System.out.println("이미지파일이아닙니다.");
+					return result;
+				}
 			}
-		}
 		
+			post.setCheck_file(1);
+			result = postDao.addPost(post)>0;
+			for (MultipartFile sendFile : sendFiles) {
+			
+					
+						Post post1 = postDao.viewPost(postDao.maxPost());
+						//getOriginalFilename() 파일명 추출
+						String fileName = sendFile.getOriginalFilename();
+						//랜덤 수 발생
+						UUID random = UUID.randomUUID();
+						String saveDirectory ="C:\\" + "temp" + File.separator;
+						File fe = new File(saveDirectory);
+						
+						if (!fe.exists()) {
+							fe.mkdirs();
+						} // end if
+						File ff = new File(saveDirectory, random + "_" + fileName);
+						
+						try {
+							FileCopyUtils.copy(sendFile.getInputStream(), new FileOutputStream(ff));
+						} catch (FileNotFoundException e) {
+							e.printStackTrace();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+						AttFile file = new AttFile();
+						file.setpNo(post1.getpNo());
+						file.setFile_name(random+"_"+fileName);
+						fileDao.addFile(file);
+			}
+		}else{	
+			post.setCheck_file(0);
+			result = postDao.addPost(post)>0;
+		}
 		return result;
 	}//end postWrite
 	
