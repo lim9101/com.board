@@ -44,25 +44,20 @@ public class UserServiceImpl implements UserService{
 	public boolean check(User user,HttpSession session){
 		boolean result=false;
 		user.setUserPw(entool.encode(user.getUserPw()));
-		System.out.println("userIn:"+user.getUserPw());
 		User sessionUser = (User)session.getAttribute("user");
 		if(sessionUser!=null && user.getUserId()==null){//받은user값에 비밀번호정보뿐이면 세션에 있는 pw갑과 비교
 			if(sessionUser.getUserPw().equals(user.getUserPw())){
 				result=true;
-				System.out.println("first:"+result);
 			}else{
 			}
 		}else{
 			User daoUser = userDao.getUser(user);
-			System.out.println("daoUser:"+user);
 			if(daoUser.getUserPw().equals(user.getUserPw())){//로그인시 비교
-				System.out.println("resultIn");
 				result=true;
 				session.setAttribute("user",daoUser);
 			}else{
 			}
 		}
-		System.out.println("end:"+result);
 		return result;
 	}
 	

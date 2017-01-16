@@ -54,11 +54,4 @@ public class AttFileController {
 		return mav;
 	}
 	
-	@RequestMapping("userDelFile")
-	public boolean userDelFile(){
-			boolean result = false;
-			
-		 return result;
-	}
-	
 }

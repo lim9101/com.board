@@ -103,6 +103,9 @@ var comentList=function(coment){
 	"<span><button type='button' onclick='comentRepleArea(this)' value='"+coment.cNo+"'>댓글</button>"+
 	"<button type='button' onclick='updateArea(this)' value='"+coment.cNo+"'>수정</button>"+
 	"<button type='button' onclick='comentDel(this)' value='"+coment.cNo+"'>삭제</button></span><br>");
+	var reContentUser=$("<span>"+coment.userId+"</span> &nbsp; &nbsp; <span>"+coment.content+"</span>"+
+			"<span><button type='button' onclick='updateArea(this)' value='"+coment.cNo+"'>수정</button>"+
+			"<button type='button' onclick='comentDel(this)' value='"+coment.cNo+"'>삭제</button></span><br>");
 	var content=$("<span>"+coment.userId+"</span> &nbsp; &nbsp; <span>"+coment.content+"</span><br>");
 	if(coment.userId == "${user.userId}"){
 		if(coment.scNo == coment.cNo){
@@ -112,7 +115,7 @@ var comentList=function(coment){
 		}else{
 			div.css("margin-left","200px");
 			div.append(dateIn);
-			div.append(contentUser);
+			div.append(reContentUser);
 			$(".comentLine").append(div);
 		}
 	}else{

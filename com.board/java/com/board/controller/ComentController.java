@@ -55,7 +55,6 @@ public class ComentController {
 	@RequestMapping(value = "comentAdd", method = RequestMethod.POST)
 	@ResponseBody
 	public boolean comentAdd(Coment coment){
-		System.out.println(coment);
 		return comentService.addComent(coment);
 	}
 }
