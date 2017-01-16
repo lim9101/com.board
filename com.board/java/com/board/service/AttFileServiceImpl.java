@@ -1,10 +1,12 @@
 package com.board.service;
 
 import java.io.File;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.board.DTO.AttFile;
 import com.board.dao.AttFileDao;
 import com.board.dao.PostDao;
 
@@ -31,5 +33,9 @@ public class AttFileServiceImpl implements AttFileService {
 		fe.delete();
 		
 		fileDao.delFile(fileNo);
+	}
+	
+	public List<AttFile> getAttFiles(String user_id){
+		return fileDao.getAttFiles(user_id);
 	}
 }

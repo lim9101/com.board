@@ -14,6 +14,13 @@
  		]]>
  	</select>
  	
+ 	<!-- 파일 삭제검색 -->
+ 	<select id="getAttFiles" parameterType="string" resultType="AttFile">
+ 		select a.pno,a.file_no,a.file_name,p.user_id
+		from posts p, attfiles a 
+		where p.pno = a.pno(+) and p.user_id=#{value}  and a.file_no is not null	
+ 	</select>
+ 	
  	<!-- 파일 수정 -->
  	<update id="updateFile" parameterType="attFile">
  		<![CDATA[ update attfiles set file_name=#{file_name} where file_no=#{file_no} ]]>

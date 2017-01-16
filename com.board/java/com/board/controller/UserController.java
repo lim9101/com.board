@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.board.DTO.AttFile;
 import com.board.DTO.User;
+import com.board.service.AttFileService;
 import com.board.service.UserService;
 
 @Controller
@@ -20,12 +22,16 @@ public class UserController {
 	@Autowired
 	private PostController postController;
 	
+	@Autowired
+	private AttFileService attFileService;
 	
 	//회원가입 기능
 	//ParameterType:User,HttpSession resultType:boolean
 	@RequestMapping("signIn")
 	@ResponseBody
 	public boolean signIn(User user,HttpSession session){
+		int pNo=0;
+		session.setAttribute("pNo", pNo);
 		session.setAttribute("user",user);
 		boolean result=false;
 		try{
@@ -65,6 +71,11 @@ public class UserController {
 		if(userService.check(user,session)){
 			User sessionUser = (User)session.getAttribute("user");
 			user.setUserId(sessionUser.getUserId());
+			System.out.println(attFileService.getAttFiles(user.getUserId()));
+			for(AttFile attFile : attFileService.getAttFiles(user.getUserId())){
+				attFileService.fileDelete(attFile.getFile_no(), attFile.getpNo());
+			}
+			System.out.println("댓글삭제 파일삭제 추가해야함");
 			result=postController.userDelPost(user.getUserId());
 			System.out.println("글삭제여부:"+result);
 			result=userService.delUser(user);

@@ -3,6 +3,7 @@ package com.board.DTO;
 import org.springframework.web.multipart.MultipartFile;
 
 public class AttFile {
+	private String user_id;
 	private int file_no;
 	private int pNo;
 	private String file_name;
@@ -32,4 +33,11 @@ public class AttFile {
 	public void setUpload(MultipartFile upload) {
 		this.upload = upload;
 	}
+	public String getUser_id() {
+		return user_id;
+	}
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
+	}
+	
 }

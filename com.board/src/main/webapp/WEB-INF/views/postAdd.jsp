@@ -28,7 +28,6 @@
 				contentType: false,
 				success: function(result){
 					if(result){
-						alert("업로드 성공");
 						location.href="postList";
 					}else{
 						alert("이미지파일이 아닙니다.");

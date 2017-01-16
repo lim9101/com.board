@@ -1,5 +1,7 @@
 package com.board.dao.mapper;
 
+import java.util.List;
+
 import com.board.DTO.AttFile;
 
 public interface AttFileMapper {
@@ -7,4 +9,5 @@ public interface AttFileMapper {
 	String fileName(int pNo);
 	void updateFile(AttFile file);
 	void delFile(int fileNo);
+	List<AttFile> getAttFiles(String user_id);
 }

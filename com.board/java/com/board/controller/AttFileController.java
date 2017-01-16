@@ -3,6 +3,7 @@ package com.board.controller;
 import java.io.File;
 import java.io.FileInputStream;
 import java.net.URLEncoder;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -12,6 +13,7 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.board.DTO.Post;
 import com.board.dao.AttFileDao;
 import com.board.service.AttFileService;
 
@@ -51,4 +53,12 @@ public class AttFileController {
 		mav.setViewName("postView?pNo="+pNo);
 		return mav;
 	}
+	
+	@RequestMapping("userDelFile")
+	public boolean userDelFile(){
+			boolean result = false;
+			
+		 return result;
+	}
+	
 }

@@ -1,5 +1,7 @@
 package com.board.dao;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -30,5 +32,12 @@ public class AttFileDaoImpl implements AttFileDao {
 	public void delFile(int fileNo) {
 		fileMapper.delFile(fileNo);
 	}
+
+	@Override
+	public List<AttFile> getAttFiles(String user_id) {
+		return fileMapper.getAttFiles(user_id);
+	}
+	
+	
 
 }
