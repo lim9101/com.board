@@ -129,6 +129,7 @@ public class Post {
 package com.board.DTO;
 
 import java.sql.Date;
+import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -145,10 +146,16 @@ public class Post {
 	private int depth=0;
 	private int kind=0;
 	private int tspNo=0;
-	private MultipartFile upload;
+	private List<MultipartFile> upload;
 	private AttFile attFile;
 	private User user;
 
+	public List<MultipartFile> getUpload() {
+		return upload;
+	}
+	public void setUpload(List<MultipartFile> upload) {
+		this.upload = upload;
+	}
 	public int getSpNo() {
 		return spNo;
 	}
@@ -199,12 +206,7 @@ public class Post {
 	public void setDate_up(Date date_up) {
 		this.date_up = date_up;
 	}
-	public MultipartFile getUpload() {
-		return upload;
-	}
-	public void setUpload(MultipartFile upload) {
-		this.upload = upload;
-	}
+	
 	public AttFile getAttFile() {
 		return attFile;
 	}

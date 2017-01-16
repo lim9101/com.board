@@ -7,6 +7,7 @@
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
+		var chk=1;
 		$(".canselBtn").on("click",function(){
 			location.href="postList";
 		});
@@ -67,6 +68,20 @@
 				$('img').attr('src',e.target.result);	
 				}
 			}
+		});
+		
+		$('.fileAdd').bind('click',function(){
+			var str;
+			if(chk>2){
+				alert("파일추가는 3개까지만 가능합니다.");
+				return false;
+			}else{
+				chk++;
+				str="<br/><input type='file' id='filepath' name='upload' class='form-control upload' /><button class='fileDel'>X</button>";
+				$('.tdAddFile').append(str);
+				return false;
+			}
+			
 		});
 	})
 </script>
@@ -129,8 +144,8 @@
 				<td colspan="2"><textarea id="content" name="content" cols="97" rows="20"></textarea></td>
 			</tr>
 			<tr>
-				<th><label for="upload">첨부파일</label></th>
-				<td class="tdStyle"><input type="file" id="filepath" name="upload" class="form-control upload" placeholder="upload" /></td>
+				<th><label for="upload">첨부파일 <button class="fileAdd">+</button></label></th>
+				<td class="tdStyle tdAddFile"><input type="file" id="filepath" name="upload" class="form-control upload" placeholder="upload" /><button class="fileDel">X</button></label></td>
 			</tr>
 		</table>
 		
