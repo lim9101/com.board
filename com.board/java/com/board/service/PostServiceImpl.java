@@ -105,7 +105,7 @@ public class PostServiceImpl implements PostService{
 
 		List<MultipartFile> sendFiles = post.getUpload();
 		// 파일이 1개이상 있으면
-		if (!(sendFiles == null)) {
+		if (sendFiles != null) {
 			System.out.println("sendFile size" + sendFiles.get(0).isEmpty());
 			map.put("check_file", 1);
 			map.put("pNo", post.getpNo());
@@ -153,6 +153,7 @@ public class PostServiceImpl implements PostService{
 			map.put("check_file", 0);
 			map.put("pNo", post.getpNo());
 			postDao.updateCheckFile(map);
+			result = true;
 		}
 		return result;
 	}
