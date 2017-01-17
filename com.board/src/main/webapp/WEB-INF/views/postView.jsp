@@ -66,7 +66,7 @@ var repleComent = function(cNo){
 	console.log($(cNo).val());
 	var coment= {
 			scNo:$(cNo).val(),
-			pNo:"${dto.pNo}",
+			pNo:"${pdto.pNo}",
 			userId:"${user.userId}",
 			content:$(".comentContent").val()
 	}
@@ -244,12 +244,10 @@ $(document).ready(function(){
 				<a href="postAdd?pNo=${pdto.pNo}"><button>답변쓰기</button></a>
 			</c:if>
 		</c:if>
-				<c:choose>
-					<c:when test="${pdto.user_id eq user.userId }">
+
+					<c:if test="${pdto.user_id eq user.userId || user.userId eq 'admin'}">
 					<a href="postUpdate?pNo=${pdto.pNo}"><button>수정</button></a>
-					</c:when>
-					<c:otherwise>	</c:otherwise>
-				</c:choose>				
+					</c:if>			
 				<c:choose>
 					<c:when test="${!empty adto}">
 						<c:forEach items="${adto}" var="dto">
@@ -261,10 +259,9 @@ $(document).ready(function(){
 					</c:otherwise>
 					</c:choose>
 					<c:choose>
-					<c:when test="${pdto.user_id eq user.userId }">
+					<c:when test="${pdto.user_id eq user.userId || user.userId eq 'admin' }">
 					<a href="postDelete?pNo=${pdto.pNo}&spNo=${pdto.spNo}&depth=${pdto.depth}&fileNo=${fileNo}&plevel=${pdto.plevel}"><button>삭제</button></a>
 					</c:when>
-					<c:otherwise>	</c:otherwise>
 				</c:choose>
 				<a href="postList"><button>목록</button></a>
 	</div>

@@ -26,9 +26,16 @@
 	where cno=#{cNo}
 	</update>
 	
-	<delete id="delComent" parameterType="Coment">
+	<delete id="delComent" parameterType="coment">
 	delete from coments
-	where cno=#{cNo}
+	<choose>
+		<when test="userId != null and content == null">
+		where user_id=#{userId}
+		</when>
+		<otherwise>
+		where cno=#{cNo}
+		</otherwise>
+	</choose>
 	</delete>
 	
 	<!-- 부모글 삭제시 자식 코멘트 전부 삭제 -->
