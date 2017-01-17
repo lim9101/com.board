@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.board.DTO.AttFile;
+import com.board.DTO.Coment;
 import com.board.DTO.User;
 import com.board.service.AttFileService;
+import com.board.service.ComentService;
 import com.board.service.UserService;
 
 @Controller
@@ -24,6 +26,9 @@ public class UserController {
 	
 	@Autowired
 	private AttFileService attFileService;
+	
+	@Autowired
+	private ComentService comentService;
 	
 	//회원가입 기능
 	//ParameterType:User,HttpSession resultType:boolean
@@ -75,7 +80,10 @@ public class UserController {
 			for(AttFile attFile : attFileService.getAttFiles(user.getUserId())){
 				attFileService.fileDelete(attFile.getFile_no(), attFile.getpNo());
 			}
-			System.out.println("댓글삭제 파일삭제 추가해야함");
+			Coment coment=new Coment();
+			coment.setUserId(user.getUserId());
+			result=comentService.delComent(coment);
+			System.out.println("댓글삭제여부:"+result);
 			result=postController.userDelPost(user.getUserId());
 			System.out.println("글삭제여부:"+result);
 			result=userService.delUser(user);

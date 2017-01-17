@@ -66,7 +66,7 @@ var repleComent = function(cNo){
 	console.log($(cNo).val());
 	var coment= {
 			scNo:$(cNo).val(),
-			pNo:"${dto.pNo}",
+			pNo:"${pdto.pNo}",
 			userId:"${user.userId}",
 			content:$(".comentContent").val()
 	}
@@ -214,7 +214,7 @@ $(document).ready(function(){
 	글 보기</h1>
 		<table>
 			<tr>
-				<th>작성자</th><td>${pdto.user.userName}</td>
+				<th>작성자</th><td>${pdto.user.userId}</td>
 				<th>조회수</th><td>${pdto.count}</td>
 				<th>등록일</th><td>${pdto.date_in}</td>
 			</tr>
