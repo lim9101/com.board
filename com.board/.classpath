@@ -39,7 +39,7 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.USER_LIBRARY/ojdbc"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/ldh/git/com.board/com.board/src/main/webapp/WEB-INF/lib/tika-core-1.14.jar"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/ldh/git/com.board/com.board/src/main/webapp/WEB-INF/lib/tika-parsers-1.14.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Administrator/git/com.board/com.board/src/main/webapp/WEB-INF/lib/tika-core-1.14.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Administrator/git/com.board/com.board/src/main/webapp/WEB-INF/lib/tika-parsers-1.14.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
