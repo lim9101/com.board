@@ -137,7 +137,7 @@ var delFile =	function (fileDel){
 				</tr>
 			</c:if>
 			<tr>
-				<th><label for="title">제목</label></th>
+				<th><label for="title"><c:if test="${!empty dto}">답변&nbsp;</c:if>제목</label></th>
 				<td class="tdStyle"><input type="text" name="title" id="title" size="50"/></td>
 			</tr>
 			<tr>

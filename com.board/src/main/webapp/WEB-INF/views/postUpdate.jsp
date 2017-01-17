@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+<%-- 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -157,8 +157,8 @@ $(document).ready(function(){
 		</div><!-- end Btn -->
 		</form>
 	</div><!-- end container -->
-</body>
-=======
+</body> --%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -186,6 +186,9 @@ var delFile=function(fileNo){
 	}); 
 }
 $(document).ready(function(){
+	$('.cancel').bind('click', function(){
+		history.go(-1)();
+	});
 	$('[name=content]').val($('[name=content]').val().trim());
 	$('[name=content]').val(
 			$('[name=content]').val().replace(/<br\s?\/?>/g, "\n"));
@@ -296,6 +299,7 @@ $(document).ready(function(){
 		<div class="Btn">
 			<button type="button" class="postUpdateBtn">수정하기</button>
 			<a href="postList"><button type="button">목록</button></a>
+			<input type="button" class="cancel" value="취소" />
 				<c:choose>
 					<c:when test="${!empty adto}">
 						<c:forEach items="${adto}" var="dto">
@@ -315,5 +319,4 @@ $(document).ready(function(){
 		</form>
 	</div><!-- end container -->
 </body>
->>>>>>> branch 'master' of https://github.com/lim9101/com.board.git
 </html>

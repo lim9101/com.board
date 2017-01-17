@@ -209,7 +209,9 @@ $(document).ready(function(){
 <body>
 <div class="container" style="position:relative">
 	<div class="view">
-	<h1>글 보기</h1>
+	<h1>
+	<c:if test="${pdto.kind==1}">공지</c:if>
+	글 보기</h1>
 		<table>
 			<tr>
 				<th>작성자</th><td>${pdto.user.userName}</td>
@@ -237,9 +239,11 @@ $(document).ready(function(){
 		</table>
 	</div><!-- end view -->
 	<div class="btn">
-		<c:if test="${pdto.plevel <3}">
+		<c:if test="${pdto.kind ==0}">
+			<c:if test="${pdto.plevel <3}">
 				<a href="postAdd?pNo=${pdto.pNo}"><button>답변쓰기</button></a>
 			</c:if>
+		</c:if>
 				<c:choose>
 					<c:when test="${pdto.user_id eq user.userId }">
 					<a href="postUpdate?pNo=${pdto.pNo}"><button>수정</button></a>
