@@ -244,7 +244,7 @@ $(document).ready(function(){
 				<a href="postAdd?pNo=${pdto.pNo}"><button>답변쓰기</button></a>
 			</c:if>
 		</c:if>
-
+				
 					<c:if test="${pdto.user_id eq user.userId || user.userId eq 'admin'}">
 					<a href="postUpdate?pNo=${pdto.pNo}"><button>수정</button></a>
 					</c:if>			
