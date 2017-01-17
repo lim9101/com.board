@@ -81,11 +81,11 @@ public class PostController {
 	}
 	
 	@RequestMapping(value = "/postUpdate", method = RequestMethod.POST)
-	public ModelAndView postUpdatePro(Post post, int fileNo){
-		ModelAndView mav = new ModelAndView();
-		postService.postUpdate(post, fileNo);
-		mav.setViewName("redirect:/postList");
-		return mav;
+	@ResponseBody
+	public boolean postUpdatePro(Post post, int fileNo){
+		boolean result =false;
+		result = postService.postUpdate(post, fileNo);
+		return result;
 	}
 	
 	//검색안한 리스트

@@ -247,7 +247,6 @@ $(document).ready(function(){
 				<c:choose>
 					<c:when test="${!empty adto}">
 						<c:forEach items="${adto}" var="dto">
-						${dto.file_no}
 							<c:set var="fileNo" value="${dto.file_no}"/>
 						</c:forEach>
 					</c:when>

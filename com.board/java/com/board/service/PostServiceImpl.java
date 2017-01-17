@@ -144,6 +144,7 @@ public class PostServiceImpl implements PostService{
 				file.setpNo(post.getpNo());
 				file.setFile_name(random + "_" + fileName);
 				fileDao.addFile(file);
+				result = true;
 			}
 		} else {
 			
