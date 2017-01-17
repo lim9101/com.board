@@ -28,4 +28,5 @@ public interface PostMapper {
 	List<Post> delSPno(int spNo);
 	int searchTspno(int pNo);
 	List<Post> userDelPost(String user_id);
+	void updateCheckFile(HashMap<String, Integer> map);
 }

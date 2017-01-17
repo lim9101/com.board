@@ -103,6 +103,11 @@ public class PostDaoImpl implements PostDao{
 	public List<Post> userDelPost(String user_id) {
 		return postMapper.userDelPost(user_id);
 	}
+
+	@Override
+	public void updateCheckFile(HashMap<String, Integer> map) {
+		postMapper.updateCheckFile(map);		
+	}
 	
 	
 

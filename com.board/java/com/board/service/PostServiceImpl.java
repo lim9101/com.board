@@ -34,80 +34,83 @@ public class PostServiceImpl implements PostService{
 	
 	//공지 글 추가
 	@Override
-	public boolean postWrite(Post post){
-		
+	public boolean postWrite(Post post) {
+
 		boolean result = false;
-		
-		//답변 글이면
-		if(post.getpNo()>0){
+
+		// 답변 글이면
+		if (post.getpNo() > 0) {
 			postDao.depthCount(post);
 			post.setSpNo(post.getSpNo());
 			post.setTspNo(post.getpNo());
-			post.setDepth(post.getDepth()+1);
-			post.setPlevel(post.getPlevel()+1);
+			post.setDepth(post.getDepth() + 1);
+			post.setPlevel(post.getPlevel() + 1);
 		}
 		List<MultipartFile> sendFiles = post.getUpload();
-		
-		//파일이 1개이상 있으면
-		if(!sendFiles.get(0).isEmpty()){
-			System.out.println("sendFile size"+sendFiles.get(0).isEmpty());
+
+		// 파일이 1개이상 있으면
+		if (!sendFiles.get(0).isEmpty()) {
+			System.out.println("sendFile size" + sendFiles.get(0).isEmpty());
 			for (MultipartFile sendFile : sendFiles) {
-				//이미지 파일 검사
+				// 이미지 파일 검사
 				if (imgType.isValidMimeType(sendFile)) {
-					
+
 				} else {
 					System.out.println("이미지파일이아닙니다.");
 					return result;
 				}
-			}
-		
+			}//end for
+
 			post.setCheck_file(1);
-			result = postDao.addPost(post)>0;
+			result = postDao.addPost(post) > 0;
 			for (MultipartFile sendFile : sendFiles) {
-			
-					
-						Post post1 = postDao.viewPost(postDao.maxPost());
-						//getOriginalFilename() 파일명 추출
-						String fileName = sendFile.getOriginalFilename();
-						//랜덤 수 발생
-						UUID random = UUID.randomUUID();
-						String saveDirectory ="C:\\" + "temp" + File.separator;
-						File fe = new File(saveDirectory);
-						
-						if (!fe.exists()) {
-							fe.mkdirs();
-						} // end if
-						File ff = new File(saveDirectory, random + "_" + fileName);
-						
-						try {
-							FileCopyUtils.copy(sendFile.getInputStream(), new FileOutputStream(ff));
-						} catch (FileNotFoundException e) {
-							e.printStackTrace();
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-						AttFile file = new AttFile();
-						file.setpNo(post1.getpNo());
-						file.setFile_name(random+"_"+fileName);
-						fileDao.addFile(file);
+
+				Post post1 = postDao.viewPost(postDao.maxPost());
+				// getOriginalFilename() 파일명 추출
+				String fileName = sendFile.getOriginalFilename();
+				// 랜덤 수 발생
+				UUID random = UUID.randomUUID();
+				String saveDirectory = "C:\\" + "temp" + File.separator;
+				File fe = new File(saveDirectory);
+
+				if (!fe.exists()) {
+					fe.mkdirs();
+				} // end if
+				File ff = new File(saveDirectory, random + "_" + fileName);
+
+				try {
+					FileCopyUtils.copy(sendFile.getInputStream(),
+							new FileOutputStream(ff));
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				AttFile file = new AttFile();
+				file.setpNo(post1.getpNo());
+				file.setFile_name(random + "_" + fileName);
+				fileDao.addFile(file);
 			}
-		}else{	
+		} else {
 			post.setCheck_file(0);
-			result = postDao.addPost(post)>0;
+			result = postDao.addPost(post) > 0;
 		}
 		return result;
-	}//end postWrite
+	}// end postWrite
 	
 	//파일 수정
 	public boolean postUpdate(Post post, int fileNo) {
-		System.out.println("kkjj" + fileNo);
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
 		postDao.updatePost(post);
 		boolean result = false;
 
 		List<MultipartFile> sendFiles = post.getUpload();
 		// 파일이 1개이상 있으면
-		if (!sendFiles.get(0).isEmpty()) {
+		if (!(sendFiles == null)) {
 			System.out.println("sendFile size" + sendFiles.get(0).isEmpty());
+			map.put("check_file", 1);
+			map.put("pNo", post.getpNo());
+			postDao.updateCheckFile(map);
 			for (MultipartFile sendFile : sendFiles) {
 				// 이미지 파일 검사
 				if (imgType.isValidMimeType(sendFile)) {
@@ -144,9 +147,13 @@ public class PostServiceImpl implements PostService{
 				file.setpNo(post.getpNo());
 				file.setFile_name(random + "_" + fileName);
 				fileDao.addFile(file);
+				result = true;
 			}
 		} else {
-			
+			//1개도 없으면 posts check_file컬럼 값 0으로 변경
+			map.put("check_file", 0);
+			map.put("pNo", post.getpNo());
+			postDao.updateCheckFile(map);
 		}
 		return result;
 	}
@@ -192,29 +199,35 @@ public class PostServiceImpl implements PostService{
 		if(spNoCount > 1){
 			delDTO = postDao.delSPno(spNo);
 			int chk=0; 
+			
 			for(int i=0; i<delDTO.size() ; i++){
 				System.out.println("size:"+delDTO.size());
 				System.out.println("i:"+i);
-				if(delDTO.get(i).getPlevel()==1 && delDTO.get(i).getTitle()!=null ){
-					chk++;  
-				}
-				if(chk==2){
-					break;
-				}
-				if(i==0&&postDao.searchTspno(pNo)==0){
-					postDao.delPost(pNo); continue;
-				}
-				if(delDTO.get(i).getTitle()==null){
-					postDao.delPost(delDTO.get(i).getpNo()); continue;
+				if(depth < delDTO.get(i).getDepth()){
+					continue;
 				}else{
-					System.out.println("break");
-					break;
+					if(delDTO.get(i).getPlevel() !=0){
+						if(depth == delDTO.get(i).getDepth()){
+							postDao.delPost(delDTO.get(i).getpNo()); continue;
+						}
+						if(delDTO.get(i).getTitle()==null){
+							postDao.delPost(delDTO.get(i).getpNo()); continue;
+						}
+					}else{
+						//제목글이면
+						spNoCount = postDao.spnoCount(spNo);
+						System.out.println("제목글:0"+delDTO.get(i).getPlevel()+"spNoCount:"+spNoCount);
+						if(spNoCount == 1 && delDTO.get(i).getTitle()==null){
+							postDao.delPost(delDTO.get(i).getpNo()); continue;
+						}
+					}
+					
 				}
-			}
-			return;
+				return;
+			}//end for
+			
 		}
-		
-						
+								
 		//답변글 중에 답변이 있거나 없는 경우
 		if(spNoCount > 1 && depth!=postDao.maxDepth(spNo)){
 			System.out.println("4");
@@ -267,6 +280,11 @@ public class PostServiceImpl implements PostService{
 	@Override
 	public List<Post> userDelPost(String user_id) {
 		return postDao.userDelPost(user_id);
+	}
+
+	@Override
+	public void updateCheckFile(HashMap<String, Integer> map) {
+		postDao.updateCheckFile(map);		
 	}
 
 }

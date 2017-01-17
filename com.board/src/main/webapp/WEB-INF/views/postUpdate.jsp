@@ -25,12 +25,30 @@ var delFile=function(fileNo){
 	}); 
 }
 $(document).ready(function(){
+	$('.cancel').bind('click', function(){
+		history.go(-1)();
+	});
 	$('[name=content]').val($('[name=content]').val().trim());
-	$('[name=content]').val(
-			$('[name=content]').val().replace(/<br\s?\/?>/g, "\n"));
+	$('[name=content]').val($('[name=content]').val().replace(/<br\s?\/?>/g, "\n"));
 
 	$('.postUpdateBtn').bind('click',function(){
-		$('#frmU').attr('action', 'postUpdate').submit();
+	/* 	$('#frmU').attr('action', 'postUpdate').submit(); */
+		var formData = new FormData($('#frmU')[0]);
+		$.ajax({
+			method:'post',
+			url:'postUpdate',
+			data:formData,
+			processData: false,
+			contentType: false,
+			success:function(result){
+				if(result){
+					location.href="postList";
+				}else{
+					alert("이미지파일이 아닙니다.");
+				}
+			}
+			
+		});
 	});
 	
 	$('.fileAdd').bind('click',function(){
@@ -117,8 +135,9 @@ $(document).ready(function(){
 		</table>
 		</div><!-- end noticeUpdate -->
 		<div class="Btn">
-			<button type="submit" class="postUpdateBtn">수정하기</button>
+			<button type="button" class="postUpdateBtn">수정하기</button>
 			<a href="postList"><button type="button">목록</button></a>
+			<input type="button" class="cancel" value="취소" />
 				<c:choose>
 					<c:when test="${!empty adto}">
 						<c:forEach items="${adto}" var="dto">

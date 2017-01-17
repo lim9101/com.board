@@ -156,6 +156,8 @@ var comentList=function(coment){
 	comentView(null);
 
 $(document).ready(function(){
+	$('[name=content]').val($('[name=content]').val().trim());
+	$('[name=content]').val($('[name=content]').val().replace(/<br\s?\/?>/g, "\n"));
 	$(".comentAddBtn").on("click",function(){
 		var scNo = 0;
 		var coment= {
@@ -175,12 +177,12 @@ $(document).ready(function(){
 }
 .container{
 	margin: 0 auto;
- 	width:580px;
+ 	width:700px;
 }
 .view table{
 	border-collapse: collapse;
     border-spacing: 0;
-	width:580px;
+	width:700px;
 	border-top: 2px solid #BFAD9F;
 	border-bottom: 2px solid #BFAD9F;
 }
@@ -247,7 +249,6 @@ $(document).ready(function(){
 				<c:choose>
 					<c:when test="${!empty adto}">
 						<c:forEach items="${adto}" var="dto">
-						${dto.file_no}
 							<c:set var="fileNo" value="${dto.file_no}"/>
 						</c:forEach>
 					</c:when>

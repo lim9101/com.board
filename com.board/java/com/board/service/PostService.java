@@ -1,6 +1,7 @@
 package com.board.service;
 
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,4 +20,5 @@ public interface PostService {
 	int searchCount(Page pv);
 	void addCount(int pNo);
 	List<Post> userDelPost(String user_id);
+	void updateCheckFile(HashMap<String, Integer> map);
 }

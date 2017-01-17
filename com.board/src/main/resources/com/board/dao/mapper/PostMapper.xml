@@ -124,7 +124,7 @@
 		]]>
  	</select>
  	
- 	<!-- 공지글 보기 -->
+ 	<!-- 글 보기 -->
  	<select id="viewPost" parameterType="int" resultMap="Post" resultType="com.board.DTO.Post" >
  		<![CDATA[
  		select p.spno, p.pno, p.user_id, p.kind, p.depth, p.plevel, p.tspno, p.content, u.user_name, p.title, p.date_in, p.count
@@ -163,7 +163,7 @@
  	
  	<!-- 삭제된 답변의 답변을 삭제시 -->
  	<select id="delSPno" parameterType="int" resultType="Post">
- 		  select * from posts where spno=#{spNo} order by depth desc, kind desc, spno desc
+ 		select * from posts where spno=#{spNo} order by kind desc, spno desc, depth desc
  	</select>
  	
  	<!-- 답변글중 하위답변이 있는지 -->
@@ -171,10 +171,10 @@
  		 select count(tspno) from posts where tspno=#{pNo}
  	</select>
  	
- 	
  	<select id="pLevel" parameterType="map" resultType="int">
  		<![CDATA[ select plevel from posts where spno=#{spNo} and depth=(select min(depth) from posts where spno=#{spNo} and depth<>0 and depth <> #{depth}) ]]>
  	</select>
+ 	
  	<select id="userDelPost" parameterType="String" resultType="post" resultMap="Post">
  		<![CDATA[
  		select p.pno,p.spno,p.depth,a.file_no,p.plevel
@@ -182,4 +182,10 @@
 		where p.pno = a.pno(+) and p.user_id=#{value}	
 		]]>	
  	</select>
+ 	
+ 	<!-- posts 파일이 있는지 여부 -->
+ 	<update id="updateCheckFile" parameterType="map">
+ 		update posts set check_file=#{check_file} where pno=#{pNo}
+ 	</update>
+ 	
  </mapper>
