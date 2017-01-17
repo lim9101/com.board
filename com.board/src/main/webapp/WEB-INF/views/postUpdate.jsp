@@ -143,17 +143,17 @@ $(document).ready(function(){
 				<c:choose>
 					<c:when test="${!empty adto}">
 						<c:forEach items="${adto}" var="dto">
-							<input type="text" value="${dto.file_no }" name="fileNo"/>
+							<input type="hidden" value="${dto.file_no }" name="fileNo"/>
 						</c:forEach>
 					</c:when>
 					<c:otherwise>
-						<input type="text" value="0" name="fileNo"/>
+						<input type="hidden" value="0" name="fileNo"/>
 					</c:otherwise>
 				</c:choose>
 			
 			
-			<input type="text" value="${pdto.pNo}" name="pNo"/>
-			<input type="text" value="${pdto.spNo}" name="spNo"/>
+			<input type="hidden" value="${pdto.pNo}" name="pNo"/>
+			<input type="hidden" value="${pdto.spNo}" name="spNo"/>
 			
 		</div><!-- end Btn -->
 		</form>
