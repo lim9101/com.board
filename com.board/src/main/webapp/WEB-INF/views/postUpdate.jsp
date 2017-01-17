@@ -34,6 +34,7 @@ $(document).ready(function(){
 
 	$('.postUpdateBtn').bind('click',function(){
 	/* 	$('#frmU').attr('action', 'postUpdate').submit(); */
+	 $('[name=content]').val($('[name=content]').val().replace(/\n/gi, '<br/>'));
 		var formData = new FormData($('#frmU')[0]);
 		$.ajax({
 			method:'post',

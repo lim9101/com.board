@@ -56,28 +56,12 @@ $(document).ready(function(){
 		 <div>
 		 질문 선택<br>
 		 <select name="pwQa" class="pwQa">
-			    <c:choose>
-				<c:when test="${user.pwQa eq '좌우명'}">
-				    <option value="">질문선택</option>
-				    <option value="좌우명" selected="selected">나의 좌우명은?</option>
-				    <option value="장소">가장 기억에 남는 장소는?</option>
-				    <option value="스포츠">가장 좋아하는 스포츠종목은?</option>
-				</c:when>
-				<c:when test="${user.pwQa eq '장소'}">
-				    <option value="" >질문선택</option>
-				    <option value="좌우명">나의 좌우명은?</option>
-				    <option value="장소" selected="selected">가장 기억에 남는 장소는?</option>
-				    <option value="스포츠">가장 좋아하는 스포츠종목은?</option>
-				</c:when>
-				<c:when test="${user.pwQa eq '스포츠'}">
-				    <option value="" >질문선택</option>
-				    <option value="좌우명">나의 좌우명은?</option>
-				    <option value="장소">가장 기억에 남는 장소는?</option>
-				    <option value="스포츠" selected="selected">가장 좋아하는 스포츠종목은?</option>
-				</c:when>
-				</c:choose>
+			<option value="" selected="selected">질문선택</option>
+			<option value="좌우명" >나의 좌우명은?</option>
+			<option value="장소">가장 기억에 남는 장소는?</option>
+			<option value="스포츠">가장 좋아하는 스포츠종목은?</option>
 		</select>
-		<label for="pwAs">답변:<input class="pwAs" name="pwAs" value="${user.pwAs}"></label>
+		<label for="pwAs">답변:<input class="pwAs" name="pwAs" value=""></label>
 		 </div>
 		 <div class="form-group">
 		 	<div class="form-inline">
