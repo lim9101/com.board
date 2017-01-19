@@ -130,4 +130,18 @@ public class UserController {
 		}
  		return result;
 	}
+	
+	@RequestMapping("checkId")
+	@ResponseBody
+	public boolean checkId(String userId){
+		System.out.println("userId:"+userId);
+		boolean result=false;
+		int chk=userService.checkId(userId);
+		if(chk==0){
+			result=true;
+		}else{
+			result=false;
+		}
+		return result;
+	}
 }

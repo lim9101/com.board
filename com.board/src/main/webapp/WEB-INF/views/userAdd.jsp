@@ -8,8 +8,40 @@
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
 <script type="text/javascript">
+var check=0;
 $(document).ready(function(){
+	
+	$('.chkIdBtn').on("click",function(){
+		check=1;
+		
+		var chkId=/^[a-z0-9]{5,15}$/g;
+		if(!chkId.test($(".id").val())){
+			$(".id").focus();
+			alert("소문자,숫자 포함 길이는 5~15까지 가능합니다.");
+			return;
+		}
+		
+		$.ajax({
+			url:"checkId",
+			data:{userId:$(".id").val()},
+			success:function(result){
+				if(result){
+					alert("사용가능한 아이디입니다.");
+				}else{
+					check=0;
+					$(".id").val('');
+					$(".id").focus();
+					alert("이미 사용중인 아이디입니다.");
+				}
+			}
+		});
+	});
+	
 	$(".signIn").on("click",function(){
+		if(check==0){
+			alert("ID 중복체크 하세요");
+			return;
+		}
 		var user = {
 				userId:$(".id").val(),
 				userPw:$(".pw").val(),
@@ -47,7 +79,7 @@ $(document).ready(function(){
 <div class="container">
 <h1>회원 가입</h1>
 	<div>
-		<P>ID:<input type="text" class="id"/></P>
+		<P>ID:<input type="text" class="id" name="userId"/> <span><button type="button" class="chkIdBtn">중복체크</button></span><span class="checkIdInfo"></span></P>
 		<P>PW:<input type="password" class="pw"/></P>
 		<P>NAME:<input type="text" class="name"/></P>
 		<P>EMAIL:<input type="email" class="email"/></P>

@@ -12,15 +12,29 @@ var delFile =	function (fileDel){
 	fileCheck--;
 	
 }
-	$(document).ready(function() {
+
+function listClick(){
+	if(confirm("목록으로 이동하시겠습니까?")==true){
+		location.href="postList";				
+	}else{
+		return;
+	}
+}
+$(document).ready(function() {
 		var chk=1;
-		$(".canselBtn").on("click",function(){
-			location.href="postList";
-		});
+		
 		$('.postAddBtn').bind('click', function() {
 			
+			if($('[name=title]').val().length > 30){
+				alert("제목은 30자까지 가능합니다.");
+				return false;
+			}
 			if($('[name=title]').val()==''){
 				alert("제목을 입력하세요");
+				return false;
+			}
+			if($('[name=content]').val().length > 300){
+				alert("내용은 300자까지 가능합니다.");
 				return false;
 			}
 			$('[name=content]').val(
@@ -52,7 +66,7 @@ var delFile =	function (fileDel){
 			var patt=/(.jpg$|.gif$|.png$)/ig;
 			var result=str.match(patt);
 			if(!result){
-				alert('jpg, gif만 가능합니다.');
+				alert('jpg, gif, png만 가능합니다.');
 				$('#filepath').val("");
 				return false;
 			}
@@ -156,8 +170,7 @@ var delFile =	function (fileDel){
 		</div><!-- end noticeAdd -->
 		<div class="Btn">
 			<button type="button" class="postAddBtn">글쓰기</button>
-			<a href="postList"><button type="button">목록</button></a>
-			<button type="button" class="btn btn-default canselBtn">취소</button>
+			<button type="button" onclick="listClick()">목록</button>
 			<c:if test="${!empty dto.pNo }">
 				<input type="hidden" name="pNo" value="${dto.pNo }"/>
 				<input type="hidden" name="spNo" value="${dto.spNo }"/>

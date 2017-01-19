@@ -54,12 +54,12 @@
 .noticeList table th{
 	font-weight: normal;
     height: 43px;
-    text-align:center;
     background: #f7f6f4;
     border-bottom: 1px solid #E6E2DE;
     font-size: 14px;
     color: #664738;
     text-align: left;
+    padding-left: 5px;
 }
 .noticeList table tr.noti{
 	background: #f7f6f4;
@@ -101,11 +101,11 @@
 			<table>
 				<tr>
 					<th width="10%">글번호</th>
-					<th width="45%">제목</th>
-					<th width="5%">첨부</th>
-					<th width="15%">작성자</th>
-					<th width="10%">조회수</th>
-					<th width="15%">등록일</th>
+					<th width="54%">제목</th>
+					<th width="6%">첨부</th>
+					<th width="10%">작성자</th>
+					<th width="7%">조회수</th>
+					<th width="13%">등록일</th>
 				</tr>
 				<c:forEach items="${pList}" var="dto">
 					<c:choose>

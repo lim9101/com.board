@@ -10,4 +10,5 @@ public interface UserService {
 	boolean updateUser(User user,HttpSession session);
 	boolean delUser(User user);
 	boolean check(User user,HttpSession session);
+	int checkId(String userId);
 }
