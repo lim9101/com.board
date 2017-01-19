@@ -18,7 +18,10 @@ var comentsHiden = function(){
 }
 
 var comentAdd =function(coment){
-	
+	if($(".comentContent").val().length > 200){
+		alert("200자까지 가능합니다.");
+		return;
+	}
 	if($(".comentContent").val()==""){
 		alert("내용을 입력하세요.");
 	}else{
@@ -63,6 +66,7 @@ var updateComent = function(cNo){
 }
 
 var repleComent = function(cNo){
+	
 	console.log($(cNo).val());
 	var coment= {
 			scNo:$(cNo).val(),
@@ -74,6 +78,7 @@ var repleComent = function(cNo){
 }
 
 var comentDel = function(cNo){
+	
 	var coment ={
 			cNo:$(cNo).val()
 	}
@@ -93,13 +98,13 @@ var canselArea = function(){
 }
 
 var comentList=function(coment){
-	var div = $("<div class='replyDiv' style='border:1px solid black;border-width:2px 1px; width:510px; height: auto; line-height:35px; position:relative'></div><br>");
+	var div = $("<div class='replyDiv' style='border:1px solid black;padding-left:7px;border-width:2px 1px; width:510px; height: auto; line-height:35px; position:relative'></div><br>");
 	var dateIn= $("<span>"+"입력날짜:"+coment.dateIn+"</span>&nbsp;&nbsp;<span>"+"수정날짜:"+coment.dateUp+"<span><br>");
 	if(coment.dateUp == null){
-		dateIn= $("<span>"+"입력날짜:"+coment.dateIn+"</span>&nbsp;&nbsp;<span>"+"수정날짜:"+""+"<span><br>");
+		dateIn= $("<span>"+coment.userId+"</span>  <span>"+"입력날짜:"+coment.dateIn+"</span>&nbsp;&nbsp;<span>"+"수정날짜:"+""+"<span><br>");
 	}else{
 	}
-	var contentUser=$("<span>"+coment.userId+"</span> &nbsp; &nbsp; <span>"+coment.content+"</span>"+
+	var contentUser=$("<span>"+coment.content+"</span>"+
 	"<span><button type='button' onclick='comentRepleArea(this)' value='"+coment.cNo+"'>댓글</button>"+
 	"<button type='button' onclick='updateArea(this)' value='"+coment.cNo+"'>수정</button>"+
 	"<button type='button' onclick='comentDel(this)' value='"+coment.cNo+"'>삭제</button></span><br>");
