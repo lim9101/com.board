@@ -7,6 +7,7 @@
 <script src="js/jquery.validate.js"></script>
 <script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
 <script type="text/javascript">
+var check=0;
 var signInValidate = function(form){
 	form.validate({
 		rules:{
@@ -70,6 +71,10 @@ var signInValidate = function(form){
 	});
 	return form.valid();
 };
+if(signInValidate($("form"))){
+	 
+}
+
 $(document).ready(function(){
 	$(".signIn").on("click",function(){
 		if(signInValidate($("form"))){
