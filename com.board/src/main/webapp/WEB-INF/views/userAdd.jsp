@@ -14,7 +14,8 @@ var signInValidate = function(form){
 			userId:{
 				required:true,
 				minlength:6,
-				maxlength:15
+				maxlength:15,
+				remote:{ type: "get", url: "checkId" }
 			},
 			userPw:{
 				required:true,
@@ -41,7 +42,8 @@ var signInValidate = function(form){
              userId: {
                  required : "필수로입력하세요",
                  minlength:"최소{0}자로 입력하세요.",
- 				maxlength:"최대{0}자로 입력하세요."
+ 				maxlength:"최대{0}자로 입력하세요.",
+ 				remote:"사용할수 없는 아이디입니다."
                
              },
              userPw: {
@@ -71,43 +73,16 @@ var signInValidate = function(form){
 	});
 	return form.valid();
 };
-if(signInValidate($("form"))){
-	 
+var chkId = function (form){
+	if(signInValidate(form)){
+		form.css("desabled",true);
+	}else{
+		form.css("desabled",false);
+	}
 }
-
 $(document).ready(function(){
-	
-	$('.chkIdBtn').on("click",function(){
-		check=1;
-		
-		var chkId=/^[a-z0-9]{5,15}$/g;
-		if(!chkId.test($(".id").val())){
-			$(".id").focus();
-			alert("소문자,숫자 포함 길이는 5~15까지 가능합니다.");
-			return;
-		}
-		
-		$.ajax({
-			url:"checkId",
-			data:{userId:$(".id").val()},
-			success:function(result){
-				if(result){
-					alert("사용가능한 아이디입니다.");
-				}else{
-					check=0;
-					$(".id").val('');
-					$(".id").focus();
-					alert("이미 사용중인 아이디입니다.");
-				}
-			}
-		});
-	});
-	
+	chkId($("form"));
 	$(".signIn").on("click",function(){
-		if(check==0){
-			alert("ID 중복체크 하세요");
-			return;
-		}
 		if(signInValidate($("form"))){
 			var user = {
 					userId:$(".id").val(),
@@ -145,12 +120,6 @@ $(document).ready(function(){
 <body>
 <div class="container">
 <h1>회원 가입</h1>
-	<div>
-		<P>ID:<input type="text" class="id" name="userId"/> <span><button type="button" class="chkIdBtn">중복체크</button></span><span class="checkIdInfo"></span></P>
-		<P>PW:<input type="password" class="pw"/></P>
-		<P>NAME:<input type="text" class="name"/></P>
-		<P>EMAIL:<input type="email" class="email"/></P>
-		<P>PHONE:<input type="tel" class="phone"/></P>
 	<form onsubmit="return false">
 		<P>ID:<input type="text" class="id" name="userId" /></P>
 		<P>PW:<input type="password" class="pw" name="userPw" /></P>
