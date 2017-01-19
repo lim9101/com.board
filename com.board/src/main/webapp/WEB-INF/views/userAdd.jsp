@@ -9,9 +9,6 @@
 <script src="js/jquery.validate.js"></script>
 <script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
 <script type="text/javascript">
-if(${userId}!=null){
-	
-}
 var check=0;
 var signInValidate = function(form){
 	form.validate({
@@ -159,7 +156,7 @@ $(document).ready(function(){
 		</div>
 		
 		 <P><button type="submit" class="btn btn-primary btn-mg signIn" value="signIn">signIN</button>
-		   <button type="button" class="btn btn-primary btn-mg" value="cansel">cansel</button>
+		   <a href="index"><button type="button" class="btn btn-primary btn-mg" value="cansel">cansel</button></a>
 		</P>
 		</fieldset>
 	</form>
