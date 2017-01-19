@@ -93,7 +93,7 @@ var canselArea = function(){
 }
 
 var comentList=function(coment){
-	var div = $("<div class='replyDiv' style='border:1px solid black;border-width:2px 1px; width:510px; height:100px; line-height:35px; position:relative'></div><br>");
+	var div = $("<div class='replyDiv' style='border:1px solid black;border-width:2px 1px; width:510px; height: auto; line-height:35px; position:relative'></div><br>");
 	var dateIn= $("<span>"+"입력날짜:"+coment.dateIn+"</span>&nbsp;&nbsp;<span>"+"수정날짜:"+coment.dateUp+"<span><br>");
 	if(coment.dateUp == null){
 		dateIn= $("<span>"+"입력날짜:"+coment.dateIn+"</span>&nbsp;&nbsp;<span>"+"수정날짜:"+""+"<span><br>");
