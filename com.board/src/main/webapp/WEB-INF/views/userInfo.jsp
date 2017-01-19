@@ -54,7 +54,7 @@ $(document).ready(function(){
 		 <c:if test='${user.gender eq "여"}'>
 		 <P>GENDER: 남<input type="radio" name="gender" value="남"/> 여<input type="radio" name="gender" value="여"  checked="checked"/></P>
 		 </c:if>
-		 비밀번호 찾기
+		<%--  비밀번호 찾기
 		 <div>
 		 질문 선택<br>
 		 <select name="pwQa" class="pwQa" disabled="disabled">
@@ -80,7 +80,7 @@ $(document).ready(function(){
 				</c:choose>
 		</select>
 		<label for="pwAs">답변:<input class="pwAs" name="pwAs" value="${user.pwAs}" readonly="readonly"></label>
-		 </div>
+		 </div> --%>
 		 <div class="form-group">
 		 	<div class="form-inline">
 			<input type="text" class="postcodify_postcode5 form-control addNo" value="${user.addNo}" placeholder="우편번호" readonly="readonly"/>
