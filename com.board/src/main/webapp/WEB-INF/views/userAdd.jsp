@@ -3,10 +3,15 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <script src="js/jquery-1.11.1.js"></script>
 <script src="js/jquery.validate.js"></script>
 <script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
 <script type="text/javascript">
+if(${userId}!=null){
+	
+}
 var check=0;
 var signInValidate = function(form){
 	form.validate({
@@ -120,7 +125,10 @@ $(document).ready(function(){
 <body>
 <div class="container">
 <h1>회원 가입</h1>
+<br>
 	<form onsubmit="return false">
+	<fieldset> 
+	<legend>회원정보</legend>
 		<P>ID:<input type="text" class="id" name="userId" /></P>
 		<P>PW:<input type="password" class="pw" name="userPw" /></P>
 		<p>pwCheck:<input type="password" class="pwCheck" name="userPwCheck" /></P>
@@ -153,6 +161,7 @@ $(document).ready(function(){
 		 <P><button type="submit" class="btn btn-primary btn-mg signIn" value="signIn">signIN</button>
 		   <button type="button" class="btn btn-primary btn-mg" value="cansel">cansel</button>
 		</P>
+		</fieldset>
 	</form>
 </div>
 </body>

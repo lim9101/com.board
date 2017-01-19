@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,6 +8,14 @@
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <script type="text/javascript">
+var sessionCheck = function(){
+	var session = "${user}";
+	if(session != ""){
+		console.log(session);
+		 location.href="postList"; 
+	}
+}
+sessionCheck();
 $(document).ready(function(){
 	$(".login").on("click",function(){
 		var user = {
