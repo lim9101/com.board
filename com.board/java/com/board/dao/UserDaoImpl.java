@@ -24,5 +24,9 @@ public class UserDaoImpl implements UserDao{
 	public int delUser(User user){
 		return userMapper.delUser(user);
 	}
+	@Override
+	public int checkId(String userId) {
+		return userMapper.checkId(userId);
+	}
 	
 }

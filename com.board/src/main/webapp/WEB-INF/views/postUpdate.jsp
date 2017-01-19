@@ -26,7 +26,11 @@ var delFile=function(fileNo){
 }
 $(document).ready(function(){
 	$('.cancel').bind('click', function(){
-		history.go(-1)();
+		if(confirm("취소하시겠습니까?")==true){
+		history.go(-1)();			
+		}else{
+			return;
+		}
 	});
 	$('[name=content]').val($('[name=content]').val().trim());
 	$('[name=content]').val(

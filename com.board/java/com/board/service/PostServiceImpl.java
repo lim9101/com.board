@@ -180,6 +180,8 @@ public class PostServiceImpl implements PostService{
 		int searchLev = 0;
 		int maxPlevel = 0;
 		List<Post> delDTO=null;
+		HashMap<String, Integer> map2 = new HashMap<String, Integer>();
+				
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
 		map.put("spNo", spNo);
 		map.put("depth", depth);
@@ -192,6 +194,9 @@ public class PostServiceImpl implements PostService{
 		}
 		
 		if(spNoCount > 1 && postDao.searchTspno(pNo)!=0){
+			map2.put("check_file", 0);
+			map2.put("pNo", pNo);
+			postDao.updateCheckFile(map2);
 			postDao.delUpdatePost(pNo); return;
 		}
 		
@@ -238,11 +243,17 @@ public class PostServiceImpl implements PostService{
 			maxPlevel = postDao.maxPlevel(spNo);
 			
 			if(postDao.searchTspno(pNo)!=0){
+				map2.put("check_file", 0);
+				map2.put("pNo", pNo);
+				postDao.updateCheckFile(map2);
 				postDao.delUpdatePost(pNo); return;
 			}
 			
 			if((maxPlevel == 3 && plevel==2)){
 				System.out.println();
+				map2.put("check_file", 0);
+				map2.put("pNo", pNo);
+				postDao.updateCheckFile(map2);
 				postDao.delUpdatePost(pNo); return;
 			}
 			
@@ -263,6 +274,9 @@ public class PostServiceImpl implements PostService{
 		//답변이 있는 제목글 삭제 아닌 업데이트로 
 		if(spNoCount > 1){
 			System.out.println("5");
+			map2.put("check_file", 0);
+			map2.put("pNo", pNo);
+			postDao.updateCheckFile(map2);
 			postDao.delUpdatePost(pNo); return;
 		}
 	}

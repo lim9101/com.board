@@ -155,7 +155,24 @@ var comentList=function(coment){
 }
 	comentView(null);
 
+
+function updateClick(){
+	if(confirm("수정하시겠습니까?")==true){
+		location.href="postUpdate?pNo=${pdto.pNo}";
+	}else{
+		return;
+	}
+}	
+
+function deleteClick(){
+	if(confirm("삭제하시겠습니까?")==true){
+		location.href="postDelete?pNo=${pdto.pNo}&spNo=${pdto.spNo}&depth=${pdto.depth}&fileNo="+$('.fileNo').val()+"&plevel=${pdto.plevel}";
+	}else{
+		return;
+	}
+}
 $(document).ready(function(){
+	
 	$('[name=content]').val($('[name=content]').val().trim());
 	$('[name=content]').val($('[name=content]').val().replace(/<br\s?\/?>/g, "\n"));
 	$(".comentAddBtn").on("click",function(){
@@ -246,7 +263,7 @@ $(document).ready(function(){
 		</c:if>
 				
 					<c:if test="${pdto.user_id eq user.userId || user.userId eq 'admin'}">
-					<a href="postUpdate?pNo=${pdto.pNo}"><button>수정</button></a>
+					<button onclick="updateClick()" type="button">수정</button>
 					</c:if>			
 				<c:choose>
 					<c:when test="${!empty adto}">
@@ -258,9 +275,10 @@ $(document).ready(function(){
 						<c:set var="fileNo" value="0"/>
 					</c:otherwise>
 					</c:choose>
+					<input type="hidden" class="fileNo" value="${fileNo}"/>
 					<c:choose>
 					<c:when test="${pdto.user_id eq user.userId || user.userId eq 'admin' }">
-					<a href="postDelete?pNo=${pdto.pNo}&spNo=${pdto.spNo}&depth=${pdto.depth}&fileNo=${fileNo}&plevel=${pdto.plevel}"><button>삭제</button></a>
+					<button onclick="deleteClick()" type="button">삭제</button>
 					</c:when>
 				</c:choose>
 				<a href="postList"><button>목록</button></a>
