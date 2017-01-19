@@ -104,14 +104,18 @@ var comentList=function(coment){
 		dateIn= $("<span>"+coment.userId+"</span>  <span>"+"입력날짜:"+coment.dateIn+"</span>&nbsp;&nbsp;<span>"+"수정날짜:"+""+"<span><br>");
 	}else{
 	}
+	var adminContent=$("<span>"+coment.content+"</span>"+
+			"<span><button type='button' onclick='comentDel(this)' value='"+coment.cNo+"'>삭제</button></span><br>");
 	var contentUser=$("<span>"+coment.content+"</span>"+
 	"<span><button type='button' onclick='comentRepleArea(this)' value='"+coment.cNo+"'>댓글</button>"+
 	"<button type='button' onclick='updateArea(this)' value='"+coment.cNo+"'>수정</button>"+
 	"<button type='button' onclick='comentDel(this)' value='"+coment.cNo+"'>삭제</button></span><br>");
-	var reContentUser=$("<span>"+coment.userId+"</span> &nbsp; &nbsp; <span>"+coment.content+"</span>"+
+	var reContentUser=$("<span>"+coment.content+"</span>"+
 			"<span><button type='button' onclick='updateArea(this)' value='"+coment.cNo+"'>수정</button>"+
 			"<button type='button' onclick='comentDel(this)' value='"+coment.cNo+"'>삭제</button></span><br>");
-	var content=$("<span>"+coment.userId+"</span> &nbsp; &nbsp; <span>"+coment.content+"</span><br>");
+	var content=$("<span>"+coment.content+"</span><br>");
+	var reContent=$("<span>"+coment.content+"<button type='button' onclick='comentRepleArea(this)' value='"+coment.cNo+"'>댓글</button>"+"</span><br>");
+	
 	if(coment.userId == "${user.userId}"){
 		if(coment.scNo == coment.cNo){
 			div.append(dateIn);
@@ -123,10 +127,21 @@ var comentList=function(coment){
 			div.append(reContentUser);
 			$(".comentLine").append(div);
 		}
+	}else if("${user.userId}" == "admin"){
+		if(coment.scNo == coment.cNo){
+			div.append(dateIn);
+			div.append(adminContent);
+			$(".comentLine").append(div);
+		}else{
+			div.css("margin-left","200px");
+			div.append(dateIn);
+			div.append(adminContent);
+			$(".comentLine").append(div);
+		}
 	}else{
 		if(coment.scNo == coment.cNo){
 			div.append(dateIn);
-			div.append(content);
+			div.append(reContent);
 			$(".comentLine").append(div);
 		}else{
 			div.css("margin-left","200px");
