@@ -6,6 +6,7 @@
 <html>
 <head>
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="ckeditor/ckeditor.js"></script>
 <script type="text/javascript">
 var fileCheck = "${fn:length(adto)}";
 var delFileInput =	function (fileDel){
@@ -32,9 +33,7 @@ $(document).ready(function(){
 			return;
 		}
 	});
-	$('[name=content]').val($('[name=content]').val().trim());
-	$('[name=content]').val(
-			$('[name=content]').val().replace(/<br\s?\/?>/g, "\n"));
+
 
 	$('.postUpdateBtn').bind('click',function(){
 	/* 	$('#frmU').attr('action', 'postUpdate').submit(); */
@@ -51,10 +50,9 @@ $(document).ready(function(){
 				alert("내용은 1000자까지 가능합니다.");
 				return false;
 			}
-			
-			 $('[name=content]').val($('[name=content]').val().replace(/\n/gi, '<br/>'));
-				
+							
 				var formData = new FormData($('#frmU')[0]);
+				formData.set("content",CKEDITOR.instances.content.getData());
 				$.ajax({
 					method:'post',
 					url:'postUpdate',
@@ -142,7 +140,7 @@ $(document).ready(function(){
 				<td class="tdStyle"><input type="text" name="userId" id="userId" value="${pdto.user.userId}" readonly="readonly"/></td>
 			</tr>
 			<tr>
-				<td colspan="2"><textarea id="content" name="content" cols="97" rows="20">${pdto.content }</textarea></td>
+				<td colspan="2"><textarea id="content" class="ckeditor" name="content" cols="97" rows="20">${pdto.content }</textarea></td>
 			</tr>
 			<tr>
 				<th><label for="upload">첨부파일</label></th>

@@ -11,7 +11,6 @@ var fileCheck =1;
 var delFile =	function (fileDel){
 	$(fileDel).parent().remove();
 	fileCheck--;
-	
 }
 
 function listClick(){
@@ -21,6 +20,7 @@ function listClick(){
 		return;
 	}
 }
+
 $(document).ready(function() {
 		var chk=1;
 		
@@ -38,11 +38,8 @@ $(document).ready(function() {
 				alert("내용은 1000자까지 가능합니다.");
 				return false;
 			}
-			$('[name=content]').val(
-					$('[name=content]').val().replace(/\n/gi, '<br/>'));
-
 			var formData = new FormData($("#frmWR")[0]);
-			formData.append("content",CKEDITOR.instances.content.getData());
+			formData.set("content",CKEDITOR.instances.content.getData());
 			$.ajax({
 				method: "post",
 				url: "postAdd",
@@ -161,7 +158,9 @@ $(document).ready(function() {
 				<td class="tdStyle"><input type="text" name="user_id" id="user_id" value="${user.userId}" readonly="readonly"/></td>
 			</tr>
 			<tr>
-				<td colspan="2"><textarea id="content" class="ckeditor" name="content" cols="97" rows="20"></textarea></td>
+				<td colspan="2"><textarea id="content" class="ckeditor" name="content" cols="97" rows="20"></textarea>
+				<script> CKEDITOR.replace('ckeditor'); </script>
+				</td>
 			</tr>
 			<tr>
 				<th><label for="upload">첨부파일 <button type="button" class="fileAdd">+</button></label></th>

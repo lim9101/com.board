@@ -6,7 +6,9 @@
 <html>
 <head>
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="ckeditor/ckeditor.js"></script>
 <script type="text/javascript">
+
 var temp=false;
 var comentsHiden = function(){
 	temp = !temp;
@@ -193,8 +195,6 @@ function deleteClick(){
 }
 $(document).ready(function(){
 	
-	$('[name=content]').val($('[name=content]').val().trim());
-	$('[name=content]').val($('[name=content]').val().replace(/<br\s?\/?>/g, "\n"));
 	$(".comentAddBtn").on("click",function(){
 		var scNo = 0;
 		var coment= {
