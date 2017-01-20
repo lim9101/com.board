@@ -5,6 +5,7 @@
 <html>
 <head>
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="ckeditor/ckeditor.js"></script>
 <script type="text/javascript">
 var fileCheck =1;
 var delFile =	function (fileDel){
@@ -39,8 +40,9 @@ $(document).ready(function() {
 			}
 			$('[name=content]').val(
 					$('[name=content]').val().replace(/\n/gi, '<br/>'));
-			/* $('#frmWR').attr('action', 'postAdd').submit(); */
+
 			var formData = new FormData($("#frmWR")[0]);
+			formData.append("content",CKEDITOR.instances.content.getData());
 			$.ajax({
 				method: "post",
 				url: "postAdd",
@@ -159,7 +161,7 @@ $(document).ready(function() {
 				<td class="tdStyle"><input type="text" name="user_id" id="user_id" value="${user.userId}" readonly="readonly"/></td>
 			</tr>
 			<tr>
-				<td colspan="2"><textarea id="content" name="content" cols="97" rows="20"></textarea></td>
+				<td colspan="2"><textarea id="content" class="ckeditor" name="content" cols="97" rows="20"></textarea></td>
 			</tr>
 			<tr>
 				<th><label for="upload">첨부파일 <button type="button" class="fileAdd">+</button></label></th>
