@@ -6,14 +6,15 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="js/popup.js"></script>
 <script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
 <script type="text/javascript">
-var openPopup = function(url,name,width,height){
+/* var openPopup = function(url,name,width,height){
 	 var winPosLeft = (screen.width - width) / 2;
 	 var winPosTop = (screen.height - height) / 2;
 	 var winOpt = "width="+width+",height="+height+",top="+winPosTop+",left="+winPosLeft;
 	 window.open(url, name, winOpt + ",menubar=no,status=no,scrollbars=no,resizable=no"); 
-}
+} */
 var checkfunction = function(result,url){
 	if(result){
 		location.href=url;			

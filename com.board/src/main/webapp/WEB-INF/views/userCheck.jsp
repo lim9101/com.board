@@ -8,11 +8,6 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	$(".checkBtn").on("click",function(){
-		/* opener.document.all.userPw.value=document.all.userPw.value; */
-		/* if(opener.document.all.checkPoint.value == 1){
-		}else if(opener.document.all.checkPoint.value == 2){
-		}else if(opener.document.all.checkPoint.value == 3){
-		}else{} */
 		var user={
 				userPw:$("#userPw").val()
 		}

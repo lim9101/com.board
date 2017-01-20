@@ -6,6 +6,7 @@
 <head>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="js/popup.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 var sessionCheck = function(){
@@ -44,25 +45,11 @@ $(document).ready(function(){
 	});
 	
 	$(".idFind").on("click",function(){
-		 var winWidth = 370;
-		 var winHeight = 360;
-		 var winURL = "idFind";
-		 var winName = "idFind";
-		 var winPosLeft = (screen.width - winWidth) / 2;
-		 var winPosTop = (screen.height - winHeight) / 2;
-		 var winOpt = "width="+winWidth+",height="+winHeight+",top="+winPosTop+",left="+winPosLeft;
-		 window.open(winURL, winName, winOpt + ",menubar=no,status=no,scrollbars=no,resizable=no"); 
+		openPopup("idFind","idFind",370,360);
 	});
 	
 	$(".pwFind").on("click",function(){
-		 var winWidth = 370;
-		 var winHeight = 360;
-		 var winURL = "pwFind";
-		 var winName = "pwFind";
-		 var winPosLeft = (screen.width - winWidth) / 2;
-		 var winPosTop = (screen.height - winHeight) / 2;
-		 var winOpt = "width="+winWidth+",height="+winHeight+",top="+winPosTop+",left="+winPosLeft;
-		 window.open(winURL, winName, winOpt + ",menubar=no,status=no,scrollbars=no,resizable=no"); 
+		openPopup("pwFind","pwFind",370,360);
 	});
 	
 });
