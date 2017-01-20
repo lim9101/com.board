@@ -38,23 +38,27 @@ $(document).ready(function(){
 
 	$('.postUpdateBtn').bind('click',function(){
 	/* 	$('#frmU').attr('action', 'postUpdate').submit(); */
-	 $('[name=content]').val($('[name=content]').val().replace(/\n/gi, '<br/>'));
-		var formData = new FormData($('#frmU')[0]);
-		$.ajax({
-			method:'post',
-			url:'postUpdate',
-			data:formData,
-			processData: false,
-			contentType: false,
-			success:function(result){
-				if(result){
-					location.href="postList";
-				}else{
-					alert("이미지파일이 아닙니다.");
+		if(confirm("수정하시겠습니까?")==true){
+			 $('[name=content]').val($('[name=content]').val().replace(/\n/gi, '<br/>'));
+				var formData = new FormData($('#frmU')[0]);
+				$.ajax({
+					method:'post',
+					url:'postUpdate',
+					data:formData,
+					processData: false,
+					contentType: false,
+					success:function(result){
+					if(result){
+						location.href="postList";
+					}else{
+						alert("이미지파일이 아닙니다.");
+					}
 				}
-			}
-			
-		});
+				
+			});
+		}else{
+			return;
+		}
 	});
 	
 	$('.fileAdd').bind('click',function(){
