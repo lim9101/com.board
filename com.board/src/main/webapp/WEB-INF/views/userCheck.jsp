@@ -17,7 +17,7 @@ $(document).ready(function(){
 			success:function(result){
 				console.log(result);
 				if(result){
-					opener.checkfunction(result);
+					opener.checkfunction(result,"userUpdate");
 					 window.open("","check","");
 						window.close();
 
