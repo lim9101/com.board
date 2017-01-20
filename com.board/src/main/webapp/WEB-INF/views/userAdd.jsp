@@ -42,7 +42,7 @@ var signInValidate = function(form){
 		},
 		 messages : {
              userId: {
-                 required : "필수로입력하세요",
+                 required : "필수로입력하세요. 영문,숫자,특수문자만 입력할수 있습니다.",
                  minlength:"최소{0}자로 입력하세요.",
  				maxlength:"최대{0}자로 입력하세요.",
  				remote:"사용할수 없는 아이디입니다."
@@ -83,6 +83,7 @@ var chkId = function (form){
 	}
 }
 $(document).ready(function(){
+	$(".id").keyup(function(){$(this).val( $(this).val().replace(/[^\!-z]/g,"") );} );
 	chkId($("form"));
 	$(".signIn").on("click",function(){
 		if(signInValidate($("form"))){
