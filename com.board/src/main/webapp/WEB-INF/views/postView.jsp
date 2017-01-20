@@ -243,6 +243,7 @@ $(document).ready(function(){
 	font-size: 14px;
 	padding-left: 10px;
 	height: 32px;
+	word-break: break-all;
 }
 
 .replyDiv {

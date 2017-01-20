@@ -38,8 +38,22 @@ $(document).ready(function(){
 
 	$('.postUpdateBtn').bind('click',function(){
 	/* 	$('#frmU').attr('action', 'postUpdate').submit(); */
+		
+		
 		if(confirm("수정하시겠습니까?")==true){
+			
+			if($('[name=title]').val().length > 30){
+				alert("제목은 30자까지 가능합니다.");
+				return false;
+			}
+		
+			if($('[name=content]').val().length > 1000){
+				alert("내용은 1000자까지 가능합니다.");
+				return false;
+			}
+			
 			 $('[name=content]').val($('[name=content]').val().replace(/\n/gi, '<br/>'));
+				
 				var formData = new FormData($('#frmU')[0]);
 				$.ajax({
 					method:'post',

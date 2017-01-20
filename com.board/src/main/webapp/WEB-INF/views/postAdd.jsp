@@ -33,8 +33,8 @@ $(document).ready(function() {
 				alert("제목을 입력하세요");
 				return false;
 			}
-			if($('[name=content]').val().length > 300){
-				alert("내용은 300자까지 가능합니다.");
+			if($('[name=content]').val().length > 1000){
+				alert("내용은 1000자까지 가능합니다.");
 				return false;
 			}
 			$('[name=content]').val(
