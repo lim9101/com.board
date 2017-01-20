@@ -209,36 +209,44 @@ $(document).ready(function(){
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <style>
-.comentHiden{
+.comentHiden {
 	cursor: pointer;
 }
-.container{
+
+.container {
 	margin: 0 auto;
- 	width:700px;
+	width: 700px;
 }
-.view table{
+
+.view table {
 	border-collapse: collapse;
-    border-spacing: 0;
-	width:700px;
+	border-spacing: 0;
+	width: 700px;
 	border-top: 2px solid #BFAD9F;
 	border-bottom: 2px solid #BFAD9F;
 }
-.view table th{
+
+.view table th {
 	font-weight: normal;
-    height: 43px;
-    text-align:center;
-    background: #f7f6f4;
-    border-bottom: 1px solid #E6E2DE;
-    font-size: 14px;
-    color: #664738;
-    text-align: center;
+	height: 43px;
+	text-align: center;
+	background: #f7f6f4;
+	border-bottom: 1px solid #E6E2DE;
+	font-size: 14px;
+	color: #664738;
+	text-align: center;
 }
+
 .view table td {
 	border-bottom: 1px solid #E6E2DE;
-	color:#464646;
+	color: #464646;
 	font-size: 14px;
 	padding-left: 10px;
 	height: 32px;
+}
+
+.replyDiv {
+	word-break: break-all;
 }
 </style>
 <title>글-상세보기</title>

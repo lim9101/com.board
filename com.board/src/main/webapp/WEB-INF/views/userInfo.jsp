@@ -27,10 +27,10 @@ $(document).ready(function(){
 		 var winPosTop = (screen.height - winHeight) / 2;
 		 var winOpt = "width="+winWidth+",height="+winHeight+",top="+winPosTop+",left="+winPosLeft;
 		 window.open(winURL, winName, winOpt + ",menubar=no,status=no,scrollbars=no,resizable=no"); 
-			/* var popUrl = "userCheck";	//팝업창에 출력될 페이지 URL
-			var popOption = "width=370, height=360, resizable=no, scrollbars=no, status=no top="+winPosTop+",left="+winPosLeft;";    //팝업창 옵션(optoin)
-			var infoWindow = window.open(popUrl,"check",popOption); */
 	})
+	var openPopup = function(url,width,height){
+		
+	}
 	$(".userDelBtn").on("click",function(){
 		location.href="userDel";
 	})
