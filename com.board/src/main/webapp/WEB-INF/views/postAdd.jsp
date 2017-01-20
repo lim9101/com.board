@@ -40,9 +40,10 @@ $(document).ready(function() {
 			}
 			$('[name=content]').val(
 					$('[name=content]').val().replace(/\n/gi, '<br/>'));
-
 			var formData = new FormData($("#frmWR")[0]);
-			formData.append("content",CKEDITOR.instances.content.getData());
+			var formContent =CKEDITOR.instances.content.getData();
+			console.log(formContent);
+			formData.set("content",formContent);
 			$.ajax({
 				method: "post",
 				url: "postAdd",
@@ -51,7 +52,7 @@ $(document).ready(function() {
 				contentType: false,
 				success: function(result){
 					if(result){
-						location.href="postList";
+						//location.href="postList";
 					}else{
 						alert("이미지파일이 아닙니다.");
 					}

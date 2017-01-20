@@ -6,6 +6,7 @@
 <html>
 <head>
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="ckeditor/ckeditor.js"></script>
 <script type="text/javascript">
 var fileCheck = "${fn:length(adto)}";
 var delFileInput =	function (fileDel){
@@ -142,7 +143,7 @@ $(document).ready(function(){
 				<td class="tdStyle"><input type="text" name="userId" id="userId" value="${pdto.user.userId}" readonly="readonly"/></td>
 			</tr>
 			<tr>
-				<td colspan="2"><textarea id="content" name="content" cols="97" rows="20">${pdto.content }</textarea></td>
+				<td colspan="2"><textarea id="content" name="content" class="ckeditor" cols="97" rows="20">${pdto.content }</textarea></td>
 			</tr>
 			<tr>
 				<th><label for="upload">첨부파일</label></th>
