@@ -16,7 +16,9 @@ $(document).ready(function(){
 			data:user,
 			success:function(result){
 				if(result){
-					location.href="index";
+					opener.checkfunction(result,"index");
+					 window.open("","check","");
+						window.close();
 				}else{
 					alert("비밀번호가 다릅니다.");
 				}
