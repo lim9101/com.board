@@ -38,19 +38,8 @@ $(document).ready(function() {
 				alert("내용은 1000자까지 가능합니다.");
 				return false;
 			}
-<<<<<<< HEAD
-=======
-			$('[name=content]').val(
-					$('[name=content]').val().replace(/\n/gi, '<br/>'));
->>>>>>> branch 'master' of https://github.com/lim9101/com.board.git
 			var formData = new FormData($("#frmWR")[0]);
-<<<<<<< HEAD
 			formData.set("content",CKEDITOR.instances.content.getData());
-=======
-			var formContent =CKEDITOR.instances.content.getData();
-			console.log(formContent);
-			formData.set("content",formContent);
->>>>>>> branch 'master' of https://github.com/lim9101/com.board.git
 			$.ajax({
 				method: "post",
 				url: "postAdd",
@@ -59,7 +48,7 @@ $(document).ready(function() {
 				contentType: false,
 				success: function(result){
 					if(result){
-						//location.href="postList";
+						location.href="postList";
 					}else{
 						alert("이미지파일이 아닙니다.");
 					}

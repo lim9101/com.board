@@ -140,11 +140,7 @@ $(document).ready(function(){
 				<td class="tdStyle"><input type="text" name="userId" id="userId" value="${pdto.user.userId}" readonly="readonly"/></td>
 			</tr>
 			<tr>
-<<<<<<< HEAD
 				<td colspan="2"><textarea id="content" class="ckeditor" name="content" cols="97" rows="20">${pdto.content }</textarea></td>
-=======
-				<td colspan="2"><textarea id="content" name="content" class="ckeditor" cols="97" rows="20">${pdto.content }</textarea></td>
->>>>>>> branch 'master' of https://github.com/lim9101/com.board.git
 			</tr>
 			<tr>
 				<th><label for="upload">첨부파일</label></th>
