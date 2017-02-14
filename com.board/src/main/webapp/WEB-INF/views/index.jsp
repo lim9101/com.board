@@ -60,6 +60,7 @@ $(document).ready(function(){
 <body>
 <div class="container">
 <h1>Board login</h1>
+<div>으아아아아아앙아</div>
 	<div>
 		ID:<input type="text" class="id"/>
 		PW:<input type="password" class="pw"/>
