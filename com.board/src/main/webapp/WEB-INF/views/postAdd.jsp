@@ -14,7 +14,7 @@ var delFile =	function (fileDel){
 }
 
 function listClick(){
-	if(confirm("목록으로 이동하시겠습니까??")==true){
+	if(confirm("목록으로 이동하시겠습니까??????")==true){
 		location.href="postList";				
 	}else{
 		return;
